@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DermaCare - Contact Us</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f7f9fc;
+            color: #172033;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 70px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #252c45;
+        }
+
+        .logo-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #625df5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #343b4d;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #625df5;
+        }
+
+        nav a.active {
+            color: #625df5;
+            font-weight: bold;
+            border-bottom: 2px solid #625df5;
+            padding-bottom: 8px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .cart {
+            font-size: 18px;
+            color: #202840;
+            cursor: pointer;
+        }
+
+        .login {
+            color: #333b4d;
+            font-size: 13px;
+        }
+
+        .help-btn {
+            border: none;
+            background: #625df5;
+            color: white;
+            padding: 10px 17px;
+            border-radius: 7px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            background: white;
+            padding: 50px 8% 55px;
+        }
+
+        .small-title {
+            color: #625df5;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+            color: #172033;
+        }
+
+        .hero p {
+            color: #7b8496;
+            font-size: 13px;
+            line-height: 1.7;
+            max-width: 650px;
+        }
+
+        /* ================= CONTACT SECTION ================= */
+
+        .contact-section {
+            padding: 45px 8% 70px;
+        }
+
+        .contact-container {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.3fr 0.8fr;
+            gap: 35px;
+        }
+
+        /* FORM */
+
+        .form-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(40, 50, 80, 0.07);
+        }
+
+        .form-card h2 {
+            font-size: 17px;
+            margin-bottom: 25px;
+            color: #20283d;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 10px;
+            font-weight: bold;
+            color: #40495c;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #e2e5ec;
+            border-radius: 7px;
+            padding: 12px;
+            font-size: 11px;
+            color: #555e70;
+            outline: none;
+            background: white;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #625df5;
+        }
+
+        textarea {
+            height: 110px;
+            resize: none;
+        }
+
+        .send-btn {
+            width: 100%;
+            border: none;
+            background: #625df5;
+            color: white;
+            padding: 13px;
+            border-radius: 7px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .send-btn:hover {
+            background: #504be5;
+        }
+
+        /* ================= RIGHT SIDE ================= */
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .info-title {
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .info-icon {
+            min-width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #eeeefe;
+            color: #625df5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        .info-text h4 {
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        .info-text p {
+            font-size: 10px;
+            color: #7c8495;
+            line-height: 1.5;
+        }
+
+        /* OPENING HOURS */
+
+        .hours-card {
+            background: #10182d;
+            color: white;
+            padding: 22px;
+            border-radius: 10px;
+        }
+
+        .hours-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .hours-title span {
+            width: 6px;
+            height: 6px;
+            background: #625df5;
+            border-radius: 50%;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 10px;
+            color: #d9dce6;
+        }
+
+        .closed {
+            color: #7b70ff;
+            font-weight: bold;
+        }
+
+        .note {
+            border-top: 1px solid #30384d;
+            padding-top: 12px;
+            margin-top: 12px;
+            font-size: 9px;
+            line-height: 1.5;
+            color: #9da4b5;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #10182d;
+            color: white;
+            padding: 45px 8%;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            font-size: 10px;
+            color: #aeb5c5;
+            line-height: 1.7;
+        }
+
+        .footer h3 {
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .footer a {
+            display: block;
+            text-decoration: none;
+            color: #aeb5c5;
+            font-size: 10px;
+            margin-bottom: 10px;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #293249;
+            margin-top: 35px;
+            padding-top: 20px;
+            color: #747d91;
+            font-size: 9px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 850px) {
+
+            header {
+                padding: 0 5%;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                height: auto;
+                padding: 20px;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .header-right {
+                display: none;
+            }
+
+            .hero {
+                padding: 35px 20px;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            .contact-section {
+                padding: 30px 20px;
+            }
+
+            .row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo">
+            <div class="logo-icon">✦</div>
+            DermaCare
+        </div>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Treatments</a>
+            <a href="#">Products</a>
+            <a href="#" class="active">Contact Us</a>
+        </nav>
+
+        <div class="header-right">
+            <div class="cart">🛒</div>
+            <div class="login">Log In</div>
+            <button class="help-btn">Need Help?</button>
+        </div>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="small-title">
+            GET IN TOUCH
+        </div>
+
+        <h1>Contact Our Medical Experts</h1>
+
+        <p>
+            Have questions about a treatment or need to schedule a consultation?
+            Our team is here to provide the clinical guidance you need.
+        </p>
+
+    </section>
+
+
+    <!-- ================= CONTACT SECTION ================= -->
+
+    <section class="contact-section">
+
+        <div class="contact-container">
+
+            <!-- FORM -->
+
+            <div class="form-card">
+
+                <h2>Send us a message</h2>
+
+                <form id="contactForm">
+
+                    <div class="row">
+
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="John Doe"
+                                required
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label>Email Address</label>
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="john@example.com"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>Subject</label>
+
+                        <select id="subject">
+
+                            <option>Treatment Inquiry</option>
+                            <option>Product Inquiry</option>
+                            <option>Appointment</option>
+                            <option>General Inquiry</option>
+                            <option>Other</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Your Message</label>
+
+                        <textarea
+                            id="message"
+                            placeholder="How can we help you today?"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="send-btn"
+                    >
+                        Send Message ➜
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="right-section">
+
+                <div>
+
+                    <h2 class="info-title">
+                        Clinical Locations
+                    </h2>
+
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            📍
+                        </div>
+
+                        <div class="info-text">
+
+                            <h4>
+                                New York Headquarters
+                            </h4>
+
+                            <p>
+                                No. 6, Park Road, New York,<br>
+                                Sri Lanka
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            ☎
+                        </div>
+
+                        <div class="info-text">
+
+                            <h4>
+                                Phone & Support
+                            </h4>
+
+                            <p>
+                                General: +1 (555) 123-4567<br>
+                                Emergency: +1 (555) 999-0000
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            ✉
+                        </div>
+
+                        <div class="info-text">
+
+                            <h4>
+                                Email Correspondence
+                            </h4>
+
+                            <p>
+                                Inquiries: info@dermacare.clinic<br>
+                                Support: support@dermacare.clinic
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OPENING HOURS -->
+
+                <div class="hours-card">
+
+                    <div class="hours-title">
+                        <span></span>
+                        Opening Hours
+                    </div>
+
+                    <div class="hours-row">
+                        <span>Monday — Friday</span>
+                        <span>08:00 AM - 07:00 PM</span>
+                    </div>
+
+                    <div class="hours-row">
+                        <span>Saturday</span>
+                        <span>09:00 AM - 04:00 PM</span>
+                    </div>
+
+                    <div class="hours-row">
+                        <span>Sunday</span>
+                        <span class="closed">CLOSED</span>
+                    </div>
+
+                    <div class="note">
+                        💡 Note: Consultation hours may vary during holidays.
+                        Please call ahead for urgent visits.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-container">
+
+            <div>
+
+                <div class="footer-logo">
+
+                    <div class="logo-icon">✦</div>
+
+                    DermaCare
+
+                </div>
+
+                <p>
+                    Professional dermatology treatments and
+                    skincare solutions designed to help you
+                    feel confident in your skin.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>Treatments</h3>
+
+                <a href="#">Carbon Laser Peel</a>
+                <a href="#">PRP Therapy</a>
+                <a href="#">Botox & Filler</a>
+                <a href="#">Chemical Peeling</a>
+
+            </div>
+
+
+            <div>
+
+                <h3>Clinic</h3>
+
+                <a href="#">About Us</a>
+                <a href="#">Our Doctors</a>
+                <a href="#">Contact Us</a>
+                <a href="#">FAQs</a>
+
+            </div>
+
+
+            <div>
+
+                <h3>Contact</h3>
+
+                <p>
+                    No. 6, Park Road, New York
+                </p>
+
+                <p>
+                    +1 (555) 123-4567
+                </p>
+
+                <p>
+                    info@dermacare.clinic
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 DermaCare. All Rights Reserved.
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        document
+            .getElementById("contactForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const name =
+                    document.getElementById("name").value;
+
+                const email =
+                    document.getElementById("email").value;
+
+                const message =
+                    document.getElementById("message").value;
+
+
+                if (
+                    name.trim() === "" ||
+                    email.trim() === "" ||
+                    message.trim() === ""
+                ) {
+
+                    alert("Please fill all required fields.");
+
+                    return;
+
+                }
+
+
+                alert(
+                    "Thank you " +
+                    name +
+                    "! Your message has been sent successfully."
+                );
+
+
+                this.reset();
+
+            });
+
+    </script>
+
+</body>
+</html>
