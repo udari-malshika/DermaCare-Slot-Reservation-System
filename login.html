@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Login | DermaCare</title>
+
+  <link rel="stylesheet" href="login.css">
+  <script src="login.js" defer></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="home.html" class="logo">
+      <span class="logo-icon">✦</span>
+      DermaCare
+    </a>
+
+    <a href="home.html" class="back-link">← Back to Home</a>
+  </header>
+
+  <main class="login-page">
+
+    <section class="welcome-panel">
+      <div class="welcome-content">
+        <span class="welcome-badge">YOUR SKINCARE JOURNEY</span>
+
+        <h1>Healthy skin.<br>Confident you.</h1>
+
+        <p>
+          Welcome to DermaCare. Sign in to manage your appointments
+          and continue your personalized skincare journey.
+        </p>
+
+        <div class="welcome-features">
+          <div class="feature">
+            <span class="feature-icon">✓</span>
+            Easy appointment management
+          </div>
+
+          <div class="feature">
+            <span class="feature-icon">✓</span>
+            Personalized skincare services
+          </div>
+
+          <div class="feature">
+            <span class="feature-icon">✓</span>
+            Your clinic information in one place
+          </div>
+        </div>
+      </div>
+
+      <div class="decor decor-one"></div>
+      <div class="decor decor-two"></div>
+      <div class="decor decor-three"></div>
+    </section>
+
+    <section class="login-panel">
+      <div class="login-card">
+
+        <div class="mobile-logo">
+          <span class="logo-icon">✦</span>
+          DermaCare
+        </div>
+
+        <div class="login-icon">✦</div>
+
+        <h2>Welcome Back!</h2>
+        <p class="login-subtitle">
+          Please enter your details to sign in.
+        </p>
+
+        <form id="loginForm">
+
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="username"
+            required
+          >
+
+          <div class="password-heading">
+            <label for="password">Password</label>
+            <a href="forgot-password.html" class="forgot-link">
+              Forgot password?
+            </a>
+          </div>
+
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              id="togglePassword"
+              class="show-password"
+              aria-label="Show password"
+              aria-pressed="false"
+            >
+              Show
+            </button>
+          </div>
+
+          <label class="remember-option">
+            <input type="checkbox" id="rememberMe">
+            <span>Remember me</span>
+          </label>
+
+          <button type="submit" class="login-button">
+            Sign In <span>→</span>
+          </button>
+
+          <p id="loginMessage" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="divider">
+          <span>OR</span>
+        </div>
+
+        <p class="signup-text">
+          Don't have an account?
+          <a href="register.html">Create Account</a>
+        </p>
+
+        <p class="security-note">
+          <span>✦</span>
+          Your skincare journey starts here.
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    © 2026 DermaCare. All rights reserved.
+  </footer>
+
+</body>
+</html>
