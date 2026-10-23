@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment | DermaCare</title>
+  <link rel="stylesheet" href="appointment.css">
+  <script src="appointment.js" defer></script>
+</head>
+<body>
+
+<header class="header">
+  <a href="home.html" class="logo">
+    <span class="logo-icon">✦</span> DermaCare
+  </a>
+
+  <nav class="nav">
+    <a href="home.html">Home</a>
+    <a href="home.html#treatments">Treatments</a>
+    <a href="products.html">Products</a>
+    <a href="contact.html">Contact Us</a>
+  </nav>
+
+  <a href="contact.html" class="help-btn">Need Help?</a>
+</header>
+
+<main class="container">
+
+  <section class="page-heading">
+    <span class="eyebrow">YOUR SKINCARE JOURNEY</span>
+    <h1>Book Your Appointment</h1>
+    <p>Complete the steps below to schedule your clinical treatment.</p>
+  </section>
+
+  <div class="booking-layout">
+
+    <div class="booking-main">
+
+      <!-- STEP 1: TREATMENTS -->
+      <section class="card">
+        <div class="section-heading">
+          <span class="step-number">1</span>
+          <div>
+            <h2>Select Treatment</h2>
+            <p>Choose the treatment you need.</p>
+          </div>
+        </div>
+
+        <input id="treatmentSearch" class="search-input"
+          type="search" placeholder="⌕  Search treatments..."
+          aria-label="Search treatments">
+
+        <div class="treatment-grid">
+
+          <button type="button" class="treatment selected"
+            data-treatment="CO2 Laser" data-price="35000"
+            data-duration="45">
+            <span class="treatment-icon">✧</span>
+            <span class="treatment-info">
+              <strong>CO2 Laser</strong>
+              <small>Acne scars &amp; resurfacing</small>
+              <span class="duration">45 minutes</span>
+            </span>
+            <span class="radio-mark"></span>
+          </button>
+
+          <button type="button" class="treatment"
+            data-treatment="Carbon Laser Peel" data-price="15000"
+            data-duration="30">
+            <span class="treatment-icon">◈</span>
+            <span class="treatment-info">
+              <strong>Carbon Laser Peel</strong>
+              <small>Deep exfoliation</small>
+              <span class="duration">30 minutes</span>
+            </span>
+            <span class="radio-mark"></span>
+          </button>
+
+          <button type="button" class="treatment"
+            data-treatment="Botox & Fillers" data-price="25000"
+            data-duration="30">
+            <span class="treatment-icon">✦</span>
+            <span class="treatment-info">
+              <strong>Botox &amp; Fillers</strong>
+              <small>Cosmetic consultation</small>
+              <span class="duration">30 minutes</span>
+            </span>
+            <span class="radio-mark"></span>
+          </button>
+
+          <button type="button" class="treatment"
+            data-treatment="RF Microneedling" data-price="20000"
+            data-duration="60">
+            <span class="treatment-icon">✺</span>
+            <span class="treatment-info">
+              <strong>RF Microneedling</strong>
+              <small>Skin tightening</small>
+              <span class="duration">60 minutes</span>
+            </span>
+            <span class="radio-mark"></span>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- STEP 2: CALENDAR -->
+      <section class="card">
+        <div class="section-heading">
+          <span class="step-number">2</span>
+          <div>
+            <h2>Date &amp; Time</h2>
+            <p>Select your preferred appointment date and time.</p>
+          </div>
+        </div>
+
+        <div class="date-layout">
+
+          <div class="calendar">
+            <div class="calendar-top">
+              <div>
+                <small>SELECT DATE</small>
+                <h3 id="monthLabel">Loading calendar...</h3>
+              </div>
+              <div class="month-buttons">
+                <button id="prevMonth" type="button"
+                  aria-label="Previous month">‹</button>
+                <button id="nextMonth" type="button"
+                  aria-label="Next month">›</button>
+              </div>
+            </div>
+
+            <div class="calendar-grid" id="calendarGrid"></div>
+
+            <div class="calendar-legend">
+              <span><i class="legend-dot"></i> Available date</span>
+              <span><i class="legend-dot selected-dot"></i> Selected</span>
+            </div>
+          </div>
+
+          <div class="slots-panel">
+            <h3>Available Slots</h3>
+            <p id="selectedDateLabel" class="selected-date-label">
+              Choose a date first
+            </p>
+            <div id="slots" class="slots"></div>
+            <p class="small-note">
+              <span>ⓘ</span> Availability must be confirmed by the clinic.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- STEP 3: PATIENT INFORMATION -->
+      <section class="card">
+        <div class="section-heading">
+          <span class="step-number">3</span>
+          <div>
+            <h2>Patient Information</h2>
+            <p>Enter your details for the appointment request.</p>
+          </div>
+        </div>
+
+        <form id="bookingForm">
+          <div class="form-grid">
+
+            <label>
+              Full Name <span class="required">*</span>
+              <input id="fullName" name="fullName" type="text"
+                placeholder="Enter your full name" required
+                autocomplete="name">
+            </label>
+
+            <label>
+              Phone Number <span class="required">*</span>
+              <input id="phone" name="phone" type="tel"
+                placeholder="+94 77 123 4567" required
+                autocomplete="tel" pattern="[0-9+() -]{9,15}">
+            </label>
+
+            <label class="full-width">
+              Email Address <span class="required">*</span>
+              <input id="email" name="email" type="email"
+                placeholder="name@example.com" required
+                autocomplete="email">
+            </label>
+
+            <label class="full-width">
+              Additional Notes <span class="optional">(Optional)</span>
+              <textarea id="notes" name="notes" rows="4"
+                placeholder="Tell us about your skin concerns or any questions..."></textarea>
+            </label>
+
+          </div>
+
+          <button type="submit" class="confirm-btn mobile-confirm">
+            Confirm Appointment <span>→</span>
+          </button>
+
+          <p id="formMessage" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+    </div>
+
+    <!-- APPOINTMENT SUMMARY -->
+    <aside class="card summary-card">
+      <div class="summary-heading">
+        <h2>Appointment Summary</h2>
+        <span class="summary-icon">✦</span>
+      </div>
+
+      <div class="summary-image">
+        <img src="Images/CO2 Laser treatment.jpg"
+          alt="Skin treatment"
+          onerror="this.parentElement.classList.add('image-fallback'); this.remove();">
+        <span class="image-fallback-icon">✦</span>
+      </div>
+
+      <span class="summary-label">SELECTED TREATMENT</span>
+      <h3 id="summaryTreatment">CO2 Laser</h3>
+      <p id="summaryDuration" class="summary-muted">45 minutes</p>
+
+      <div class="summary-divider"></div>
+
+      <span class="summary-label">APPOINTMENT DATE</span>
+      <p id="summaryDate" class="summary-value">Not selected</p>
+
+      <span class="summary-label time-label">APPOINTMENT TIME</span>
+      <p id="summaryTime" class="summary-value">Not selected</p>
+
+      <div class="summary-divider"></div>
+
+      <div class="price-row">
+        <span>Consultation Fee</span>
+        <strong id="consultationCost">LKR 2,000.00</strong>
+      </div>
+
+      <div class="price-row">
+        <span>Estimated Treatment</span>
+        <strong id="serviceCost">LKR 35,000.00</strong>
+      </div>
+
+      <div class="price-row total-row">
+        <span>Total Estimated Cost</span>
+        <strong id="totalCost">LKR 37,000.00</strong>
+      </div>
+
+      <div class="notice">
+        <strong>ⓘ Appointment Notice</strong>
+        <p>Your request is not confirmed until the clinic verifies your selected date and time.</p>
+      </div>
+
+      <button id="summaryConfirm" type="button" class="confirm-btn">
+        Confirm Appointment <span>→</span>
+      </button>
+
+      <p class="terms">
+        By continuing, you agree to the clinic's appointment terms.
+      </p>
+    </aside>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-brand">
+    <a href="home.html" class="logo footer-logo">
+      <span class="logo-icon">✦</span> DermaCare
+    </a>
+    <p>Professional skincare and personalized clinical treatments.</p>
+  </div>
+
+  <div>
+    <h3>Our Treatments</h3>
+    <a href="carbonLaser.html">Carbon Laser Peel</a>
+    <a href="home.html#treatments">Laser Therapy</a>
+    <a href="home.html#treatments">Skin Rejuvenation</a>
+  </div>
+
+  <div>
+    <h3>Contact Us</h3>
+    <p>Colombo, Sri Lanka</p>
+    <a href="contact.html">Contact our team</a>
+  </div>
+
+  <div class="copyright">
+    © 2026 DermaCare. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
+
