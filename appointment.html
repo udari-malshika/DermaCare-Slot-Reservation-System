@@ -6,16 +6,20 @@
     <meta name="theme-color" content="#7650a6">
     <title>Book Appointment | DermaCare</title>
     <link rel="stylesheet" href="./appoinment.css">
-    <script src="./appoinment.js" defer></script>
+    <script type="module" src="./appoinment.js"></script>
 </head>
 <body>
 
 <header class="topbar">
     <a href="home.html" class="brand">
         <span class="brand-icon">✿</span>
-        <span>DermaCare<small>SKIN · HEALTH · CONFIDENCE</small></span>
+        <span class="brand-text">DermaCare<small>SKIN · HEALTH · CONFIDENCE</small></span>
     </a>
-    <a href="home.html" class="home-link">⌂ &nbsp; Home</a>
+
+    <nav class="nav-actions">
+        <a href="home.html" class="nav-btn back-btn" onclick="history.back(); return false;">← &nbsp;Back</a>
+        <a href="home.html" class="nav-btn home-btn">⌂ &nbsp;Home</a>
+    </nav>
 </header>
 
 <section class="hero">
@@ -72,8 +76,8 @@
             </div>
 
             <p class="legend">
-                <span></span> Available &nbsp;&nbsp;
-                <span class="legend-selected"></span> Selected
+                <span class="dot dot-open"></span> Available &nbsp;&nbsp;
+                <span class="dot dot-selected"></span> Selected
             </p>
         </section>
 
@@ -87,26 +91,28 @@
             </div>
 
             <form id="bookingForm">
-                <label for="service">Treatment / Service</label>
-                <select id="service" required>
-                    <option value="">Select treatment</option>
-                    <option value="Bespoke Facial">Bespoke Facial</option>
-                    <option value="Carbon Laser">Carbon Laser</option>
-                    <option value="Pigmentation Removal">Pigmentation Removal</option>
-                    <option value="PRP Therapy">PRP Therapy</option>
-                    <option value="RF Microneedling">RF Microneedling</option>
-                    <option value="Skin Consultation">Skin Consultation</option>
-                    <option value="Acne Treatment">Acne Treatment</option>
-                </select>
+                <div class="field">
+                    <label for="service">Treatment / Service</label>
+                    <select id="service" required>
+                        <option value="">Select treatment</option>
+                        <option value="Bespoke Facial">Bespoke Facial</option>
+                        <option value="Carbon Laser">Carbon Laser</option>
+                        <option value="Pigmentation Removal">Pigmentation Removal</option>
+                        <option value="PRP Therapy">PRP Therapy</option>
+                        <option value="RF Microneedling">RF Microneedling</option>
+                        <option value="Skin Consultation">Skin Consultation</option>
+                        <option value="Acne Treatment">Acne Treatment</option>
+                    </select>
+                </div>
 
                 <div class="form-row">
-                    <div>
+                    <div class="field">
                         <label for="customerName">Full Name</label>
                         <input id="customerName" name="customerName"
                                type="text" placeholder="Enter your full name"
                                autocomplete="name" required minlength="2">
                     </div>
-                    <div>
+                    <div class="field">
                         <label for="phone">Phone Number</label>
                         <input id="phone" name="phone" type="tel"
                                placeholder="0771234567" autocomplete="tel"
@@ -115,14 +121,18 @@
                     </div>
                 </div>
 
-                <label for="email">Email Address</label>
-                <input id="email" name="email" type="email"
-                       placeholder="example@email.com"
-                       autocomplete="email" required>
+                <div class="field">
+                    <label for="email">Email Address</label>
+                    <input id="email" name="email" type="email"
+                           placeholder="example@email.com"
+                           autocomplete="email" required>
+                </div>
 
-                <label for="notes">Additional Notes (Optional)</label>
-                <textarea id="notes" name="notes" rows="3"
-                          placeholder="Any special requests or concerns..."></textarea>
+                <div class="field">
+                    <label for="notes">Additional Notes (Optional)</label>
+                    <textarea id="notes" name="notes" rows="3"
+                              placeholder="Any special requests or concerns..."></textarea>
+                </div>
 
                 <div class="summary-box">
                     <h3>▤ &nbsp; Booking Summary</h3>
@@ -147,7 +157,7 @@
                 </button>
 
                 <p id="message" role="status" aria-live="polite"></p>
-                <p class="privacy-note">Your appointment details are stored in this browser.</p>
+                <p class="privacy-note">Your appointment details are securely saved.</p>
             </form>
         </section>
     </div>
