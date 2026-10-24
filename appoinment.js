@@ -1,218 +1,424 @@
+"use strict";
 
-const treatments = document.querySelectorAll(".treatment");
-const search = document.getElementById("treatmentSearch");
-const calendarGrid = document.getElementById("calendarGrid");
-const monthLabel = document.getElementById("monthLabel");
-const slotsBox = document.getElementById("slots");
+(() => {
+    const $ = (id) => document.getElementById(id);
 
-let selectedTreatment = document.querySelector(".treatment.selected");
-let selectedDate = "";
-let selectedTime = "";
+    const STORAGE_KEY = "dermacareAppointments";
+    const MAX_DAYS_AHEAD = 60;
+    const CLOSED_WEEKDAYS = [0];
+    const HOLIDAYS = ["01-01", "02-04", "05-01", "12-25"];
+    const START_OF_DAY = 9 * 60;
+    const END_OF_DAY = 20 * 60 + 30;
 
-let displayedMonth = new Date();
-displayedMonth.setDate(1);
+    const TIME_GROUPS = {
+        morning: ["10:15 AM", "11:00 AM"],
+        afternoon: ["12:30 PM", "1:00 PM", "2:00 PM", "2:15 PM", "4:00 PM"],
+        evening: ["5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM"]
+    };
 
-const timeSlots = [
-  "09:00 AM", "10:30 AM",
-  "01:00 PM", "02:30 PM",
-  "04:00 PM", "05:30 PM"
-];
+    const MONTH_NAMES = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
 
-const money = value =>
-  "LKR " + Number(value).toLocaleString("en-LK") + ".00";
+    const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function updateSummary() {
-  const price = Number(selectedTreatment.dataset.price);
+    const state = {
+        currentMonth: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+        selectedDate: null,
+        selectedTime: null,
+        appointments: loadAppointments()
+    };
 
-  document.getElementById("summaryTreatment").textContent =
-    selectedTreatment.dataset.treatment;
+    const elements = {
+        monthTitle: $("monthTitle"),
+        calendar: $("calendar"),
+        selectedDate: $("selectedDate"),
+        summaryService: $("summaryService"),
+        summaryDate: $("summaryDate"),
+        summaryTime: $("summaryTime"),
+        bookingForm: $("bookingForm"),
+        service: $("service"),
+        customerName: $("customerName"),
+        phone: $("phone"),
+        email: $("email"),
+        notes: $("notes"),
+        message: $("message"),
+        appointmentsList: $("appointmentsList"),
+        appointmentCount: $("appointmentCount"),
+        prevMonth: $("prevMonth"),
+        nextMonth: $("nextMonth")
+    };
 
-  document.getElementById("serviceCost").textContent = money(price);
-  document.getElementById("totalCost").textContent = money(price + 2000);
-
-  document.getElementById("summaryDate").textContent =
-    selectedDate
-      ? new Date(selectedDate + "T12:00:00").toLocaleDateString(
-          "en-LK",
-          { weekday: "long", month: "long", day: "numeric", year: "numeric" }
-        )
-      : "Select a date";
-
-  document.getElementById("summaryTime").textContent =
-    selectedTime || "Select a time slot";
-}
-
-treatments.forEach(button => {
-  button.addEventListener("click", () => {
-    treatments.forEach(item => item.classList.remove("selected"));
-    button.classList.add("selected");
-    selectedTreatment = button;
-    updateSummary();
-  });
-});
-
-// Search treatments
-search.addEventListener("input", () => {
-  const query = search.value.toLowerCase();
-
-  treatments.forEach(button => {
-    button.hidden = !button.textContent.toLowerCase().includes(query);
-  });
-});
-
-// Calendar
-const weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
-
-function dateKey(year, month, day) {
-  return [
-    year,
-    String(month + 1).padStart(2, "0"),
-    String(day).padStart(2, "0")
-  ].join("-");
-}
-
-function renderCalendar() {
-  const year = displayedMonth.getFullYear();
-  const month = displayedMonth.getMonth();
-
-  monthLabel.textContent = displayedMonth.toLocaleDateString("en-US", {
-    month: "long",
-    year: "numeric"
-  });
-
-  calendarGrid.innerHTML = weekdays.map(day =>
-    `<span class="weekday">${day}</span>`
-  ).join("");
-
-  const firstDay = new Date(year, month, 1);
-  const offset = (firstDay.getDay() + 6) % 7;
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-  for (let i = 0; i < offset; i++) {
-    calendarGrid.insertAdjacentHTML("beforeend", "<span></span>");
-  }
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  for (let day = 1; day <= daysInMonth; day++) {
-    const date = new Date(year, month, day);
-    const key = dateKey(year, month, day);
-    const button = document.createElement("button");
-
-    button.type = "button";
-    button.textContent = day;
-    button.setAttribute("aria-label", date.toDateString());
-
-    // Disable past dates and Sundays
-    if (date < today || date.getDay() === 0) {
-      button.disabled = true;
+    function loadAppointments() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            return raw ? JSON.parse(raw) : [];
+        } catch {
+            return [];
+        }
     }
 
-    if (key === selectedDate) {
-      button.classList.add("selected");
+    function saveAppointments() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state.appointments));
     }
 
-    button.addEventListener("click", () => {
-      selectedDate = key;
-      selectedTime = "";
-      renderCalendar();
-      renderSlots();
-      updateSummary();
-    });
-
-    calendarGrid.appendChild(button);
-  }
-}
-
-document.getElementById("prevMonth").addEventListener("click", () => {
-  const now = new Date();
-  const currentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-
-  if (displayedMonth > currentMonth) {
-    displayedMonth.setMonth(displayedMonth.getMonth() - 1);
-    renderCalendar();
-  }
-});
-
-document.getElementById("nextMonth").addEventListener("click", () => {
-  displayedMonth.setMonth(displayedMonth.getMonth() + 1);
-  renderCalendar();
-});
-
-// Available time slots (demo data, not live clinic availability)
-function renderSlots() {
-  slotsBox.innerHTML = "";
-
-  if (!selectedDate) {
-    slotsBox.innerHTML =
-      "<p class='hint'>Choose a date first.</p>";
-    return;
-  }
-
-  timeSlots.forEach(time => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "slot";
-    button.textContent = time;
-
-    if (selectedTime === time) {
-      button.classList.add("selected");
+    function pad(value) {
+        return String(value).padStart(2, "0");
     }
 
-    button.addEventListener("click", () => {
-      selectedTime = time;
-      renderSlots();
-      updateSummary();
-    });
+    function formatDateKey(date) {
+        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+    }
 
-    slotsBox.appendChild(button);
-  });
-}
+    function parseDateKey(key) {
+        const [year, month, day] = key.split('-').map(Number);
+        return new Date(year, month - 1, day);
+    }
 
-// Confirm appointment request
-function submitBooking(event) {
-  event.preventDefault();
+    function formatDisplayDate(date) {
+        return date.toLocaleDateString("en-US", {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+        });
+    }
 
-  const message = document.getElementById("formMessage");
+    function isWeekend(date) {
+        return date.getDay() === 0 || date.getDay() === 6;
+    }
 
-  if (!selectedDate || !selectedTime) {
-    message.style.color = "#b45309";
-    message.textContent =
-      "Please select your appointment date and time.";
-    document.querySelector(".booking-form .panel:nth-child(2)")
-      .scrollIntoView({ behavior: "smooth", block: "center" });
-    return;
-  }
+    function isHoliday(date) {
+        const monthDay = `${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+        return HOLIDAYS.includes(monthDay);
+    }
 
-  const name = document.getElementById("fullName").value.trim();
-  const email = document.getElementById("email").value.trim();
+    function isBeforeToday(date) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return date < today;
+    }
 
-  message.style.color = "#26734d";
-  message.textContent =
-    `Demo request prepared for ${name}. ` +
-    `Treatment: ${selectedTreatment.dataset.treatment}; ` +
-    `Date: ${selectedDate}; Time: ${selectedTime}. ` +
-    "This has not been sent to the clinic. Connect a backend to save the booking.";
+    function isBeyondBookingWindow(date) {
+        const limit = new Date();
+        limit.setHours(0, 0, 0, 0);
+        limit.setDate(limit.getDate() + MAX_DAYS_AHEAD);
+        return date > limit;
+    }
 
-  console.log("Demo appointment request:", {
-    name,
-    email,
-    phone: document.getElementById("phone").value.trim(),
-    treatment: selectedTreatment.dataset.treatment,
-    date: selectedDate,
-    time: selectedTime,
-    notes: document.getElementById("notes").value.trim()
-  });
-}
+    function isDateBlocked(date) {
+        return (
+            isBeforeToday(date) ||
+            isWeekend(date) ||
+            CLOSED_WEEKDAYS.includes(date.getDay()) ||
+            isHoliday(date) ||
+            isBeyondBookingWindow(date)
+        );
+    }
 
-document.getElementById("bookingForm")
-  .addEventListener("submit", submitBooking);
+    function toMinutes(timeText) {
+        const match = String(timeText).match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+        if (!match) return 0;
+        let hour = Number(match[1]);
+        const minute = Number(match[2]);
+        const suffix = match[3].toUpperCase();
+        if (suffix === "PM" && hour !== 12) hour += 12;
+        if (suffix === "AM" && hour === 12) hour = 0;
+        return hour * 60 + minute;
+    }
 
-document.getElementById("summaryConfirm").addEventListener("click", () => {
-  document.getElementById("bookingForm").requestSubmit();
-});
+    function timeIsAvailable(dateKeyValue, timeText) {
+        const appointmentDate = parseDateKey(dateKeyValue);
+        const selectedMinutes = toMinutes(timeText);
+        const dayStart = START_OF_DAY;
+        const dayEnd = END_OF_DAY;
 
-renderCalendar();
-renderSlots();
-updateSummary();
+        if (selectedMinutes < dayStart || selectedMinutes > dayEnd) {
+            return false;
+        }
+
+        const chosenDate = formatDateKey(appointmentDate);
+        const existing = state.appointments.filter((appt) => appt.date === chosenDate && appt.time === timeText);
+        return existing.length === 0;
+    }
+
+    function renderCalendar() {
+        const year = state.currentMonth.getFullYear();
+        const month = state.currentMonth.getMonth();
+        elements.monthTitle.textContent = `${MONTH_NAMES[month]} ${year}`;
+
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const startWeekDay = firstDay.getDay();
+        const totalDays = lastDay.getDate();
+
+        const fragment = document.createDocumentFragment();
+
+        DAY_NAMES.forEach((day) => {
+            const label = document.createElement("div");
+            label.className = "day-name";
+            label.textContent = day;
+            fragment.appendChild(label);
+        });
+
+        for (let i = 0; i < startWeekDay; i += 1) {
+            const blank = document.createElement("div");
+            blank.className = "calendar-day empty";
+            blank.setAttribute("aria-hidden", "true");
+            fragment.appendChild(blank);
+        }
+
+        for (let day = 1; day <= totalDays; day += 1) {
+            const button = document.createElement("button");
+            const date = new Date(year, month, day);
+            const key = formatDateKey(date);
+            const isSelected = state.selectedDate === key;
+            const blocked = isDateBlocked(date);
+
+            button.type = "button";
+            button.className = `calendar-day ${isSelected ? "selected" : ""}`;
+            button.textContent = String(day);
+            button.disabled = blocked;
+
+            if (!blocked) {
+                button.addEventListener("click", () => {
+                    state.selectedDate = key;
+                    state.selectedTime = null;
+                    renderCalendar();
+                    renderTimeSlots();
+                    updateSummary();
+                });
+            }
+
+            fragment.appendChild(button);
+        }
+
+        elements.calendar.innerHTML = "";
+        elements.calendar.appendChild(fragment);
+    }
+
+    function renderTimeSlots() {
+        const groups = ["morning", "afternoon", "evening"];
+
+        groups.forEach((group) => {
+            const container = $(group);
+            if (!container) return;
+
+            container.innerHTML = "";
+            const times = TIME_GROUPS[group];
+
+            times.forEach((time) => {
+                const slot = document.createElement("button");
+                slot.type = "button";
+                slot.className = `time-slot ${state.selectedTime === time ? "selected" : ""}`;
+                slot.textContent = time;
+
+                const isBlocked = state.selectedDate ? !timeIsAvailable(state.selectedDate, time) : false;
+                slot.disabled = !state.selectedDate || isBlocked;
+
+                slot.addEventListener("click", () => {
+                    if (!state.selectedDate || slot.disabled) return;
+                    state.selectedTime = time;
+                    renderTimeSlots();
+                    updateSummary();
+                });
+
+                container.appendChild(slot);
+            });
+        });
+    }
+
+    function updateSummary() {
+        const serviceValue = elements.service.value || "Not selected";
+        elements.summaryService.textContent = serviceValue === "" ? "Not selected" : serviceValue;
+        elements.summaryDate.textContent = state.selectedDate ? formatDisplayDate(parseDateKey(state.selectedDate)) : "Not selected";
+        elements.summaryTime.textContent = state.selectedTime || "Not selected";
+
+        if (elements.selectedDate) {
+            elements.selectedDate.textContent = state.selectedDate ? formatDisplayDate(parseDateKey(state.selectedDate)) : "Choose a date";
+        }
+    }
+
+    function renderAppointments() {
+        const list = elements.appointmentsList;
+        list.innerHTML = "";
+
+        if (!state.appointments.length) {
+            list.innerHTML = '<p class="empty-message">No appointments booked yet.</p>';
+            elements.appointmentCount.textContent = "0 appointments";
+            return;
+        }
+
+        state.appointments
+            .slice()
+            .sort((a, b) => new Date(a.date) - new Date(b.date))
+            .forEach((appointment) => {
+                const item = document.createElement("div");
+                item.className = "appointment-item";
+
+                const heading = document.createElement("h3");
+                heading.textContent = appointment.service;
+
+                const details = document.createElement("p");
+                details.textContent = `${appointment.dateText} • ${appointment.time}`;
+
+                const meta = document.createElement("p");
+                meta.textContent = `${appointment.name} • ${appointment.phone}`;
+
+                const badge = document.createElement("span");
+                badge.className = "status-badge";
+                badge.textContent = "Confirmed";
+
+                const cancelButton = document.createElement("button");
+                cancelButton.type = "button";
+                cancelButton.className = "cancel-button";
+                cancelButton.textContent = "Cancel";
+                cancelButton.addEventListener("click", () => {
+                    state.appointments = state.appointments.filter((appt) => appt.id !== appointment.id);
+                    saveAppointments();
+                    renderAppointments();
+                    renderTimeSlots();
+                });
+
+                item.appendChild(heading);
+                item.appendChild(details);
+                item.appendChild(meta);
+                item.appendChild(badge);
+                item.appendChild(cancelButton);
+                list.appendChild(item);
+            });
+
+        elements.appointmentCount.textContent = `${state.appointments.length} appointment${state.appointments.length === 1 ? "" : "s"}`;
+    }
+
+    function saveDraft() {
+        const draft = {
+            selectedDate: state.selectedDate,
+            selectedTime: state.selectedTime,
+            service: elements.service.value,
+            customerName: elements.customerName.value,
+            phone: elements.phone.value,
+            email: elements.email.value,
+            notes: elements.notes.value
+        };
+        localStorage.setItem("dermacareDraft", JSON.stringify(draft));
+    }
+
+    function restoreDraft() {
+        try {
+            const draft = JSON.parse(localStorage.getItem("dermacareDraft") || "null");
+            if (!draft) return;
+
+            if (draft.service) elements.service.value = draft.service;
+            if (draft.customerName) elements.customerName.value = draft.customerName;
+            if (draft.phone) elements.phone.value = draft.phone;
+            if (draft.email) elements.email.value = draft.email;
+            if (draft.notes) elements.notes.value = draft.notes;
+            if (draft.selectedDate) state.selectedDate = draft.selectedDate;
+            if (draft.selectedTime) state.selectedTime = draft.selectedTime;
+        } catch {
+            // Ignore invalid saved draft.
+        }
+    }
+
+    function validateForm() {
+        if (!elements.service.value) {
+            throw new Error("Please select a treatment.");
+        }
+
+        if (!state.selectedDate) {
+            throw new Error("Please select a date.");
+        }
+
+        if (!state.selectedTime) {
+            throw new Error("Please select a time slot.");
+        }
+
+        if (!elements.customerName.value.trim()) {
+            throw new Error("Please enter your full name.");
+        }
+
+        const phoneValue = elements.phone.value.trim();
+        if (!/^\+?[0-9\s()-]{9,16}$/.test(phoneValue)) {
+            throw new Error("Please enter a valid phone number.");
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(elements.email.value.trim())) {
+            throw new Error("Please enter a valid email address.");
+        }
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        try {
+            validateForm();
+
+            const appointment = {
+                id: Date.now().toString(),
+                service: elements.service.value,
+                date: state.selectedDate,
+                dateText: formatDisplayDate(parseDateKey(state.selectedDate)),
+                time: state.selectedTime,
+                name: elements.customerName.value.trim(),
+                phone: elements.phone.value.trim(),
+                email: elements.email.value.trim(),
+                notes: elements.notes.value.trim(),
+                createdAt: new Date().toISOString()
+            };
+
+            state.appointments.push(appointment);
+            saveAppointments();
+            renderAppointments();
+
+            localStorage.removeItem("dermacareDraft");
+            elements.bookingForm.reset();
+            state.selectedDate = null;
+            state.selectedTime = null;
+            renderCalendar();
+            renderTimeSlots();
+            updateSummary();
+
+            elements.message.textContent = "Appointment booked successfully.";
+            elements.message.style.color = "#23834d";
+        } catch (error) {
+            elements.message.textContent = error.message;
+            elements.message.style.color = "#b83232";
+        }
+    }
+
+    function bindEvents() {
+        elements.service.addEventListener("change", () => {
+            updateSummary();
+            saveDraft();
+        });
+
+        [elements.customerName, elements.phone, elements.email, elements.notes].forEach((input) => {
+            input.addEventListener("input", saveDraft);
+        });
+
+        elements.bookingForm.addEventListener("submit", handleSubmit);
+
+        elements.prevMonth.addEventListener("click", () => {
+            state.currentMonth = new Date(state.currentMonth.getFullYear(), state.currentMonth.getMonth() - 1, 1);
+            renderCalendar();
+        });
+
+        elements.nextMonth.addEventListener("click", () => {
+            state.currentMonth = new Date(state.currentMonth.getFullYear(), state.currentMonth.getMonth() + 1, 1);
+            renderCalendar();
+        });
+    }
+
+    function init() {
+        restoreDraft();
+        bindEvents();
+        renderCalendar();
+        renderTimeSlots();
+        updateSummary();
+        renderAppointments();
+    }
+
+    init();
+})();
