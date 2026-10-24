@@ -10,6 +10,59 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Login & Book Appointment buttons -->
+    <style>
+        .nav-actions {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+        }
+
+        .nav-actions a.dc-auth-btn {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 12px 28px !important;
+            font-size: 16px !important;
+            font-weight: 800 !important;
+            text-decoration: none !important;
+            white-space: nowrap !important;
+            border: 2px solid #5a3560 !important;
+            border-radius: 999px !important;
+            transition: 0.2s ease;
+        }
+
+        .nav-actions a.dc-auth-outline {
+            color: #5a3560 !important;
+            background: #ffffff !important;
+        }
+
+        .nav-actions a.dc-auth-solid {
+            color: #ffffff !important;
+            background: #5a3560 !important;
+        }
+
+        .nav-actions a.dc-auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(90, 53, 96, 0.35);
+        }
+
+        .nav-actions a.dc-auth-outline:hover {
+            background: #f3ebf5 !important;
+        }
+
+        .nav-actions a.dc-auth-solid:hover {
+            background: #6e4275 !important;
+        }
+
+        @media (max-width: 700px) {
+            .nav-actions a.dc-auth-btn {
+                padding: 10px 18px !important;
+                font-size: 14px !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -32,10 +85,8 @@
                 <a href="#contact">Contact Us</a>
             </nav>
             <div class="nav-actions">
-                <a href="#login" class="login-btn">Log in</a>
-                
-<a href="./appointment.html" class="book-btn">Book Appointment</a>
-
+                <a href="login.html" class="dc-auth-btn dc-auth-outline">Log in</a>
+                <a href="appointment.html" class="dc-auth-btn dc-auth-solid">Book Appointment</a>
             </div>
         </div>
     </header>
@@ -46,7 +97,7 @@
             <div class="hero-text">
                 <h1>Advanced Skin Care<br>for a Radiant You</h1>
                 <p>Get closer to your skin and hair goals with clinical treatments tailored exactly to your unique profile.</p>
-                <a href="#contact" class="hero-cta">Book Appointment</a>
+                <a href="appointment.html" class="hero-cta">Book Appointment</a>
             </div>
             <div class="hero-cards">
                 <div class="preview-card">
@@ -125,97 +176,4 @@
             <div class="treatment-card">
                 <div class="t-icon"><i class="fa-solid fa-award"></i></div>
                 <h3>RF Microneedling</h3>
-                <p>Radio-frequency combined with needling for ultimate skin tightening.</p>
-                <div class="t-tags">
-                    <span>Anti-aging</span>
-                    <span>Tightening</span>
-                </div>
-            </div>
-
-            <!-- Treatment 6 -->
-            <div class="treatment-card">
-                <div class="t-icon"><i class="fa-solid fa-droplet"></i></div>
-                <h3>PRP Therapy</h3>
-                <p>Platelet-rich plasma for natural skin rejuvenation and hair growth stimulation.</p>
-                <div class="t-tags">
-                    <span>Hair Loss</span>
-                    <span>Rejuvenation</span>
-                </div>
-            </div>
-
-            <!-- Treatment 7 -->
-            <div class="treatment-card">
-                <div class="t-icon"><i class="fa-solid fa-flask"></i></div>
-                <h3>Chemical Peels</h3>
-                <p>Customized acid solutions to treat acne, texture, and dullness.</p>
-                <div class="t-tags">
-                    <span>Acne</span>
-                    <span>Texture</span>
-                </div>
-            </div>
-
-            <!-- Treatment 8 -->
-            <div class="treatment-card">
-                <div class="t-icon"><i class="fa-solid fa-pen-nib"></i></div>
-                <h3>Botox & Fillers</h3>
-                <p>Expert injectables for wrinkle relaxation and volume restoration.</p>
-                <div class="t-tags">
-                    <span>Wrinkles</span>
-                    <span>Contour</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
-    <footer id="contact" class="site-footer">
-        <div class="footer-container">
-            <div class="footer-col brand-col">
-                <div class="logo">
-                    <div class="logo-icon"><i class="fa-solid fa-shield-heart"></i></div>
-                    <span>DermoCare</span>
-                </div>
-                <p>Premium dermatological clinic providing advanced, personalized skin and hair treatments.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                </div>
-            </div>
-
-            <div class="footer-col">
-                <h4>Treatments</h4>
-                <ul>
-                    <li><a href="#">Laser Therapy</a></li>
-                    <li><a href="#">Injectables</a></li>
-                    <li><a href="#">Hair Restoration</a></li>
-                    <li><a href="#">Body Contouring</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4>Clinic</h4>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Our Doctors</a></li>
-                    <li><a href="#">Testimonials</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col contact-col">
-                <h4>Contact</h4>
-                <p><i class="fa-solid fa-location-dot"></i> No 6., Pagoda Rd, Nugegoda, Sri Lanka</p>
-                <p><i class="fa-solid fa-phone"></i> +94 (11) 123-4567</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 DermoCare Clinic. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-            </div>
-        </div>
-    </footer>
-
-</body>
-</html>
+                <p>Radio-frequency combined with needling for ultimate

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -146,6 +145,14 @@
   <footer class="footer">
     © 2026 DermaCare. All rights reserved.
   </footer>
+
+  <!-- Browser Back button එක එබුවත් Home page එකටම යන්න -->
+  <script>
+    history.pushState(null, "", location.href);
+    window.addEventListener("popstate", function () {
+      window.location.replace("home.html");
+    });
+  </script>
 
 </body>
 </html>
