@@ -1,314 +1,755 @@
+// DermaCare product listing and shopping cart
+// Demo products: change these details to your actual products.
 
 const products = [
   {
     id: 1,
-    name: "Gentle Foaming Cleanser",
-    category: "Cleanser",
-    price: 4200,
-    rating: 4.8,
-    tag: "BESTSELLER",
-    skin: ["Oily", "Sensitive", "Combination"],
-    description: "A gentle daily cleanser for fresh, balanced skin.",
-    image: "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=600&q=80"
+    name: "Rose Glow Face Serum",
+    category: "Serum",
+    skin: "Dry",
+    price: 3000,
+    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=700&q=80",
+    description: "A lightweight facial serum for a smooth, hydrated-looking glow."
   },
   {
     id: 2,
-    name: "Vitamin C Brightening Serum",
-    category: "Serum",
-    price: 5850,
-    rating: 4.9,
-    tag: "POPULAR",
-    skin: ["Dry", "Oily", "Combination"],
-    description: "A lightweight serum for a radiant-looking complexion.",
-    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=600&q=80"
+    name: "Gentle Daily Cleanser",
+    category: "Cleanser",
+    skin: "Sensitive",
+    price: 2500,
+    image: "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=80",
+    description: "A gentle daily cleanser to help remove dirt and excess oil."
   },
   {
     id: 3,
-    name: "Hydrating Barrier Cream",
+    name: "Hydra Soft Moisturizer",
     category: "Moisturizer",
-    price: 6400,
-    rating: 4.7,
-    tag: "NEW",
-    skin: ["Dry", "Sensitive"],
-    description: "A rich moisturizer to support your skin barrier.",
-    image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=600&q=80"
+    skin: "Dry",
+    price: 3500,
+    image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=700&q=80",
+    description: "A nourishing moisturizer for soft, comfortable-feeling skin."
   },
   {
     id: 4,
-    name: "Mineral SPF 50 Shield",
+    name: "Daily Sun Shield",
     category: "Sunscreen",
-    price: 3800,
-    rating: 4.6,
-    tag: "",
-    skin: ["Sensitive", "Dry", "Combination"],
-    description: "Daily sun protection for your skincare routine.",
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80"
+    skin: "Normal",
+    price: 4000,
+    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=700&q=80",
+    description: "A sunscreen option for your daytime skincare routine."
   },
   {
     id: 5,
-    name: "Advanced Retinol Serum",
-    category: "Serum",
-    price: 3980,
-    rating: 4.5,
-    tag: "",
-    skin: ["Dry", "Oily", "Combination"],
-    description: "A night serum for a smoother-looking complexion.",
-    image: "https://images.unsplash.com/photo-1600612253971-422e7f7faeb6?auto=format&fit=crop&w=600&q=80"
+    name: "Purifying Face Mask",
+    category: "Mask",
+    skin: "Oily",
+    price: 2200,
+    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=700&q=80",
+    description: "A face mask to complement your weekly skincare routine."
   },
   {
     id: 6,
-    name: "Daily Hydrating Cleanser",
-    category: "Cleanser",
-    price: 3200,
-    rating: 4.4,
-    tag: "",
-    skin: ["Dry", "Sensitive"],
-    description: "A simple cleanser for a comfortable daily routine.",
-    image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=600&q=80"
-  },
-  {
-    id: 7,
-    name: "Oil Control Moisturizer",
-    category: "Moisturizer",
-    price: 4500,
-    rating: 4.7,
-    tag: "POPULAR",
-    skin: ["Oily", "Combination"],
-    description: "Lightweight hydration without a heavy finish.",
-    image: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=600&q=80"
-  },
-  {
-    id: 8,
-    name: "Daily Glow Sunscreen",
-    category: "Sunscreen",
-    price: 3500,
-    rating: 4.6,
-    tag: "",
-    skin: ["Oily", "Dry", "Combination"],
-    description: "A daily sunscreen for your morning routine.",
-    image: "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=600&q=80"
-  },
-  {
-    id: 9,
-    name: "Soothing Skin Serum",
+    name: "Daily Balance Serum",
     category: "Serum",
-    price: 5200,
-    rating: 4.8,
-    tag: "TOP RATED",
-    skin: ["Sensitive", "Dry"],
-    description: "A gentle-feeling serum for a simple skincare routine.",
-    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=600&q=80"
+    skin: "Combination",
+    price: 3200,
+    image: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80",
+    description: "A lightweight serum for a simple daily skincare routine."
   }
 ];
 
-const grid = document.getElementById("productGrid");
-const category = document.getElementById("category");
-const skinType = document.getElementById("skinType");
-const maxPrice = document.getElementById("maxPrice");
-const priceValue = document.getElementById("priceValue");
-const sortBy = document.getElementById("sortBy");
-const resultCount = document.getElementById("resultCount");
-const emptyMessage = document.getElementById("emptyMessage");
+const $ = id => document.getElementById(id);
 
-let cart = [];
+const grid = $("productsGrid");
+const cartCount = $("cartCount");
+const cartButton = $("cartButton");
+const category = $("category");
+const skin = $("skin");
+const priceRange = $("priceRange");
+const priceValue = $("priceValue");
+const search = $("search");
+const sort = $("sort");
+const resultCount = $("resultCount");
+const emptyState = $("emptyState");
 
+const CART_KEY = "dermacare-cart-v1";
+
+let cart = readCart();
+
+// Load cart from localStorage
+function readCart() {
+  try {
+    const saved = JSON.parse(
+      localStorage.getItem(CART_KEY) || "[]"
+    );
+
+    return Array.isArray(saved)
+      ? saved
+          .filter(item =>
+            products.some(
+              product => product.id === Number(item.id)
+            ) &&
+            Number(item.quantity) > 0
+          )
+          .map(item => ({
+            ...products.find(
+              product => product.id === Number(item.id)
+            ),
+            quantity: Math.floor(Number(item.quantity))
+          }))
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+// Format prices in Sri Lankan rupees
+const money = amount =>
+  "LKR " + Number(amount).toLocaleString("en-LK");
+
+// Save cart and refresh cart count
+function saveCart() {
+  localStorage.setItem(
+    CART_KEY,
+    JSON.stringify(cart)
+  );
+
+  updateCartCount();
+}
+
+// Update number displayed on Cart button
+function updateCartCount() {
+  cartCount.textContent = cart.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
+}
+
+// Display products
 function renderProducts() {
-  const searchTerm = document.getElementById("searchInput")?.value
-    .toLowerCase().trim() || "";
+  let list = products.filter(product => {
+    const q = search.value.trim().toLowerCase();
 
-  let filtered = products.filter(product => {
-    const matchesCategory =
-      category.value === "all" ||
-      product.category === category.value;
+    return (
+      (category.value === "all" ||
+        product.category === category.value) &&
 
-    const matchesSkin =
-      skinType.value === "all" ||
-      product.skin.includes(skinType.value);
+      (skin.value === "all" ||
+        product.skin === skin.value) &&
 
-    const matchesPrice =
-      product.price <= Number(maxPrice.value);
+      product.price <= Number(priceRange.value) &&
 
-    const matchesSearch =
-      product.name.toLowerCase().includes(searchTerm) ||
-      product.category.toLowerCase().includes(searchTerm) ||
-      product.description.toLowerCase().includes(searchTerm);
-
-    return matchesCategory && matchesSkin &&
-      matchesPrice && matchesSearch;
+      (
+        product.name.toLowerCase().includes(q) ||
+        product.category.toLowerCase().includes(q) ||
+        product.skin.toLowerCase().includes(q)
+      )
+    );
   });
 
-  if (sortBy.value === "low") {
-    filtered.sort((a, b) => a.price - b.price);
-  } else if (sortBy.value === "high") {
-    filtered.sort((a, b) => b.price - a.price);
-  } else if (sortBy.value === "rating") {
-    filtered.sort((a, b) => b.rating - a.rating);
+  // Sorting
+  if (sort.value === "low") {
+    list.sort((a, b) => a.price - b.price);
+  }
+
+  if (sort.value === "high") {
+    list.sort((a, b) => b.price - a.price);
+  }
+
+  if (sort.value === "name") {
+    list.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
   }
 
   resultCount.textContent =
-    `Showing ${filtered.length} of ${products.length} products`;
+    `Showing ${list.length} product${list.length === 1 ? "" : "s"}`;
 
-  emptyMessage.hidden = filtered.length > 0;
+  emptyState.hidden = list.length !== 0;
 
-  grid.innerHTML = filtered.map(product => `
+  grid.innerHTML = list.map(product => `
     <article class="product-card">
-      <div class="product-image">
+
+      <button
+        class="product-image-button"
+        type="button"
+        data-action="details"
+        data-id="${product.id}"
+        aria-label="View ${product.name} details"
+      >
         <img
           src="${product.image}"
           alt="${product.name}"
           loading="lazy"
-          onerror="this.onerror=null;this.src='https://placehold.co/500x400/f0efff/6558f5?text=DermaCare'">
-        ${product.tag ? `<span class="tag">${product.tag}</span>` : ""}
-      </div>
+        >
+      </button>
+
       <div class="product-info">
-        <span class="product-category">${product.category}</span>
+
+        <span class="product-category">
+          ${product.category}
+        </span>
+
         <h3>${product.name}</h3>
-        <p>${product.description}</p>
-        <div class="product-bottom">
-          <span class="price">LKR ${product.price.toLocaleString("en-LK")}</span>
-          <span class="rating">★ ${product.rating}</span>
+
+        <p class="product-skin">
+          ${product.skin} skin
+        </p>
+
+        <div class="product-price">
+          ${money(product.price)}
         </div>
-        <button class="add-btn" data-add="${product.id}">
-          + Add to Cart
+
+        <button
+          class="details-btn"
+          type="button"
+          data-action="details"
+          data-id="${product.id}"
+        >
+          View Details
         </button>
+
+        <button
+          class="add-cart-btn"
+          type="button"
+          data-action="add"
+          data-id="${product.id}"
+        >
+          ＋ Add to Cart
+        </button>
+
       </div>
     </article>
   `).join("");
 }
 
-[category, skinType, sortBy].forEach(control => {
-  control.addEventListener("change", renderProducts);
-});
+// Show notification
+let toastTimer;
 
-maxPrice.addEventListener("input", () => {
-  priceValue.textContent = Number(maxPrice.value).toLocaleString("en-LK");
-  renderProducts();
-});
+function showMessage(message) {
+  const toast = $("toast");
 
-document.getElementById("resetButton").addEventListener("click", () => {
-  category.value = "all";
-  skinType.value = "all";
-  maxPrice.value = "10000";
-  priceValue.textContent = "10000";
-  sortBy.value = "popular";
+  toast.textContent = message;
+  toast.classList.add("show");
 
-  const searchInput = document.getElementById("searchInput");
-  if (searchInput) searchInput.value = "";
+  clearTimeout(toastTimer);
 
-  renderProducts();
-});
-
-// Add products to the demo shopping cart
-grid.addEventListener("click", event => {
-  const button = event.target.closest("[data-add]");
-  if (!button) return;
-
-  const id = Number(button.dataset.add);
-  const product = products.find(item => item.id === id);
-  const existing = cart.find(item => item.id === id);
-
-  if (existing) {
-    existing.quantity++;
-  } else {
-    cart.push({ ...product, quantity: 1 });
-  }
-
-  updateCart();
-  button.textContent = "✓ Added to Cart";
-  setTimeout(() => {
-    button.textContent = "+ Add to Cart";
-  }, 900);
-});
-
-function updateCart() {
-  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-  document.getElementById("cartCount").textContent = count;
-
-  document.getElementById("cartItems").innerHTML = cart.length
-    ? cart.map(item => `
-      <div class="cart-line">
-        <strong>${item.name}</strong>
-        <p>Quantity: ${item.quantity} × LKR ${item.price.toLocaleString("en-LK")}</p>
-        <button data-remove="${item.id}">Remove one</button>
-      </div>
-    `).join("")
-    : "<p>Your cart is empty. Add a product to get started!</p>";
-
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity, 0
-  );
-
-  document.getElementById("cartTotal").textContent =
-    `Total: LKR ${total.toLocaleString("en-LK")}`;
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2400);
 }
 
-document.getElementById("cartItems").addEventListener("click", event => {
-  const button = event.target.closest("[data-remove]");
-  if (!button) return;
+// Add product to cart
+function addToCart(id) {
+  const product = products.find(
+    item => item.id === Number(id)
+  );
 
-  const id = Number(button.dataset.remove);
-  const item = cart.find(product => product.id === id);
+  if (!product) return;
 
-  if (item) {
-    item.quantity--;
-    if (item.quantity <= 0) {
-      cart = cart.filter(product => product.id !== id);
-    }
+  const existing = cart.find(
+    item => item.id === product.id
+  );
+
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({
+      ...product,
+      quantity: 1
+    });
   }
 
-  updateCart();
+  saveCart();
+
+  showMessage(
+    `${product.name} added to cart 💜`
+  );
+}
+
+// Create modal window
+function ensureModal() {
+  if ($("storeModal")) return;
+
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    `
+      <div
+        class="store-modal"
+        id="storeModal"
+        aria-hidden="true"
+      >
+        <section
+          class="store-panel"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modalTitle"
+        >
+          <button
+            class="modal-close"
+            type="button"
+            data-action="close"
+            aria-label="Close"
+          >×</button>
+
+          <div id="modalContent"></div>
+        </section>
+      </div>
+    `
+  );
+}
+
+// Open modal with selected content
+function openModal(content) {
+  ensureModal();
+
+  $("modalContent").innerHTML = content;
+
+  $("storeModal").classList.add("open");
+
+  $("storeModal").setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.classList.add("modal-open");
+}
+
+// Close modal
+function closeModal() {
+  const modal = $("storeModal");
+
+  if (!modal) return;
+
+  modal.classList.remove("open");
+
+  modal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.classList.remove("modal-open");
+}
+
+// Show product details
+function showDetails(id) {
+  const product = products.find(
+    item => item.id === Number(id)
+  );
+
+  if (!product) return;
+
+  openModal(`
+    <div class="detail-layout">
+
+      <img
+        class="detail-image"
+        src="${product.image}"
+        alt="${product.name}"
+      >
+
+      <div class="detail-info">
+
+        <span class="product-category">
+          ${product.category}
+        </span>
+
+        <h2 id="modalTitle">
+          ${product.name}
+        </h2>
+
+        <p>${product.description}</p>
+
+        <p>
+          <strong>Skin type:</strong>
+          ${product.skin}
+        </p>
+
+        <div class="product-price">
+          ${money(product.price)}
+        </div>
+
+        <button
+          class="add-cart-btn"
+          type="button"
+          data-action="add"
+          data-id="${product.id}"
+        >
+          ＋ Add to Cart
+        </button>
+
+      </div>
+    </div>
+  `);
+}
+
+// Display shopping cart
+function showCart() {
+  const total = cart.reduce(
+    (sum, item) =>
+      sum + item.price * item.quantity,
+    0
+  );
+
+  const itemsHTML = cart.length
+    ? cart.map(item => `
+        <div class="cart-item">
+
+          <img
+            src="${item.image}"
+            alt="${item.name}"
+          >
+
+          <div class="cart-item-info">
+
+            <strong>${item.name}</strong>
+
+            <span>
+              ${money(item.price)} each
+            </span>
+
+            <div class="quantity-controls">
+
+              <button
+                type="button"
+                data-action="decrease"
+                data-id="${item.id}"
+                aria-label="Decrease quantity"
+              >−</button>
+
+              <span>${item.quantity}</span>
+
+              <button
+                type="button"
+                data-action="increase"
+                data-id="${item.id}"
+                aria-label="Increase quantity"
+              >＋</button>
+
+            </div>
+          </div>
+
+          <button
+            class="remove-item"
+            type="button"
+            data-action="remove"
+            data-id="${item.id}"
+          >
+            Remove
+          </button>
+
+        </div>
+      `).join("")
+    : `
+        <div class="cart-empty">
+          <p>Your cart is empty 🛍️</p>
+          <p>Add a product to get started.</p>
+        </div>
+      `;
+
+  openModal(`
+    <h2 id="modalTitle">
+      Your Shopping Cart 🛒
+    </h2>
+
+    <div class="cart-items">
+      ${itemsHTML}
+    </div>
+
+    <div class="cart-total">
+      <span>Subtotal</span>
+      <strong>${money(total)}</strong>
+    </div>
+
+    <p class="cart-note">
+      Delivery charges, if applicable, are not included.
+    </p>
+
+    ${
+      cart.length
+        ? `
+          <button
+            class="checkout-btn"
+            type="button"
+            data-action="checkout"
+          >
+            Continue to Order
+          </button>
+        `
+        : ""
+    }
+  `);
+}
+
+// Increase or decrease item quantity
+function updateQuantity(id, amount) {
+  const item = cart.find(
+    product => product.id === Number(id)
+  );
+
+  if (!item) return;
+
+  item.quantity += amount;
+
+  if (item.quantity <= 0) {
+    cart = cart.filter(
+      product => product.id !== Number(id)
+    );
+  }
+
+  saveCart();
+  showCart();
+}
+
+// Remove product from cart
+function removeItem(id) {
+  cart = cart.filter(
+    item => item.id !== Number(id)
+  );
+
+  saveCart();
+  showCart();
+}
+
+// Prepare checkout form
+function showCheckout() {
+  if (!cart.length) {
+    return showCart();
+  }
+
+  const total = cart.reduce(
+    (sum, item) =>
+      sum + item.price * item.quantity,
+    0
+  );
+
+  openModal(`
+    <h2 id="modalTitle">
+      Order Details
+    </h2>
+
+    <p class="cart-note">
+      Enter your details to prepare your order.
+      This demo does not process online payments.
+    </p>
+
+    <form class="checkout-form" id="checkoutForm">
+
+      <label>
+        Full name
+        <input
+          name="name"
+          required
+          autocomplete="name"
+        >
+      </label>
+
+      <label>
+        Phone number
+        <input
+          name="phone"
+          required
+          type="tel"
+          autocomplete="tel"
+        >
+      </label>
+
+      <label>
+        Delivery address
+        <textarea
+          name="address"
+          required
+          rows="3"
+          autocomplete="street-address"
+        ></textarea>
+      </label>
+
+      <div class="cart-total">
+        <span>Order subtotal</span>
+        <strong>${money(total)}</strong>
+      </div>
+
+      <button
+        class="checkout-btn"
+        type="submit"
+      >
+        Prepare Order
+      </button>
+
+    </form>
+  `);
+}
+
+// Handle buttons throughout the page
+document.addEventListener("click", event => {
+  const actionButton = event.target.closest(
+    "[data-action]"
+  );
+
+  if (actionButton) {
+    const action = actionButton.dataset.action;
+    const id = actionButton.dataset.id;
+
+    if (action === "details") showDetails(id);
+    if (action === "add") addToCart(id);
+    if (action === "close") closeModal();
+    if (action === "increase") updateQuantity(id, 1);
+    if (action === "decrease") updateQuantity(id, -1);
+    if (action === "remove") removeItem(id);
+    if (action === "checkout") showCheckout();
+  }
+
+  if (event.target.id === "storeModal") {
+    closeModal();
+  }
 });
 
-const cartModal = document.getElementById("cartModal");
+// Prevent the checkout form from refreshing the page
+document.addEventListener("submit", event => {
+  if (event.target.id !== "checkoutForm") return;
 
-document.getElementById("cartButton").addEventListener("click", () => {
-  cartModal.hidden = false;
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+
+  const name = String(
+    formData.get("name")
+  ).trim();
+
+  const phone = String(
+    formData.get("phone")
+  ).trim();
+
+  const address = String(
+    formData.get("address")
+  ).trim();
+
+  if (!name || !phone || !address) return;
+
+  const orderLines = cart.map(item =>
+    `${item.name} x ${item.quantity} — ${money(item.price * item.quantity)}`
+  ).join("\n");
+
+  const total = cart.reduce(
+    (sum, item) =>
+      sum + item.price * item.quantity,
+    0
+  );
+
+  openModal(`
+    <h2 id="modalTitle">
+      Order Prepared 💜
+    </h2>
+
+    <p>
+      Thank you, ${escapeHTML(name)}.
+      Your order summary is ready.
+    </p>
+
+    <pre style="
+      white-space:pre-wrap;
+      overflow-wrap:anywhere;
+      background:#fff4f8;
+      padding:14px;
+      border-radius:12px;
+      font:13px/1.7 'DM Sans',sans-serif
+    ">${escapeHTML(orderLines)}
+
+Subtotal: ${money(total)}
+Phone: ${escapeHTML(phone)}
+Address: ${escapeHTML(address)}</pre>
+
+    <p class="cart-note">
+      This website currently prepares an order summary only.
+      Connect a backend or order service to actually submit
+      and save orders.
+    </p>
+
+    <button
+      class="checkout-btn"
+      type="button"
+      data-action="finish-order"
+    >
+      Finish
+    </button>
+  `);
 });
 
-document.getElementById("closeCart").addEventListener("click", () => {
-  cartModal.hidden = true;
+// Escape text before displaying user-entered details
+function escapeHTML(value) {
+  return String(value).replace(
+    /[&<>"']/g,
+    char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]
+  );
+}
+
+// Finish demo order
+document.addEventListener("click", event => {
+  if (
+    event.target.closest(
+      '[data-action="finish-order"]'
+    )
+  ) {
+    cart = [];
+
+    saveCart();
+    closeModal();
+
+    showMessage(
+      "Order summary completed. Cart cleared."
+    );
+  }
 });
 
-// Skin quiz
-const quizModal = document.getElementById("quizModal");
+// Cart button
+cartButton.addEventListener("click", showCart);
 
-document.getElementById("quizButton").addEventListener("click", () => {
-  quizModal.hidden = false;
-});
+// Search, filters and sorting
+[category, skin, priceRange, search, sort].forEach(
+  control => {
+    control.addEventListener("input", renderProducts);
+    control.addEventListener("change", renderProducts);
+  }
+);
 
-document.getElementById("closeQuiz").addEventListener("click", () => {
-  quizModal.hidden = true;
-});
+// Reset all filters
+function resetFilters() {
+  category.value = "all";
+  skin.value = "all";
+  priceRange.value = "10000";
+  search.value = "";
+  sort.value = "featured";
 
-document.getElementById("findProducts").addEventListener("click", () => {
-  skinType.value = document.getElementById("quizSkin").value;
-  quizModal.hidden = true;
+  priceValue.textContent = "Up to LKR 10,000";
+
   renderProducts();
+}
 
-  document.querySelector(".catalog").scrollIntoView({
-    behavior: "smooth"
-  });
+priceRange.addEventListener("input", () => {
+  priceValue.textContent =
+    `Up to ${money(Number(priceRange.value))}`;
 });
 
-// Close a modal by clicking outside its content
-[quizModal, cartModal].forEach(modal => {
-  modal.addEventListener("click", event => {
-    if (event.target === modal) modal.hidden = true;
-  });
+$("reset").addEventListener("click", resetFilters);
+
+$("resetEmpty").addEventListener(
+  "click",
+  resetFilters
+);
+
+// Close modal with Escape key
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closeModal();
+  }
 });
 
-// Search field added to the catalog heading
-const search = document.createElement("input");
-search.id = "searchInput";
-search.type = "search";
-search.placeholder = "Search skincare products...";
-search.setAttribute("aria-label", "Search products");
-search.style.cssText =
-  "width:100%;max-width:300px;padding:11px;border:1px solid #e9eaf1;border-radius:8px;margin-bottom:18px";
-
-document.querySelector(".catalog-heading").after(search);
-search.addEventListener("input", renderProducts);
-
+// Initial page setup
+updateCartCount();
 renderProducts();
-updateCart();

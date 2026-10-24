@@ -1,181 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#7650a6">
-    <title>Book Appointment | DermaCare</title>
-    <link rel="stylesheet" href="./appoinment.css">
-    <script type="module" src="./appoinment.js"></script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="0; url='appoinment.html'" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting to Appointment</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: Arial, sans-serif;
+      background: #f8eefb;
+      color: #2d173d;
+    }
+    .message {
+      text-align: center;
+      padding: 32px 40px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 20px 40px rgba(61, 29, 79, 0.12);
+    }
+    a { color: #7a3bb8; }
+  </style>
 </head>
 <body>
-
-<header class="topbar">
-    <a href="home.html" class="brand">
-        <span class="brand-icon">✿</span>
-        <span class="brand-text">DermaCare<small>SKIN · HEALTH · CONFIDENCE</small></span>
-    </a>
-
-    <nav class="nav-actions">
-        <a href="home.html" class="nav-btn back-btn" onclick="history.back(); return false;">← &nbsp;Back</a>
-        <a href="home.html" class="nav-btn home-btn">⌂ &nbsp;Home</a>
-    </nav>
-</header>
-
-<section class="hero">
-    <div class="hero-content">
-        <p class="eyebrow">YOUR SKIN DESERVES THE BEST</p>
-        <h1>Book Your Appointment</h1>
-        <p>Choose your treatment, date and preferred time.</p>
-    </div>
-    <div class="hero-decoration">Healthy Skin<br>Brighter You</div>
-</section>
-
-<main class="container">
-
-    <div class="booking-layout">
-
-        <section class="card">
-            <div class="section-heading">
-                <span class="heading-icon">▦</span>
-                <div>
-                    <h2>Select Date &amp; Time</h2>
-                    <p>Choose an available appointment slot.</p>
-                </div>
-            </div>
-
-            <div class="month-navigation">
-                <button type="button" id="prevMonth" aria-label="Previous month">‹</button>
-                <h3 id="monthTitle">Loading calendar...</h3>
-                <button type="button" id="nextMonth" aria-label="Next month">›</button>
-            </div>
-
-            <div id="calendar" class="calendar-grid"></div>
-
-            <div class="selected-date-box">
-                <span class="heading-icon">▣</span>
-                <div>
-                    <small>Selected Date</small>
-                    <strong id="selectedDate">Choose a date</strong>
-                </div>
-            </div>
-
-            <div class="time-section">
-                <h3>☼ &nbsp; Morning</h3>
-                <div id="morning" class="time-grid"></div>
-            </div>
-
-            <div class="time-section">
-                <h3>☀ &nbsp; Afternoon</h3>
-                <div id="afternoon" class="time-grid"></div>
-            </div>
-
-            <div class="time-section">
-                <h3>☾ &nbsp; Evening</h3>
-                <div id="evening" class="time-grid"></div>
-            </div>
-
-            <p class="legend">
-                <span class="dot dot-open"></span> Available &nbsp;&nbsp;
-                <span class="dot dot-selected"></span> Selected
-            </p>
-        </section>
-
-        <section class="card">
-            <div class="section-heading">
-                <span class="heading-icon">♙</span>
-                <div>
-                    <h2>Your Details</h2>
-                    <p>Enter your details to reserve your appointment.</p>
-                </div>
-            </div>
-
-            <form id="bookingForm">
-                <div class="field">
-                    <label for="service">Treatment / Service</label>
-                    <select id="service" required>
-                        <option value="">Select treatment</option>
-                        <option value="Bespoke Facial">Bespoke Facial</option>
-                        <option value="Carbon Laser">Carbon Laser</option>
-                        <option value="Pigmentation Removal">Pigmentation Removal</option>
-                        <option value="PRP Therapy">PRP Therapy</option>
-                        <option value="RF Microneedling">RF Microneedling</option>
-                        <option value="Skin Consultation">Skin Consultation</option>
-                        <option value="Acne Treatment">Acne Treatment</option>
-                    </select>
-                </div>
-
-                <div class="form-row">
-                    <div class="field">
-                        <label for="customerName">Full Name</label>
-                        <input id="customerName" name="customerName"
-                               type="text" placeholder="Enter your full name"
-                               autocomplete="name" required minlength="2">
-                    </div>
-                    <div class="field">
-                        <label for="phone">Phone Number</label>
-                        <input id="phone" name="phone" type="tel"
-                               placeholder="0771234567" autocomplete="tel"
-                               required pattern="[0-9+\s()-]{9,16}"
-                               title="Enter a valid phone number">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label for="email">Email Address</label>
-                    <input id="email" name="email" type="email"
-                           placeholder="example@email.com"
-                           autocomplete="email" required>
-                </div>
-
-                <div class="field">
-                    <label for="notes">Additional Notes (Optional)</label>
-                    <textarea id="notes" name="notes" rows="3"
-                              placeholder="Any special requests or concerns..."></textarea>
-                </div>
-
-                <div class="summary-box">
-                    <h3>▤ &nbsp; Booking Summary</h3>
-                    <div class="summary-grid">
-                        <div>
-                            <small>Treatment</small>
-                            <strong id="summaryService">Not selected</strong>
-                        </div>
-                        <div>
-                            <small>Date</small>
-                            <strong id="summaryDate">Not selected</strong>
-                        </div>
-                        <div>
-                            <small>Time</small>
-                            <strong id="summaryTime">Not selected</strong>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="book-button">
-                    ▦ &nbsp; Confirm Appointment &nbsp; →
-                </button>
-
-                <p id="message" role="status" aria-live="polite"></p>
-                <p class="privacy-note">Your appointment details are securely saved.</p>
-            </form>
-        </section>
-    </div>
-
-    <section class="card appointments-card">
-        <div class="section-heading">
-            <span class="heading-icon">▣</span>
-            <div>
-                <h2>My Appointments</h2>
-                <p>View or cancel your upcoming appointments.</p>
-            </div>
-            <span id="appointmentCount" class="count-badge">0 appointments</span>
-        </div>
-        <div id="appointmentsList"></div>
-    </section>
-
-    <footer>© 2026 DermaCare · Your skin, our care.</footer>
-</main>
-
+  <div class="message">
+    <h2>Redirecting to the appointment page...</h2>
+    <p>If you are not redirected, <a href="appoinment.html">click here</a>.</p>
+  </div>
 </body>
 </html>

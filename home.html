@@ -1,179 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DermoCare - Advanced Skin Care</title>
-    <link rel="stylesheet" href="Dermocare booking/css/home.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#120720">
+  <title>DermaCare | Professional Skin Care</title>
 
-    <!-- Login & Book Appointment buttons -->
-    <style>
-        .nav-actions {
-            display: flex !important;
-            align-items: center !important;
-            gap: 12px !important;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
-        .nav-actions a.dc-auth-btn {
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            padding: 12px 28px !important;
-            font-size: 16px !important;
-            font-weight: 800 !important;
-            text-decoration: none !important;
-            white-space: nowrap !important;
-            border: 2px solid #5a3560 !important;
-            border-radius: 999px !important;
-            transition: 0.2s ease;
-        }
-
-        .nav-actions a.dc-auth-outline {
-            color: #5a3560 !important;
-            background: #ffffff !important;
-        }
-
-        .nav-actions a.dc-auth-solid {
-            color: #ffffff !important;
-            background: #5a3560 !important;
-        }
-
-        .nav-actions a.dc-auth-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(90, 53, 96, 0.35);
-        }
-
-        .nav-actions a.dc-auth-outline:hover {
-            background: #f3ebf5 !important;
-        }
-
-        .nav-actions a.dc-auth-solid:hover {
-            background: #6e4275 !important;
-        }
-
-        @media (max-width: 700px) {
-            .nav-actions a.dc-auth-btn {
-                padding: 10px 18px !important;
-                font-size: 14px !important;
-            }
-        }
-    </style>
+  <link rel="stylesheet" href="home.css">
+  <script src="home.js" defer></script>
 </head>
+
 <body>
 
-    <!-- Top Announcement Banner -->
-    <div class="announcement-banner">
-        <span><i class="fa-solid fa-sparkles"></i> New Patient Special: Free Consultation + 10% Off First Treatment</span>
+<header class="site-header" id="siteHeader">
+  <div class="info-bar">
+    <span>No. 00, Your Street, Colombo · Mon–Sat 9:00 AM–8:30 PM</span>
+    <div class="right">
+      <span>+94 11 000 0000</span>
+      <a href="mailto:info@dermacare.com">info@dermacare.com</a>
+    </div>
+  </div>
+
+  <div class="nav-wrap">
+    <a href="home.html" class="brand"><span class="brand-mark" aria-hidden="true">✿</span>DERMACARE</a>
+
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav">Menu</button>
+
+    <nav class="main-nav" id="mainNav">
+      <a class="active" href="home.html">Home</a>
+      <a href="treatment.html">Treatments</a>
+      <a href="products.html">Products</a>
+      <a href="appointment.html">Appointment</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Log In</a>
+    </nav>
+
+    <a href="appointment.html" class="nav-cta">Book now</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="hero" aria-label="Featured">
+    <div class="slide s1 active">
+      <div class="slide-content">
+        <p class="tagline">Experienced skin specialists</p>
+        <h1>Enjoy Professional Skin Care Services!</h1>
+        <p class="lead">Expert advice and treatments for every skin type, booked online in a minute.</p>
+        <div class="hero-btns">
+          <a href="appointment.html" class="btn primary">Book now</a>
+          <a href="treatment.html" class="btn outline">View treatments</a>
+        </div>
+      </div>
     </div>
 
-    <!-- Header / Navbar -->
-    <header class="site-header">
-        <div class="nav-container">
-            <div class="logo">
-                <div class="logo-icon"><i class="fa-solid fa-shield-heart"></i></div>
-                <span>DermoCare</span>
-            </div>
-            <nav class="nav-links">
-                <a href="#home" class="active">Home</a>
-                <a href="#treatments">Treatments</a>
-                <a href="#products">Products</a>
-                <a href="contact.html">Contact Us</a>
-            </nav>
-            <div class="nav-actions">
-                <a href="login.html" class="dc-auth-btn dc-auth-outline">Log in</a>
-                <a href="appointment.html" class="dc-auth-btn dc-auth-solid">Book Appointment</a>
-            </div>
+    <div class="slide s2">
+      <div class="slide-content">
+        <p class="tagline">Laser and peel treatments</p>
+        <h1>Glow Starts With The Right Treatment</h1>
+        <p class="lead">From carbon laser peels to pigmentation care, guided by our team.</p>
+        <div class="hero-btns">
+          <a href="treatment.html" class="btn primary">Explore treatments</a>
+          <a href="contact.html" class="btn outline">Ask a question</a>
         </div>
-    </header>
+      </div>
+    </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Advanced Skin Care<br>for a Radiant You</h1>
-                <p>Get closer to your skin and hair goals with clinical treatments tailored exactly to your unique profile.</p>
-                <a href="appointment.html" class="hero-cta">Book Appointment</a>
-            </div>
-            <div class="hero-cards">
-                <div class="preview-card">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300" alt="Clear skin">
-                    <div class="card-label">Clear your skin <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-                <div class="preview-card">
-                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=300" alt="Brighten skin">
-                    <div class="card-label">Brighten your skin <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-                <div class="preview-card">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300" alt="Regrow hair">
-                    <div class="badge-new">New!</div>
-                    <div class="card-label">Regrow your hair <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </div>
+    <div class="slide s3">
+      <div class="slide-content">
+        <p class="tagline">Skincare for every routine</h1>
+        <h1>Shop Products You Can Trust</h1>
+        <p class="lead">Cleansers, serums and masks chosen to go with your treatment.</p>
+        <div class="hero-btns">
+          <a href="products.html" class="btn primary">Shop now</a>
+          <a href="appointment.html" class="btn outline">Book a visit</a>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <!-- Clinical Treatments Section -->
-    <section id="treatments" class="treatments-section">
-        <div class="section-header">
-            <div>
-                <h2>Clinical Treatments</h2>
-                <p>Gold-standard procedures performed by licensed dermatologists for optimal, lasting results.</p>
-            </div>
-            <a href="#all-services" class="view-all-btn">View All Services</a>
-        </div>
+    <div class="slider-controls">
+      <div class="dots" id="dots"></div>
+      <div class="arrows">
+        <button class="arrow" id="prevSlide" type="button" aria-label="Previous slide">‹</button>
+        <button class="arrow" id="nextSlide" type="button" aria-label="Next slide">›</button>
+      </div>
+    </div>
+  </section>
 
-        <div class="treatments-grid">
-            <!-- Treatment 1 -->
-            <a class="treatment-card" href="CO2.html">
-                <div class="t-icon"><i class="fa-solid fa-syringe"></i></div>
-                <h3>CO2 Laser</h3>
-                <p>Advanced fractional resurfacing for acne scars, stretch marks, and warts removal.</p>
-                <div class="t-tags">
-                    <span>Scars</span>
-                    <span>Stretch Marks</span>
-                </div>
-            </a>
+  <!-- STATS -->
+  <section class="stats" aria-label="At a glance">
+    <div class="stat"><strong data-count="5">0</strong><span>Treatments</span></div>
+    <div class="stat"><strong data-count="20" data-plus="1">0</strong><span>Skincare products</span></div>
+    <div class="stat"><strong data-count="6">0</strong><span>Days open each week</span></div>
+    <div class="stat"><strong data-count="60">0</strong><span>Days you can book ahead</span></div>
+  </section>
 
-            <!-- Treatment 2 -->
-            <a class="treatment-card" href="carbonLaser.html">
-                <div class="t-icon"><i class="fa-solid fa-mask"></i></div>
-                <h3>Carbon Laser Peel</h3>
-                <p>The 'Hollywood Peel' for deep exfoliation, reduced pores, and instant glow.</p>
-                <div class="t-tags">
-                    <span>Pores</span>
-                    <span>Glow</span>
-                </div>
-            </a>
+  <!-- TREATMENTS -->
+  <section class="section">
+    <div class="section-title">
+      <h2>Treatments for every skin goal</h2>
+      <span class="bar"></span>
+      <p>Start with a consultation. We will suggest what fits your skin.</p>
+    </div>
 
-            <!-- Treatment 3 -->
-            <a class="treatment-card" href="pigmentation.html">
-                <div class="t-icon"><i class="fa-solid fa-sun"></i></div>
-                <h3>Pigmentation Laser</h3>
-                <p>Targeted light therapy to break down melanin and clear dark spots.</p>
-                <div class="t-tags">
-                    <span>Dark Spots</span>
-                    <span>Tone</span>
-                </div>
-            </a>
+    <div class="service-grid">
+      <a class="service" href="treatment.html">
+        <span class="icon" aria-hidden="true">✚</span>
+        <h3>Botox and Filler</h3>
+        <p>Soften fine lines and restore volume with a gentle, planned approach.</p>
+        <span class="more">Learn more</span>
+      </a>
+      <a class="service" href="carbonLaser.html">
+        <span class="icon" aria-hidden="true">✦</span>
+        <h3>Carbon Laser Peel</h3>
+        <p>Refresh dull skin and make pores look smaller.</p>
+        <span class="more">Learn more</span>
+      </a>
+      <a class="service" href="treatment.html">
+        <span class="icon" aria-hidden="true">❖</span>
+        <h3>Chemical Peeling</h3>
+        <p>Even out tone and texture with a guided peel.</p>
+        <span class="more">Learn more</span>
+      </a>
+      <a class="service" href="CO2.html">
+        <span class="icon" aria-hidden="true">◈</span>
+        <h3>CO2 Laser</h3>
+        <p>Resurfacing for scars and rough texture.</p>
+        <span class="more">Learn more</span>
+      </a>
+      <a class="service" href="pigmentation.html">
+        <span class="icon" aria-hidden="true">✿</span>
+        <h3>Pigmentation Care</h3>
+        <p>Target dark spots and uneven colour.</p>
+        <span class="more">Learn more</span>
+      </a>
+    </div>
+  </section>
 
-            <!-- Treatment 4 -->
-            <div class="treatment-card">
-                <div class="t-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                <h3>Laser Hair Removal</h3>
-                <p>Safe, effective, and permanent reduction for all skin types and body areas.</p>
-                <div class="t-tags">
-                    <span>Full Body</span>
-                    <span>Face</span>
-                </div>
-            </div>
+  <!-- HOW IT WORKS -->
+  <section class="section why">
+    <div class="why-text">
+      <h2>Care that fits your schedule</h2>
+      <p>Reserve your slot online, arrive at your time and leave with a routine you can follow at home.</p>
+      <a href="appointment.html" class="btn primary">Reserve a slot</a>
+    </div>
 
-            <!-- Treatment 5 -->
-            <div class="treatment-card">
-                <div class="t-icon"><i class="fa-solid fa-award"></i></div>
-                <h3>RF Microneedling</h3>
-                <p>Radio-frequency combined with needling for ultimate
+    <ol class="steps">
+      <li><strong>Pick your day and time</strong><span>See open slots on the calendar and choose one.</span></li>
+      <li><strong>Add your details</strong><span>Tell us your name, phone and the treatment you want.</span></li>
+      <li><strong>Arrive and relax</strong><span>Your booking is saved, so you can walk straight in.</span></li>
+    </ol>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section">
+    <div class="section-title">
+      <h2>Popular products</h2>
+      <span class="bar"></span>
+      <p>Cleansers, serums and masks picked to go with your treatment.</p>
+    </div>
+
+    <div class="shelf-track">
+      <a class="shelf-item" href="products.html">
+        <img src="Images/centella%20cream.jpg" alt="Centella cream" loading="lazy">
+        <span>Centella cream</span>
+      </a>
+      <a class="shelf-item" href="products.html">
+        <img src="Images/Anua%20Clean%20pad.jpg" alt="Anua Clean pad" loading="lazy">
+        <span>Anua Clean pad</span>
+      </a>
+      <a class="shelf-item" href="products.html">
+        <img src="Images/centella%20blue%20serum.jpg" alt="Centella blue serum" loading="lazy">
+        <span>Centella blue serum</span>
+      </a>
+      <a class="shelf-item" href="products.html">
+        <img src="Images/Biodance%20mask.jpg" alt="Biodance mask" loading="lazy">
+        <span>Biodance mask</span>
+      </a>
+      <a class="shelf-item" href="products.html">
+        <img src="Images/Snail%2092%20Cream.jpg" alt="Snail 92 cream" loading="lazy">
+        <span>Snail 92 cream</span>
+      </a>
+      <a class="shelf-item" href="products.html">
+        <img src="Images/Medicube%20mask.jpg" alt="Medicube mask" loading="lazy">
+        <span>Medicube mask</span>
+      </a>
+    </div>
+
+    <div class="center"><a href="products.html" class="btn primary">Shop all products</a></div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section">
+    <div class="section-title">
+      <h2>Common questions</h2>
+      <span class="bar"></span>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary>How do I book an appointment?</summary>
+        <p>Open the appointment page, pick a day and time on the calendar, fill in your details and confirm.</p>
+      </details>
+      <details>
+        <summary>What are your opening hours?</summary>
+        <p>We are open Monday to Saturday, 9:00 AM to 8:30 PM. We are closed on Sundays and public holidays.</p>
+      </details>
+      <details>
+        <summary>Can I cancel a booking?</summary>
+        <p>Yes. Open the appointment page and press Cancel on the booking under My Appointments.</p>
+      </details>
+      <details>
+        <summary>Which treatment is right for me?</summary>
+        <p>Book a consultation first. We will look at your skin and suggest what fits.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <h2>Your next appointment is a few taps away.</h2>
+    <a href="appointment.html" class="btn primary">Book an appointment</a>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div>
+    <a href="home.html" class="brand"><span class="brand-mark" aria-hidden="true">✿</span>DERMACARE</a>
+    <p>Your journey to healthier-looking skin starts here.</p>
+  </div>
+
+  <div>
+    <h4>Explore</h4>
+    <ul>
+      <li><a href="treatment.html">Treatments</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="appointment.html">Appointment</a></li>
+      <li><a href="login.html">Log In</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h4>Contact</h4>
+    <ul>
+      <li>No. 00, Your Street, Colombo</li>
+      <li>+94 11 000 0000</li>
+      <li><a href="mailto:info@dermacare.com">info@dermacare.com</a></li>
+      <li>Mon–Sat 9:00 AM–8:30 PM</li>
+    </ul>
+  </div>
+
+  <p class="copy">© 2026 DermaCare. All rights reserved.</p>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
+
+</body>
+</html>

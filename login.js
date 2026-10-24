@@ -1,9 +1,18 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
+  const toggleBtn = document.getElementById("togglePassword");
   const message = document.getElementById("loginMessage");
+
+  // Show / Hide password
+  toggleBtn.addEventListener("click", () => {
+    const show = passwordInput.type === "password";
+    passwordInput.type = show ? "text" : "password";
+    toggleBtn.textContent = show ? "Hide" : "Show";
+    toggleBtn.setAttribute("aria-pressed", String(show));
+    toggleBtn.setAttribute("aria-label", show ? "Hide password" : "Show password");
+  });
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
