@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="products.css">
+  <link rel="stylesheet" href="Products.css">
   <script src="products.js" defer></script>
 </head>
 
@@ -42,50 +42,11 @@
     </div>
   </header>
 
-  <section class="hero">
-    <div class="eyebrow">Your skincare journey starts here</div>
-    <h1>Healthy Skin.<br>Confident You.</h1>
-
-    <p>
-      Discover thoughtfully selected skincare essentials designed
-      to help your skin look and feel its best.
-    </p>
-
-    <a href="#shop" class="hero-btn">Explore Products →</a>
-  </section>
-
-  <section class="benefits">
-    <div class="benefit">
-      <span class="benefit-icon">✦</span>
-      <div>
-        <strong>Curated Skincare</strong>
-        <small>Products for your routine</small>
-      </div>
-    </div>
-
-    <div class="benefit">
-      <span class="benefit-icon">♡</span>
-      <div>
-        <strong>Find Your Match</strong>
-        <small>Choose your skin type</small>
-      </div>
-    </div>
-
-    <div class="benefit">
-      <span class="benefit-icon">✓</span>
-      <div>
-        <strong>Easy Shopping</strong>
-        <small>Simple product discovery</small>
-      </div>
-    </div>
-  </section>
-
   <main class="shop" id="shop">
     <div class="section-heading">
-      <div>
+      <div class="section-title-wrap">
         <div class="eyebrow">The DermaCare collection</div>
         <h2>Shop Our Products</h2>
-        <p>Find the right essentials for your daily skincare routine.</p>
       </div>
 
       <select class="sort-select" id="sort">
@@ -96,55 +57,42 @@
       </select>
     </div>
 
-    <div class="shop-layout">
-      <aside class="filters">
-        <h3>Find Your Products</h3>
+    <div class="catalog-shell">
+      <aside class="filters" aria-label="Product filters">
+        <h3>Filters</h3>
 
         <div class="filter-group">
           <label for="category">Category</label>
           <select id="category" class="filter-select">
-            <option value="all">All Products</option>
-            <option value="Cleanser">Cleansers</option>
-            <option value="Serum">Serums</option>
-            <option value="Moisturizer">Moisturizers</option>
-            <option value="Sunscreen">Sunscreens</option>
-            <option value="Mask">Face Masks</option>
+            <option value="all">All products</option>
+            <option value="Serum">Serum</option>
+            <option value="Moisturizer">Moisturizer</option>
+            <option value="Mask">Mask</option>
+            <option value="Cleanser">Cleanser</option>
           </select>
         </div>
 
         <div class="filter-group">
-          <label for="skin">Skin Type</label>
+          <label for="skin">Skin type</label>
           <select id="skin" class="filter-select">
-            <option value="all">All Skin Types</option>
-            <option value="Oily">Oily Skin</option>
-            <option value="Dry">Dry Skin</option>
-            <option value="Combination">Combination</option>
-            <option value="Sensitive">Sensitive Skin</option>
-            <option value="Normal">Normal Skin</option>
+            <option value="all">All skin types</option>
+            <option value="Sensitive">Sensitive</option>
+            <option value="Normal">Normal</option>
+            <option value="Dry">Dry</option>
+            <option value="Oily">Oily</option>
           </select>
         </div>
 
-        <div class="filter-group">
-          <label for="priceRange">Maximum Price (LKR)</label>
-          <input
-            type="range"
-            id="priceRange"
-            min="1000"
-            max="10000"
-            step="500"
-            value="10000"
-          >
-          <div class="price-value" id="priceValue">
-            Up to LKR 10,000
-          </div>
+        <div class="filter-group range-group">
+          <label for="priceRange">Max price</label>
+          <input id="priceRange" type="range" min="3000" max="10000" step="500" value="10000">
+          <div class="price-value" id="priceValue">Up to LKR 10,000</div>
         </div>
 
-        <button class="reset-btn" id="reset" type="button">
-          ↻ Reset Filters
-        </button>
+        <button class="reset-btn" id="reset" type="button">Reset Filters</button>
       </aside>
 
-      <section class="catalog">
+      <div class="catalog">
         <div class="catalog-top">
           <div class="search-wrap">
             <span>⌕</span>
@@ -170,7 +118,7 @@
             Clear Filters
           </button>
         </div>
-      </section>
+      </div>
     </div>
   </main>
 

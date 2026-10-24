@@ -1,62 +1,93 @@
 // DermaCare product listing and shopping cart
 // Demo products: change these details to your actual products.
 
-const products = [
+const FALLBACK_PRODUCT_IMAGE = "Images/centella%20cream.jpg";
+
+const productCatalog = [
   {
     id: 1,
-    name: "Rose Glow Face Serum",
+    name: "Anua 10+ Azelaic Serum",
     category: "Serum",
-    skin: "Dry",
-    price: 3000,
-    image: "Images/centella%20blue%20serum.jpg",
-    description: "A lightweight facial serum for a smooth, hydrated-looking glow."
+    skin: "Sensitive",
+    price: 5500,
+    image: "Images/Anua%20Green.jpg",
+    description: "A gentle radiance-boosting serum designed for a calm, even-looking finish."
   },
   {
     id: 2,
-    name: "Gentle Daily Cleanser",
-    category: "Cleanser",
-    skin: "Sensitive",
-    price: 2500,
-    image: "Images/Centella%20cleanser.jpg",
-    description: "A gentle daily cleanser to help remove dirt and excess oil."
+    name: "Medicube Deep Vita C Cream",
+    category: "Moisturizer",
+    skin: "Normal",
+    price: 6800,
+    image: "Images/Medicube%20Deep%20Vita%20C%20cap%20cream.jpg",
+    description: "A brightening cream with vitamin-rich care for a healthy glow."
   },
   {
     id: 3,
-    name: "Hydra Soft Moisturizer",
+    name: "COSRX Advanced Snail 92 Cream",
     category: "Moisturizer",
     skin: "Dry",
-    price: 3500,
-    image: "Images/centella%20cream.jpg",
-    description: "A nourishing moisturizer for soft, comfortable-feeling skin."
+    price: 6200,
+    image: "Images/Snail%2092%20Cream.jpg",
+    description: "A deeply nourishing cream for hydration and skin comfort."
   },
   {
     id: 4,
-    name: "Daily Sun Shield",
-    category: "Sunscreen",
-    skin: "Normal",
-    price: 4000,
-    image: "Images/Medicube%20Pink%20serum.jpg",
-    description: "A sunscreen option for your daytime skincare routine."
+    name: "The Ordinary AHA 30% BHA 2%",
+    category: "Serum",
+    skin: "Oily",
+    price: 5200,
+    image: "Images/Ord%20AHA.jpg",
+    description: "A targeted exfoliating treatment for a smoother skin texture."
   },
   {
     id: 5,
-    name: "Purifying Face Mask",
+    name: "Mediheal Green Essence Mask",
     category: "Mask",
-    skin: "Oily",
-    price: 2200,
-    image: "Images/Biodance%20mask.jpg",
-    description: "A face mask to complement your weekly skincare routine."
+    skin: "Sensitive",
+    price: 3800,
+    image: "Images/mediheal%20green.jpg",
+    description: "A calming sheet mask to refresh and soothe tired-looking skin."
   },
   {
     id: 6,
-    name: "Daily Balance Serum",
+    name: "Medicube Pink Eye Cream",
+    category: "Moisturizer",
+    skin: "Dry",
+    price: 4300,
+    image: "Images/Medicube%20Pink%20eye%20Cream.jpg",
+    description: "A lightweight eye cream that helps hydrate and soften the eye area."
+  },
+  {
+    id: 7,
+    name: "Centella Green Serum",
     category: "Serum",
-    skin: "Combination",
-    price: 3200,
-    image: "Images/Snail%209%20serum.jpg",
-    description: "A lightweight serum for a simple daily skincare routine."
+    skin: "Sensitive",
+    price: 4800,
+    image: "Images/Centella%20green%20serum.jpg",
+    description: "A soothing serum that supports a balanced and calm complexion."
+  },
+  {
+    id: 8,
+    name: "Snail Mucin Gel Cleanser",
+    category: "Cleanser",
+    skin: "Sensitive",
+    price: 4600,
+    image: "Images/Snail%20cleanser.jpg",
+    description: "A gentle cleanser that refreshes skin without stripping moisture."
+  },
+  {
+    id: 9,
+    name: "Arencia Vitamin C Serum",
+    category: "Serum",
+    skin: "Normal",
+    price: 6900,
+    image: "Images/Arencia%20vitemin%20C.jpg",
+    description: "A glow-boosting vitamin C treatment designed for daily radiance."
   }
 ];
+
+const products = productCatalog;
 
 const $ = id => document.getElementById(id);
 
@@ -181,6 +212,7 @@ function renderProducts() {
           src="${product.image}"
           alt="${product.name}"
           loading="lazy"
+          onerror="this.onerror=null;this.src='Images/centella%20cream.jpg';"
         >
       </button>
 
@@ -346,6 +378,7 @@ function showDetails(id) {
         class="detail-image"
         src="${product.image}"
         alt="${product.name}"
+        onerror="this.onerror=null;this.src='Images/centella%20cream.jpg';"
       >
 
       <div class="detail-info">
@@ -599,6 +632,15 @@ document.addEventListener("click", event => {
     if (action === "checkout") showCheckout();
   }
 
+  const productImageButton = event.target.closest(".product-image-button");
+  if (productImageButton) {
+    const productId = Number(productImageButton.dataset.id);
+    const product = products.find(item => item.id === productId);
+    if (product) {
+      openLightbox(products.findIndex(item => item.id === product.id));
+    }
+  }
+
   if (event.target.id === "storeModal") {
     closeModal();
   }
@@ -753,3 +795,74 @@ document.addEventListener("keydown", event => {
 // Initial page setup
 updateCartCount();
 renderProducts();
+
+// Lightbox for product images
+const lightbox = document.getElementById("lightbox");
+const lbImg = document.getElementById("lbImg");
+const lbCaption = document.getElementById("lbCaption");
+const lbClose = document.getElementById("lbClose");
+const lbPrev = document.getElementById("lbPrev");
+const lbNext = document.getElementById("lbNext");
+
+let lightboxIndex = 0;
+let lightboxItems = [];
+
+function openLightbox(index) {
+  if (!lightboxItems.length) return;
+
+  lightboxIndex = (index + lightboxItems.length) % lightboxItems.length;
+  const item = lightboxItems[lightboxIndex];
+
+  lbImg.onerror = () => {
+    lbImg.src = "Images/centella%20cream.jpg";
+  };
+  lbImg.src = item.image;
+  lbCaption.textContent = item.name;
+  lightbox.classList.add("open");
+  document.body.classList.add("modal-open");
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  document.body.classList.remove("modal-open");
+}
+
+function moveLightbox(step) {
+  if (!lightboxItems.length) return;
+  openLightbox(lightboxIndex + step);
+}
+
+function updateLightboxItems() {
+  lightboxItems = products.map(product => ({
+    name: product.name,
+    image: product.image
+  }));
+}
+
+lbClose.addEventListener("click", closeLightbox);
+lbPrev.addEventListener("click", () => moveLightbox(-1));
+lbNext.addEventListener("click", () => moveLightbox(1));
+
+lightbox.addEventListener("click", event => {
+  if (event.target === lightbox) closeLightbox();
+});
+
+window.addEventListener("keydown", event => {
+  if (!lightbox.classList.contains("open")) return;
+
+  if (event.key === "Escape") closeLightbox();
+  if (event.key === "ArrowLeft") moveLightbox(-1);
+  if (event.key === "ArrowRight") moveLightbox(1);
+});
+
+updateLightboxItems();
+
+function setProductImageFallback(imgElement, imageUrl) {
+  imgElement.onerror = () => {
+    if (imgElement.src !== location.origin + "/" + FALLBACK_PRODUCT_IMAGE) {
+      imgElement.src = FALLBACK_PRODUCT_IMAGE;
+    }
+  };
+
+  imgElement.src = imageUrl;
+}
