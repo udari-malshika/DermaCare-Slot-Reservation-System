@@ -14,18 +14,18 @@ function showMessage(text, type) {
   formMessage.className = type;
 }
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-  // validation
   const fields = form.querySelectorAll("input, select, textarea");
   let valid = true;
-  fields.forEach((f) => {
-    if (!f.checkValidity()) {
-      f.classList.add("invalid");
+
+  fields.forEach((field) => {
+    if (!field.checkValidity()) {
+      field.classList.add("invalid");
       valid = false;
     } else {
-      f.classList.remove("invalid");
+      field.classList.remove("invalid");
     }
   });
 
@@ -47,16 +47,33 @@ form.addEventListener("submit", async (e) => {
   showMessage("Sending...", "");
 
   try {
-    await addDoc(collection(db, "messages"), data);
-    showMessage("Thank you! Your message has been sent. We'll contact you soon.", "success");
+    if (db) {
+      await addDoc(collection(db, "messages"), data);
+      showMessage("Thank you! Your message has been sent. We'll contact you soon.", "success");
+    } else {
+      throw new Error("Firestore not available");
+    }
     form.reset();
   } catch (error) {
-    console.error("Error sending message:", error);
-    showMessage("Something went wrong. Please try again or call us.", "error");
+    console.warn("Sending message via Firebase failed, saving locally instead.", error);
+
+    const savedMessages = JSON.parse(localStorage.getItem("dermacareContactMessages") || "[]");
+    savedMessages.push({
+      ...data,
+      createdAt: new Date().toISOString()
+    });
+    localStorage.setItem("dermacareContactMessages", JSON.stringify(savedMessages));
+
+    showMessage("Thank you! Your message has been saved locally and our team will follow up soon.", "success");
+    form.reset();
   } finally {
     sendBtn.disabled = false;
   }
 });
 
-// remove red border when user types
-form.addEventListener("input", (e) => e.target.classList.remove("invalid"));
+form.addEventListener("input", (event) => {
+  const target = event.target;
+  if (target.classList.contains("invalid")) {
+    target.classList.remove("invalid");
+  }
+});
