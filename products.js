@@ -8,7 +8,7 @@ const products = [
     category: "Serum",
     skin: "Dry",
     price: 3000,
-    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=700&q=80",
+    image: "Images/centella%20blue%20serum.jpg",
     description: "A lightweight facial serum for a smooth, hydrated-looking glow."
   },
   {
@@ -17,7 +17,7 @@ const products = [
     category: "Cleanser",
     skin: "Sensitive",
     price: 2500,
-    image: "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=80",
+    image: "Images/Centella%20cleanser.jpg",
     description: "A gentle daily cleanser to help remove dirt and excess oil."
   },
   {
@@ -26,7 +26,7 @@ const products = [
     category: "Moisturizer",
     skin: "Dry",
     price: 3500,
-    image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=700&q=80",
+    image: "Images/centella%20cream.jpg",
     description: "A nourishing moisturizer for soft, comfortable-feeling skin."
   },
   {
@@ -35,7 +35,7 @@ const products = [
     category: "Sunscreen",
     skin: "Normal",
     price: 4000,
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=700&q=80",
+    image: "Images/Medicube%20Pink%20serum.jpg",
     description: "A sunscreen option for your daytime skincare routine."
   },
   {
@@ -44,7 +44,7 @@ const products = [
     category: "Mask",
     skin: "Oily",
     price: 2200,
-    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=700&q=80",
+    image: "Images/Biodance%20mask.jpg",
     description: "A face mask to complement your weekly skincare routine."
   },
   {
@@ -53,7 +53,7 @@ const products = [
     category: "Serum",
     skin: "Combination",
     price: 3200,
-    image: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80",
+    image: "Images/Snail%209%20serum.jpg",
     description: "A lightweight serum for a simple daily skincare routine."
   }
 ];
