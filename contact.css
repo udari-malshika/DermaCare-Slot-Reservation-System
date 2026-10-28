@@ -449,6 +449,60 @@ textarea.invalid {
   }
 }
 
+html[data-theme="light"] body.contact-page {
+  background: linear-gradient(180deg, #f8f1f5 0%, #f4edf3 100%);
+  color: #21182a;
+}
+
+html[data-theme="light"] .site-header {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(31, 22, 39, 0.08);
+}
+
+html[data-theme="light"] .nav-links a {
+  color: rgba(33, 24, 42, 0.7);
+}
+
+html[data-theme="light"] .nav-links a.active,
+html[data-theme="light"] .nav-links a:hover {
+  color: #2d1438;
+}
+
+html[data-theme="light"] .hero-content,
+html[data-theme="light"] .info-card,
+html[data-theme="light"] .form-card {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(34, 20, 39, 0.08);
+  box-shadow: 0 18px 40px rgba(35, 20, 42, 0.08);
+}
+
+html[data-theme="light"] .eyebrow,
+html[data-theme="light"] .info-card h3,
+html[data-theme="light"] .form-card h2,
+html[data-theme="light"] label {
+  color: #2b1128;
+}
+
+html[data-theme="light"] .hero-sub,
+html[data-theme="light"] .info-card p,
+html[data-theme="light"] .form-sub,
+html[data-theme="light"] .site-footer {
+  color: rgba(33, 24, 42, 0.72);
+}
+
+html[data-theme="light"] input,
+html[data-theme="light"] select,
+html[data-theme="light"] textarea {
+  background: #fff;
+  color: #21182a;
+  border-color: rgba(34, 20, 39, 0.12);
+}
+
+html[data-theme="light"] input::placeholder,
+html[data-theme="light"] textarea::placeholder {
+  color: rgba(33, 24, 42, 0.45);
+}
+
 :root {
   --bg: #f9f2f5;
   --panel: #fffdfd;

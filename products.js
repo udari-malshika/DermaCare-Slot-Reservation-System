@@ -97,6 +97,61 @@ const products = [
     skin: ["Sensitive", "Dry"],
     description: "A gentle-feeling serum for a simple skincare routine.",
     image: "Images/Anua Niasinamide.jpg"
+  },
+  {
+    id: 10,
+    name: "Centella Recovery Cream",
+    category: "Moisturizer",
+    price: 6100,
+    rating: 4.8,
+    tag: "NEW",
+    skin: ["Sensitive", "Dry"],
+    description: "Comforting hydration with a soothing, barrier-supporting finish.",
+    image: "Images/centella cream.jpg"
+  },
+  {
+    id: 11,
+    name: "Green Glow Essence",
+    category: "Serum",
+    price: 5750,
+    rating: 4.9,
+    tag: "BESTSELLER",
+    skin: ["Oily", "Combination", "Sensitive"],
+    description: "A calming, brightening serum for more refreshed-looking skin.",
+    image: "Images/Anua Green.jpg"
+  },
+  {
+    id: 12,
+    name: "Pore Refining Serum",
+    category: "Serum",
+    price: 4900,
+    rating: 4.7,
+    tag: "POPULAR",
+    skin: ["Oily", "Combination"],
+    description: "Targets texture and dullness for a more refined complexion.",
+    image: "Images/Medicube Pink serum.jpg"
+  },
+  {
+    id: 13,
+    name: "Barrier Repair Mask",
+    category: "Moisturizer",
+    price: 4700,
+    rating: 4.6,
+    tag: "",
+    skin: ["Dry", "Sensitive"],
+    description: "A deep-hydrating mask for soft, replenished skin after a long day.",
+    image: "Images/Biodance mask.jpg"
+  },
+  {
+    id: 14,
+    name: "Niacinamide Daily Essence",
+    category: "Serum",
+    price: 5600,
+    rating: 4.8,
+    tag: "TOP RATED",
+    skin: ["Oily", "Combination", "Sensitive"],
+    description: "Helps refine skin tone and support a smoother-looking finish.",
+    image: "Images/Ord Niacinamide.jpg"
   }
 ];
 
@@ -109,7 +164,23 @@ const sortBy = document.getElementById("sortBy");
 const resultCount = document.getElementById("resultCount");
 const emptyMessage = document.getElementById("emptyMessage");
 
+const CART_KEY = "dermacare-cart";
 let cart = [];
+
+function loadCart() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+    if (Array.isArray(stored)) {
+      cart = stored;
+    }
+  } catch (error) {
+    cart = [];
+  }
+}
+
+function saveCart() {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
 
 function renderProducts() {
   const searchTerm = document.getElementById("searchInput")?.value
@@ -212,6 +283,7 @@ grid.addEventListener("click", event => {
     cart.push({ ...product, quantity: 1 });
   }
 
+  saveCart();
   updateCart();
   button.textContent = "✓ Added to Cart";
   setTimeout(() => {
@@ -240,6 +312,14 @@ function updateCart() {
 
   document.getElementById("cartTotal").textContent =
     `Total: LKR ${total.toLocaleString("en-LK")}`;
+
+  const checkoutButton = document.getElementById("checkoutBtn");
+  if (checkoutButton) {
+    checkoutButton.disabled = cart.length === 0;
+    checkoutButton.style.opacity = cart.length === 0 ? "0.5" : "1";
+  }
+
+  saveCart();
 }
 
 document.getElementById("cartItems").addEventListener("click", event => {
@@ -260,6 +340,15 @@ document.getElementById("cartItems").addEventListener("click", event => {
 });
 
 const cartModal = document.getElementById("cartModal");
+const checkoutBtn = document.getElementById("checkoutBtn");
+
+if (checkoutBtn) {
+  checkoutBtn.addEventListener("click", () => {
+    if (!cart.length) return;
+    cartModal.hidden = true;
+    window.location.href = "payment.html";
+  });
+}
 
 document.getElementById("cartButton").addEventListener("click", () => {
   cartModal.hidden = false;

@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DermoCare | Advanced Skin Care</title>
-    <link rel="stylesheet" href="Dermocare booking/css/home.css">
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="theme.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -26,12 +28,12 @@
                 <a href="home.html" class="active">Home</a>
                 <a href="#treatments">Treatments</a>
                 <a href="products.html">Products</a>
-                <a href="#contact">Contact Us</a>
+                <a href="contact.html">Contact Us</a>
             </nav>
 
             <div class="nav-actions">
                 <a href="products.html" class="login-btn">Products</a>
-                <a href="#contact" class="book-btn">Book Appointment</a>
+                <a href="appointment.html" class="book-btn">Book Appointment</a>
             </div>
         </div>
     </header>
@@ -45,7 +47,7 @@
                     <p>Personalized dermatology and aesthetic care for your skin, hair, and confidence—designed around your goals and lifestyle.</p>
 
                     <div class="hero-actions">
-                        <a href="#contact" class="primary-btn">Book Appointment</a>
+                        <a href="appointment.html" class="primary-btn">Book Appointment</a>
                         <a href="products.html" class="secondary-btn">Shop Products</a>
                     </div>
 
@@ -135,7 +137,7 @@
                     </div>
                 </a>
 
-                <div class="treatment-card">
+                <a class="treatment-card" href="treatment-detail.html?treatment=Laser%20Hair%20Removal">
                     <div class="t-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
                     <h3>Laser Hair Removal</h3>
                     <p>Long-term hair reduction with safe, clinically guided treatment plans.</p>
@@ -143,9 +145,29 @@
                         <span>Face</span>
                         <span>Body</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="treatment-card">
+                <a class="treatment-card" href="treatment-detail.html?treatment=RF%20Microneedling">
+                    <div class="t-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+                    <h3>RF Microneedling</h3>
+                    <p>Radio-frequency combined with needling for firmer, smoother-looking skin.</p>
+                    <div class="t-tags">
+                        <span>Anti-aging</span>
+                        <span>Tightening</span>
+                    </div>
+                </a>
+
+                <a class="treatment-card" href="treatment-detail.html?treatment=PRP%20Therapy">
+                    <div class="t-icon"><i class="fa-solid fa-droplet"></i></div>
+                    <h3>PRP Therapy</h3>
+                    <p>Platelet-rich plasma care for natural skin rejuvenation and hair growth support.</p>
+                    <div class="t-tags">
+                        <span>Hair loss</span>
+                        <span>Rejuvenation</span>
+                    </div>
+                </a>
+
+                <a class="treatment-card" href="treatment-detail.html?treatment=Chemical%20Peeling">
                     <div class="t-icon"><i class="fa-solid fa-flask"></i></div>
                     <h3>Chemical Peels</h3>
                     <p>Custom exfoliation to brighten your skin and improve acne-prone texture.</p>
@@ -153,25 +175,15 @@
                         <span>Acne</span>
                         <span>Brightening</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="treatment-card">
+                <a class="treatment-card" href="treatment-detail.html?treatment=Botox%20%26%20Fillers">
                     <div class="t-icon"><i class="fa-solid fa-pen-nib"></i></div>
                     <h3>Botox & Fillers</h3>
                     <p>Subtle, natural-looking enhancement for smoother, lifted features.</p>
                     <div class="t-tags">
                         <span>Softening</span>
                         <span>Contour</span>
-                    </div>
-                </div>
-
-                <a class="treatment-card" href="products.html">
-                    <div class="t-icon"><i class="fa-solid fa-bag-shopping"></i></div>
-                    <h3>Skincare Products</h3>
-                    <p>Shop dermatologist-inspired essentials to support your glow at home.</p>
-                    <div class="t-tags">
-                        <span>Daily care</span>
-                        <span>Glow</span>
                     </div>
                 </a>
             </div>
@@ -259,7 +271,7 @@
                     <p class="eyebrow light">Ready for your glow-up?</p>
                     <h2>Book your consultation today</h2>
                 </div>
-                <a href="#contact" class="primary-btn dark">Reserve a slot</a>
+                <a href="appointment.html" class="primary-btn dark">Reserve a slot</a>
             </div>
         </section>
     </main>
@@ -291,10 +303,10 @@
             <div class="footer-col">
                 <h4>Clinic</h4>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Our Doctors</a></li>
-                    <li><a href="#">Testimonials</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#results">About Us</a></li>
+                    <li><a href="#results">Our Doctors</a></li>
+                    <li><a href="#results">Testimonials</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
 

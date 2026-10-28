@@ -198,6 +198,23 @@ body {
 .config-box ul { padding-left: 18px; }
 .config-box li { margin-bottom: 5px; }
 
+.detail-book-btn {
+    display: inline-flex;
+    margin-top: 28px;
+    padding: 13px 20px;
+    border-radius: 999px;
+    background: var(--plum);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.detail-book-btn:hover {
+    background: var(--terracotta);
+    transform: translateY(-2px);
+}
+
 .site-footer { background: var(--ink); padding: 52px 24px 20px; }
 .footer-container { border-bottom-color: #473b4a; }
 .footer-col h2, .footer-col h4 { font-family: 'DM Serif Display', Georgia, serif; font-size: 16px; font-weight: 400; }
@@ -210,6 +227,159 @@ body {
     .hero-section { padding: 40px 24px 46px; }
     .hero-text h1 { font-size: 40px; }
     .hero-single-card { align-self: flex-start; }
+}
+
+html[data-theme="light"] body {
+    background: #f8f4fb;
+    color: #20182c;
+}
+
+html[data-theme="light"] .site-header {
+    background: rgba(255, 255, 255, 0.84);
+    border-bottom-color: rgba(41, 27, 52, 0.08);
+}
+
+html[data-theme="light"] .logo,
+html[data-theme="light"] .nav-links a,
+html[data-theme="light"] .login-btn,
+html[data-theme="light"] .nav-links a.active,
+html[data-theme="light"] .footer-col a,
+html[data-theme="light"] .footer-links a,
+html[data-theme="light"] .details-card h2,
+html[data-theme="light"] .details-card h3,
+html[data-theme="light"] .details-card h4,
+html[data-theme="light"] .config-box h3,
+html[data-theme="light"] .config-box h4 {
+    color: #1f1730;
+}
+
+html[data-theme="light"] .nav-links a,
+html[data-theme="light"] .footer-col a,
+html[data-theme="light"] .footer-links a {
+    opacity: 0.86;
+}
+
+html[data-theme="light"] .nav-links a:hover,
+html[data-theme="light"] .nav-links a.active,
+html[data-theme="light"] .footer-col a:hover,
+html[data-theme="light"] .footer-links a:hover {
+    color: #7c4ac7;
+}
+
+html[data-theme="light"] .hero-section {
+    background: linear-gradient(135deg, #efe8ff 0%, #e1d6ff 35%, #f9dfe9 100%);
+    color: #251b32;
+}
+
+html[data-theme="light"] .hero-text h1,
+html[data-theme="light"] .hero-text p,
+html[data-theme="light"] .hero-text .eyebrow {
+    color: #251b32;
+}
+
+html[data-theme="light"] .details-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(34, 20, 39, 0.08);
+    box-shadow: 0 18px 42px rgba(35, 20, 42, 0.08);
+}
+
+html[data-theme="light"] .details-card p,
+html[data-theme="light"] .config-box li,
+html[data-theme="light"] .site-footer,
+html[data-theme="light"] .brand-col p,
+html[data-theme="light"] .contact-col p {
+    color: #5f5667;
+}
+
+html[data-theme="light"] .detail-book-btn,
+html[data-theme="light"] .book-btn {
+    background: linear-gradient(135deg, #7a5ae0, #d5659a);
+    box-shadow: 0 12px 24px rgba(122, 90, 224, 0.18);
+}
+
+html[data-theme="light"] .site-footer {
+    background: #171220;
+    color: #cac1d6;
+}
+
+html[data-theme="light"] .footer-col h2,
+html[data-theme="light"] .footer-col h4 {
+    color: #fff;
+}
+
+html[data-theme="dark"] body {
+    background: #0d0817;
+    color: #f0ebff;
+}
+
+html[data-theme="dark"] .site-header {
+    background: rgba(20, 14, 29, 0.9);
+    border-bottom-color: rgba(201, 176, 255, 0.12);
+}
+
+html[data-theme="dark"] .logo,
+html[data-theme="dark"] .nav-links a,
+html[data-theme="dark"] .login-btn,
+html[data-theme="dark"] .nav-links a.active,
+html[data-theme="dark"] .footer-col a,
+html[data-theme="dark"] .footer-links a,
+html[data-theme="dark"] .details-card h2,
+html[data-theme="dark"] .details-card h3,
+html[data-theme="dark"] .details-card h4,
+html[data-theme="dark"] .config-box h3,
+html[data-theme="dark"] .config-box h4 {
+    color: #f0ebff;
+}
+
+html[data-theme="dark"] .nav-links a,
+html[data-theme="dark"] .footer-col a,
+html[data-theme="dark"] .footer-links a {
+    opacity: 0.8;
+}
+
+html[data-theme="dark"] .nav-links a:hover,
+html[data-theme="dark"] .nav-links a.active,
+html[data-theme="dark"] .footer-col a:hover,
+html[data-theme="dark"] .footer-links a:hover {
+    color: #dcb5ff;
+}
+
+html[data-theme="dark"] .hero-section {
+    background: linear-gradient(135deg, #1c1232 0%, #321e4e 35%, #200f2e 100%);
+}
+
+html[data-theme="dark"] .hero-text h1,
+html[data-theme="dark"] .hero-text p {
+    color: #f4ebff;
+}
+
+html[data-theme="dark"] .details-card {
+    background: rgba(24, 15, 37, 0.9);
+    border-color: rgba(212, 183, 255, 0.18);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+}
+
+html[data-theme="dark"] .details-card p,
+html[data-theme="dark"] .config-box li,
+html[data-theme="dark"] .brand-col p,
+html[data-theme="dark"] .contact-col p {
+    color: #d8cbed;
+}
+
+html[data-theme="dark"] .detail-book-btn,
+html[data-theme="dark"] .book-btn {
+    background: linear-gradient(135deg, #9e7be6, #d7639d);
+    box-shadow: 0 14px 28px rgba(142, 107, 214, 0.24);
+}
+
+html[data-theme="dark"] .site-footer {
+    background: #120d1d;
+    color: #d8cbed;
+}
+
+html[data-theme="dark"] .footer-col h2,
+html[data-theme="dark"] .footer-col h4 {
+    color: #fff;
 }
 
 /* Treatment Details Page Styles */

@@ -32,6 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
     (button) => button.classList.contains("selected")
   ) || treatmentButtons[0];
 
+  const requestedTreatment = new URLSearchParams(window.location.search).get("treatment");
+  if (requestedTreatment) {
+    const requestedButton = treatmentButtons.find(
+      (button) => button.dataset.treatment === requestedTreatment
+    );
+
+    if (requestedButton) {
+      selectedTreatment = requestedButton;
+      treatmentButtons.forEach((button) => button.classList.remove("selected"));
+      requestedButton.classList.add("selected");
+    }
+  }
+
   let selectedDate = "";
   let selectedTime = "";
 
