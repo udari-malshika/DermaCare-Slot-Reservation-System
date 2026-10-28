@@ -12,12 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const consultationFee = 2000;
 
   const timeSlots = [
-    "09:00 AM",
-    "10:30 AM",
-    "01:00 PM",
-    "02:30 PM",
-    "04:00 PM",
-    "05:30 PM"
+    {
+      period: "Morning",
+      slots: ["09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM"]
+    },
+    {
+      period: "Afternoon",
+      slots: ["12:00 PM", "12:30 PM", "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM", "03:00 PM"]
+    },
+    {
+      period: "Evening",
+      slots: ["04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM", "06:00 PM", "06:30 PM"]
+    }
   ];
 
   const weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
@@ -194,32 +200,48 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!selectedDate) {
       const message = document.createElement("p");
       message.className = "small-note";
-      message.textContent = "Select a calendar date to view available time slots.";
+      message.textContent = "Select a calendar date to view available slots.";
       slotsContainer.appendChild(message);
       return;
     }
 
-    timeSlots.forEach((time) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "slot";
-      button.textContent = time;
+    timeSlots.forEach(({ period, slots }) => {
+      const group = document.createElement("div");
+      group.className = "slot-group";
 
-      if (selectedTime === time) {
-        button.classList.add("selected");
-        button.setAttribute("aria-pressed", "true");
-      } else {
-        button.setAttribute("aria-pressed", "false");
-      }
+      const title = document.createElement("div");
+      title.className = "slot-group-title";
+      title.textContent = period;
+      group.appendChild(title);
 
-      button.addEventListener("click", () => {
-        selectedTime = time;
-        formMessage.textContent = "";
-        renderSlots();
-        updateSummary();
+      const slotGrid = document.createElement("div");
+      slotGrid.className = "slot-grid";
+
+      slots.forEach((time) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "slot";
+        button.textContent = time;
+
+        if (selectedTime === time) {
+          button.classList.add("selected");
+          button.setAttribute("aria-pressed", "true");
+        } else {
+          button.setAttribute("aria-pressed", "false");
+        }
+
+        button.addEventListener("click", () => {
+          selectedTime = time;
+          formMessage.textContent = "";
+          renderSlots();
+          updateSummary();
+        });
+
+        slotGrid.appendChild(button);
       });
 
-      slotsContainer.appendChild(button);
+      group.appendChild(slotGrid);
+      slotsContainer.appendChild(group);
     });
   }
 
