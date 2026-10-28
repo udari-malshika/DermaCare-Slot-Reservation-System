@@ -1,0 +1,785 @@
+/* DermaCare Treatments Theme */
+:root {
+  --bg: #0a0612;
+  --bg-strong: #120b1f;
+  --bg-soft: #1a112b;
+  --panel: rgba(19, 13, 31, 0.84);
+  --panel-strong: rgba(26, 18, 42, 0.96);
+  --panel-alt: rgba(36, 24, 56, 0.9);
+  --card: rgba(25, 17, 38, 0.9);
+  --card-border: rgba(177, 138, 255, 0.18);
+  --purple-900: #090510;
+  --purple-800: #160d2b;
+  --purple-700: #210f3d;
+  --purple-600: #2d1e57;
+  --purple-500: #4b2a86;
+  --purple-300: #9b7af0;
+  --purple-200: #c8a8ff;
+  --rose-700: #ab4e72;
+  --rose-500: #d76c96;
+  --rose-300: #f4aac0;
+  --rose-100: #ffe4ee;
+  --text: #f5effc;
+  --muted: #cdbfe8;
+  --muted-strong: #a89bc5;
+  --gold: #f7d66d;
+  --shadow: 0 18px 50px rgba(31, 12, 48, 0.45);
+  --shadow-soft: 0 10px 30px rgba(22, 11, 29, 0.22);
+  --radius: 24px;
+  --radius-lg: 32px;
+  --radius-pill: 999px;
+  --max-width: 1200px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "DM Sans", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at top left, rgba(155, 122, 240, 0.18), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(215, 108, 150, 0.18), transparent 30%),
+    linear-gradient(180deg, #090510 0%, #120b1f 100%);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+.topbar {
+  background: linear-gradient(90deg, var(--purple-600), var(--rose-700), var(--purple-500));
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  padding: 0.6rem 1rem;
+}
+
+.topbar-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(18px);
+  background: rgba(10, 6, 18, 0.78);
+  border-bottom: 1px solid rgba(197, 164, 255, 0.12);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+}
+
+.logo {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+  font-size: 2.2rem;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #f7edf7 0%, #d6b7ff 36%, #f9b6d3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logo span {
+  color: #f4adc7;
+  -webkit-text-fill-color: #f4adc7;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav a {
+  color: var(--muted);
+  padding: 0.6rem 0.95rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  transition: 0.25s ease;
+  font-weight: 600;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: var(--text);
+  background: rgba(117, 90, 170, 0.18);
+  border-color: rgba(202, 155, 255, 0.18);
+}
+
+.login-btn,
+.main-btn,
+.secondary-btn,
+.booking-submit,
+.book-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  padding: 0.9rem 1.5rem;
+  font-weight: 700;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+.login-btn {
+  border: 1px solid rgba(199, 156, 255, 0.25);
+  background: rgba(255,255,255,0.02);
+  color: var(--text);
+}
+
+.main-btn,
+.booking-submit {
+  background: linear-gradient(135deg, var(--purple-500), var(--rose-500));
+  color: #fff;
+  box-shadow: 0 12px 24px rgba(207, 98, 145, 0.35);
+}
+
+.main-btn:hover,
+.secondary-btn:hover,
+.booking-submit:hover,
+.login-btn:hover {
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.02);
+  color: var(--text);
+}
+
+.hero,
+.benefits,
+.spotlight,
+.treatments,
+.booking-section,
+.closing {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.hero {
+  padding-top: 4.5rem;
+  padding-bottom: 2rem;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 190, 214, 0.08);
+  color: #f1b6d7;
+  border: 1px solid rgba(241, 182, 215, 0.18);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hero-copy h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(3rem, 5.4vw, 5rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  margin: 0 0 1rem 0;
+  color: #fef8ff;
+}
+
+.hero-text {
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 1.05rem;
+  max-width: 620px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2.2rem;
+}
+
+.hero-stats div {
+  min-width: 110px;
+}
+
+.hero-stats strong {
+  display: block;
+  font-size: 1.7rem;
+  margin-bottom: 0.2rem;
+  color: var(--text);
+}
+
+.hero-stats span {
+  color: var(--muted-strong);
+  font-size: 0.9rem;
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.visual-card {
+  width: min(100%, 520px);
+  background: linear-gradient(180deg, rgba(23, 17, 36, 0.9), rgba(20, 13, 27, 0.95));
+  border: 1px solid rgba(196, 165, 255, 0.16);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.visual-card img {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+}
+
+.visual-details {
+  padding: 1.2rem 1.2rem 1.4rem;
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: rgba(215, 108, 150, 0.12);
+  border: 1px solid rgba(215, 108, 150, 0.26);
+  color: #f4b9d2;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visual-details h2 {
+  margin: 0.8rem 0 0.5rem;
+  font-size: clamp(1.8rem, 2vw, 2.5rem);
+}
+
+.visual-details p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  padding-top: 1.8rem;
+  padding-bottom: 2rem;
+}
+
+.benefit-card {
+  background: rgba(25, 17, 38, 0.78);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  box-shadow: var(--shadow-soft);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(154, 107, 255, 0.25), rgba(245, 146, 184, 0.25));
+  border: 1px solid rgba(217, 172, 255, 0.18);
+  border-radius: 14px;
+  font-size: 1.25rem;
+  color: #ffd8ec;
+}
+
+.benefit-card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.08rem;
+}
+
+.benefit-card p {
+  color: var(--muted-strong);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.spotlight {
+  padding-top: 4rem;
+  padding-bottom: 2.8rem;
+}
+
+.section-header {
+  margin-bottom: 1.6rem;
+}
+
+.section-header.center {
+  text-align: center;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.2rem, 3vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  background: rgba(21, 16, 30, 0.7);
+  border: 1px solid rgba(205, 173, 255, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.spotlight-image img {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.spotlight-copy {
+  padding: 1.2rem 0.8rem 1.2rem 0.4rem;
+}
+
+.mini-panel {
+  background: rgba(26, 18, 40, 0.76);
+  border: 1px solid rgba(203, 170, 255, 0.12);
+  border-radius: 20px;
+  padding: 1.3rem;
+  margin-bottom: 1.2rem;
+}
+
+.mini-tag {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f3c3d5;
+}
+
+.mini-panel h3 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+}
+
+.mini-panel p {
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.4rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.feature-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.feature-list li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #f5c4d6;
+}
+
+.treatments {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: rgba(25, 17, 38, 0.85);
+  border: 1px solid var(--card-border);
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(202, 167, 255, 0.24);
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.2rem 1.1rem 1.3rem;
+}
+
+.category {
+  color: #f4c7d8;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  margin-bottom: 0.55rem;
+}
+
+.card h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.55rem;
+}
+
+.description {
+  color: var(--muted);
+  line-height: 1.65;
+  min-height: 78px;
+  margin: 0;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.15rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.card-meta span {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.card-meta a {
+  color: #f8d8ea;
+  font-weight: 700;
+}
+
+.card.highlight {
+  background: linear-gradient(180deg, rgba(36, 21, 52, 0.93), rgba(21, 16, 30, 0.9));
+}
+
+.booking-section {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.booking-container {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 2rem;
+  align-items: center;
+  background: rgba(15, 11, 25, 0.8);
+  border: 1px solid rgba(212, 178, 255, 0.12);
+  border-radius: 32px;
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.booking-info h2 {
+  margin: 0 0 0.7rem;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.2rem, 3vw, 3.4rem);
+  line-height: 1;
+}
+
+.booking-info h2 span {
+  color: #f7b9d2;
+}
+
+.booking-info p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.booking-feature {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.3rem;
+  padding: 0.85rem 0.8rem;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.booking-feature span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(155, 122, 240, 0.24), rgba(237, 138, 185, 0.25));
+  color: #ffd7e7;
+  font-size: 1.2rem;
+}
+
+.booking-feature h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.08rem;
+}
+
+.booking-feature p {
+  margin: 0;
+  font-size: 0.96rem;
+}
+
+.booking-form {
+  background: rgba(25, 17, 38, 0.9);
+  border: 1px solid rgba(214, 182, 255, 0.12);
+  border-radius: 24px;
+  padding: 1.6rem;
+}
+
+.booking-form h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.6rem;
+}
+
+.form-subtitle {
+  color: var(--muted-strong);
+  margin: 0 0 1.3rem;
+}
+
+.booking-form label {
+  display: block;
+  margin-bottom: 0.95rem;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  width: 100%;
+  padding: 0.88rem 0.95rem;
+  margin-top: 0.4rem;
+  border-radius: 14px;
+  border: 1px solid rgba(216, 181, 255, 0.15);
+  background: rgba(14, 10, 23, 0.72);
+  color: var(--text);
+}
+
+.booking-form input::placeholder,
+.booking-form textarea::placeholder {
+  color: #9b8bb8;
+}
+
+.date-time-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.booking-submit {
+  width: 100%;
+  border: none;
+  margin-top: 0.8rem;
+  cursor: pointer;
+}
+
+.form-note {
+  color: var(--muted-strong);
+  margin-top: 0.9rem;
+  line-height: 1.6;
+  font-size: 0.86rem;
+}
+
+.booking-message {
+  min-height: 1.2rem;
+  margin-top: 0.9rem;
+  color: #f9dfe9;
+  font-weight: 600;
+}
+
+.closing {
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 4rem;
+}
+
+.closing h2 {
+  margin: 0 0 0.7rem;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.3rem, 3vw, 3.5rem);
+  line-height: 1;
+}
+
+.closing h2 span {
+  color: #f7bfd7;
+}
+
+.closing p {
+  color: var(--muted);
+  max-width: 640px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.7;
+}
+
+footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 2.5rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+footer .logo {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+footer p {
+  margin: 0.25rem 0;
+}
+
+.menu-toggle {
+  display: none;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.02);
+  color: var(--text);
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 980px) {
+  .hero-content,
+  .spotlight-grid,
+  .booking-container,
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .cards {
+    display: grid;
+  }
+
+  .booking-container {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .header {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 0.5rem;
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .nav a,
+  .login-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero {
+    padding-top: 3rem;
+  }
+
+  .visual-card img,
+  .spotlight-image img {
+    height: 320px;
+  }
+
+  .date-time-row {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar-inner {
+    justify-content: center;
+    text-align: center;
+  }
+}
