@@ -3,190 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DermoCare - Advanced Skin Care</title>
+    <title>DermoCare | Advanced Skin Care</title>
     <link rel="stylesheet" href="Dermocare booking/css/home.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-    <!-- Top Announcement Banner -->
     <div class="announcement-banner">
         <span><i class="fa-solid fa-sparkles"></i> New Patient Special: Free Consultation + 10% Off First Treatment</span>
     </div>
 
-    <!-- Header / Navbar -->
     <header class="site-header">
         <div class="nav-container">
             <div class="logo">
                 <div class="logo-icon"><i class="fa-solid fa-shield-heart"></i></div>
                 <span>DermoCare</span>
             </div>
-            <nav class="nav-links">
-                <a href="#home" class="active">Home</a>
+
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="home.html" class="active">Home</a>
                 <a href="#treatments">Treatments</a>
-                <a href="#products">Products</a>
+                <a href="products.html">Products</a>
                 <a href="#contact">Contact Us</a>
             </nav>
+
             <div class="nav-actions">
-                <a href="#login" class="login-btn">Log in</a>
+                <a href="products.html" class="login-btn">Products</a>
                 <a href="#contact" class="book-btn">Book Appointment</a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Advanced Skin Care<br>for a Radiant You</h1>
-                <p>Get closer to your skin and hair goals with clinical treatments tailored exactly to your unique profile.</p>
-                <a href="#contact" class="hero-cta">Book Appointment</a>
-            </div>
-            <div class="hero-cards">
-                <div class="preview-card">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300" alt="Clear skin">
-                    <div class="card-label">Clear your skin <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-                <div class="preview-card">
-                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=300" alt="Brighten skin">
-                    <div class="card-label">Brighten your skin <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-                <div class="preview-card">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300" alt="Regrow hair">
-                    <div class="badge-new">New!</div>
-                    <div class="card-label">Regrow your hair <i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <div class="hero-copy">
+                    <p class="eyebrow">Clinically advanced skin care</p>
+                    <h1>Glow with confidence,<br>naturally refined.</h1>
+                    <p>Personalized dermatology and aesthetic care for your skin, hair, and confidence—designed around your goals and lifestyle.</p>
 
-    <!-- Clinical Treatments Section -->
-    <section id="treatments" class="treatments-section">
-        <div class="section-header">
-            <div>
-                <h2>Clinical Treatments</h2>
-                <p>Gold-standard procedures performed by licensed dermatologists for optimal, lasting results.</p>
-            </div>
-            <a href="#all-services" class="view-all-btn">View All Services</a>
-        </div>
+                    <div class="hero-actions">
+                        <a href="#contact" class="primary-btn">Book Appointment</a>
+                        <a href="products.html" class="secondary-btn">Shop Products</a>
+                    </div>
 
-        <div class="treatments-grid">
-            <!-- Treatment 1 -->
-            <a class="treatment-card" href="CO2.html">
-                <div class="t-icon"><i class="fa-solid fa-syringe"></i></div>
-                <h3>CO2 Laser</h3>
-                <p>Advanced fractional resurfacing for acne scars, stretch marks, and warts removal.</p>
-                <div class="t-tags">
-                    <span>Scars</span>
-                    <span>Stretch Marks</span>
+                    <ul class="hero-trust">
+                        <li><i class="fa-solid fa-check"></i> Medical-grade care</li>
+                        <li><i class="fa-solid fa-check"></i> Personalized plans</li>
+                        <li><i class="fa-solid fa-check"></i> Visible results</li>
+                    </ul>
                 </div>
-            </a>
 
-            <!-- Treatment 2 -->
-            <a class="treatment-card" href="carbonLaser.html">
-                <div class="t-icon"><i class="fa-solid fa-mask"></i></div>
-                <h3>Carbon Laser Peel</h3>
-                <p>The 'Hollywood Peel' for deep exfoliation, reduced pores, and instant glow.</p>
-                <div class="t-tags">
-                    <span>Pores</span>
-                    <span>Glow</span>
-                </div>
-            </a>
+                <div class="hero-visual" aria-label="Dermatology results preview">
+                    <div class="hero-card main">
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=900" alt="Woman smiling with glowing skin">
+                        <div class="hero-card-overlay">
+                            <div>
+                                <span class="mini-label">Skin Renewal</span>
+                                <strong>Glass skin glow</strong>
+                            </div>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
 
-            <!-- Treatment 3 -->
-            <a class="treatment-card" href="pigmentation.html">
-                <div class="t-icon"><i class="fa-solid fa-sun"></i></div>
-                <h3>Pigmentation Laser</h3>
-                <p>Targeted light therapy to break down melanin and clear dark spots.</p>
-                <div class="t-tags">
-                    <span>Dark Spots</span>
-                    <span>Tone</span>
-                </div>
-            </a>
-
-            <!-- Treatment 4 -->
-            <div class="treatment-card">
-                <div class="t-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                <h3>Laser Hair Removal</h3>
-                <p>Safe, effective, and permanent reduction for all skin types and body areas.</p>
-                <div class="t-tags">
-                    <span>Full Body</span>
-                    <span>Face</span>
+                    <div class="floating-card">
+                        <div class="floating-icon"><i class="fa-solid fa-star"></i></div>
+                        <div>
+                            <strong>4.9/5</strong>
+                            <span>Patient care rating</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Treatment 5 -->
-            <div class="treatment-card">
-                <div class="t-icon"><i class="fa-solid fa-award"></i></div>
-                <h3>RF Microneedling</h3>
-                <p>Radio-frequency combined with needling for ultimate skin tightening.</p>
-                <div class="t-tags">
-                    <span>Anti-aging</span>
-                    <span>Tightening</span>
-                </div>
+        <section class="stats-bar" aria-label="Clinic highlights">
+            <div class="stat-item">
+                <strong>5000+</strong>
+                <span>Happy clients</span>
+            </div>
+            <div class="stat-item">
+                <strong>15+</strong>
+                <span>Advanced treatments</span>
+            </div>
+            <div class="stat-item">
+                <strong>6 days</strong>
+                <span>Open every week</span>
+            </div>
+            <div class="stat-item">
+                <strong>60 days</strong>
+                <span>Booking ahead</span>
+            </div>
+        </section>
+
+        <section id="treatments" class="treatments-section">
+            <div class="section-heading">
+                <p class="eyebrow dark">Popular treatments</p>
+                <h2>Care designed for every skin goal</h2>
             </div>
 
-            <!-- Treatment 6 -->
-            <div class="treatment-card">
-                <div class="t-icon"><i class="fa-solid fa-droplet"></i></div>
-                <h3>PRP Therapy</h3>
-                <p>Platelet-rich plasma for natural skin rejuvenation and hair growth stimulation.</p>
-                <div class="t-tags">
-                    <span>Hair Loss</span>
-                    <span>Rejuvenation</span>
+            <div class="treatments-grid">
+                <a class="treatment-card" href="CO2.html">
+                    <div class="t-icon"><i class="fa-solid fa-syringe"></i></div>
+                    <h3>CO2 Laser</h3>
+                    <p>Target scars, stretch marks, and texture issues with advanced resurfacing.</p>
+                    <div class="t-tags">
+                        <span>Scars</span>
+                        <span>Texture</span>
+                    </div>
+                </a>
+
+                <a class="treatment-card" href="carbonLaser.html">
+                    <div class="t-icon"><i class="fa-solid fa-mask"></i></div>
+                    <h3>Carbon Laser Peel</h3>
+                    <p>Refresh dull skin and reduce pores for a smooth, radiant finish.</p>
+                    <div class="t-tags">
+                        <span>Pores</span>
+                        <span>Glow</span>
+                    </div>
+                </a>
+
+                <a class="treatment-card" href="pigmentation.html">
+                    <div class="t-icon"><i class="fa-solid fa-sun"></i></div>
+                    <h3>Pigmentation Care</h3>
+                    <p>Reduce dark spots and even out your complexion with precision light therapy.</p>
+                    <div class="t-tags">
+                        <span>Dark spots</span>
+                        <span>Tone</span>
+                    </div>
+                </a>
+
+                <div class="treatment-card">
+                    <div class="t-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <h3>Laser Hair Removal</h3>
+                    <p>Long-term hair reduction with safe, clinically guided treatment plans.</p>
+                    <div class="t-tags">
+                        <span>Face</span>
+                        <span>Body</span>
+                    </div>
+                </div>
+
+                <div class="treatment-card">
+                    <div class="t-icon"><i class="fa-solid fa-flask"></i></div>
+                    <h3>Chemical Peels</h3>
+                    <p>Custom exfoliation to brighten your skin and improve acne-prone texture.</p>
+                    <div class="t-tags">
+                        <span>Acne</span>
+                        <span>Brightening</span>
+                    </div>
+                </div>
+
+                <div class="treatment-card">
+                    <div class="t-icon"><i class="fa-solid fa-pen-nib"></i></div>
+                    <h3>Botox & Fillers</h3>
+                    <p>Subtle, natural-looking enhancement for smoother, lifted features.</p>
+                    <div class="t-tags">
+                        <span>Softening</span>
+                        <span>Contour</span>
+                    </div>
+                </div>
+
+                <a class="treatment-card" href="products.html">
+                    <div class="t-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                    <h3>Skincare Products</h3>
+                    <p>Shop dermatologist-inspired essentials to support your glow at home.</p>
+                    <div class="t-tags">
+                        <span>Daily care</span>
+                        <span>Glow</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="results" class="experience-section">
+            <div class="experience-content">
+                <div class="experience-image">
+                    <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&q=80&w=900" alt="Dermatology treatment consultation">
+                </div>
+
+                <div class="experience-copy">
+                    <p class="eyebrow dark">How it works</p>
+                    <h2>Simple, expert, and designed around your routine.</h2>
+                    <p>From your first consultation to your final follow-up, every step is tailored for comfort, clarity, and real visible progress.</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <span class="feature-number">01</span>
+                            <div>
+                                <h3>Consultation</h3>
+                                <p>Meet with our specialists to discuss your skin concerns and goals.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <span class="feature-number">02</span>
+                            <div>
+                                <h3>Personal plan</h3>
+                                <p>We build the right treatment path using evidence-based dermatology.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <span class="feature-number">03</span>
+                            <div>
+                                <h3>Care & results</h3>
+                                <p>Enjoy a guided treatment journey with support every step of the way.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Treatment 7 -->
-            <div class="treatment-card">
-                <div class="t-icon"><i class="fa-solid fa-flask"></i></div>
-                <h3>Chemical Peels</h3>
-                <p>Customized acid solutions to treat acne, texture, and dullness.</p>
-                <div class="t-tags">
-                    <span>Acne</span>
-                    <span>Texture</span>
-                </div>
+        <section class="testimonial-section">
+            <div class="section-heading center">
+                <p class="eyebrow dark">Client stories</p>
+                <h2>Real results from real patients</h2>
             </div>
 
-            <!-- Treatment 8 -->
-            <div class="treatment-card">
-                <div class="t-icon"><i class="fa-solid fa-pen-nib"></i></div>
-                <h3>Botox & Fillers</h3>
-                <p>Expert injectables for wrinkle relaxation and volume restoration.</p>
-                <div class="t-tags">
-                    <span>Wrinkles</span>
-                    <span>Contour</span>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="testimonials-grid">
+                <article class="testimonial-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p>“The clinic feels premium and the team truly understands skin concerns. My pigmentation improved beautifully within a few sessions.”</p>
+                    <div class="client">
+                        <strong>Sarah M.</strong>
+                        <span>Pigmentation treatment</span>
+                    </div>
+                </article>
 
-    <!-- Footer Section -->
+                <article class="testimonial-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p>“Professional, comfort-focused, and very transparent. My skin texture feels smoother and healthier than ever.”</p>
+                    <div class="client">
+                        <strong>Hiruni P.</strong>
+                        <span>CO2 laser care</span>
+                    </div>
+                </article>
+
+                <article class="testimonial-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p>“From the consultation to aftercare, everything was smooth and personalised. I feel confident and refreshed.”</p>
+                    <div class="client">
+                        <strong>Amaya T.</strong>
+                        <span>Glow treatment</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="cta-box">
+                <div>
+                    <p class="eyebrow light">Ready for your glow-up?</p>
+                    <h2>Book your consultation today</h2>
+                </div>
+                <a href="#contact" class="primary-btn dark">Reserve a slot</a>
+            </div>
+        </section>
+    </main>
+
     <footer id="contact" class="site-footer">
         <div class="footer-container">
             <div class="footer-col brand-col">
-                <div class="logo">
+                <div class="logo footer-logo">
                     <div class="logo-icon"><i class="fa-solid fa-shield-heart"></i></div>
                     <span>DermoCare</span>
                 </div>
-                <p>Premium dermatological clinic providing advanced, personalized skin and hair treatments.</p>
+                <p>Premium dermatological care for brighter, healthier skin and hair.</p>
                 <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
             </div>
 
             <div class="footer-col">
                 <h4>Treatments</h4>
                 <ul>
-                    <li><a href="#">Laser Therapy</a></li>
-                    <li><a href="#">Injectables</a></li>
-                    <li><a href="#">Hair Restoration</a></li>
-                    <li><a href="#">Body Contouring</a></li>
+                    <li><a href="products.html">Skin Care Products</a></li>
+                    <li><a href="CO2.html">Laser Therapy</a></li>
+                    <li><a href="pigmentation.html">Pigmentation Care</a></li>
+                    <li><a href="carbonLaser.html">Carbon Peel</a></li>
                 </ul>
             </div>
 
@@ -202,10 +300,11 @@
 
             <div class="footer-col contact-col">
                 <h4>Contact</h4>
-                <p><i class="fa-solid fa-location-dot"></i> No 6., Pagoda Rd, Nugegoda, Sri Lanka</p>
+                <p><i class="fa-solid fa-location-dot"></i> No 6, Pagoda Road, Nugegoda, Sri Lanka</p>
                 <p><i class="fa-solid fa-phone"></i> +94 (11) 123-4567</p>
             </div>
         </div>
+
         <div class="footer-bottom">
             <p>&copy; 2026 DermoCare Clinic. All rights reserved.</p>
             <div class="footer-links">
@@ -214,6 +313,5 @@
             </div>
         </div>
     </footer>
-
 </body>
 </html>
