@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout | DermaCare</title>
+  <script src="theme.js"></script>
+  <link rel="stylesheet" href="theme.css" />
+  <style>
+    :root {
+      --bg: #f8f4fb;
+      --bg-soft: #f2ebf7;
+      --panel: rgba(255,255,255,0.87);
+      --panel-strong: #fff;
+      --line: rgba(59, 42, 78, 0.12);
+      --text: #2a1737;
+      --muted: #665a71;
+      --brand: #7651aa;
+      --brand-2: #d55c8d;
+      --brand-3: #f1b4c5;
+      --shadow: 0 18px 40px rgba(43, 27, 58, 0.12);
+      --success: #0d966b;
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Manrope", Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+      color: var(--text);
+    }
+    a { text-decoration: none; color: inherit; }
+    button, input, select { font: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: white;
+      box-shadow: 0 10px 20px rgba(118, 81, 170, 0.2);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-link,
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-link {
+      color: var(--muted);
+    }
+
+    .nav-link:hover,
+    .pill-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .pill-btn {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: white;
+      box-shadow: 0 12px 26px rgba(118, 81, 170, 0.2);
+    }
+
+    .checkout-wrap {
+      max-width: 1200px;
+      margin: 36px auto 56px;
+      padding: 0 24px;
+    }
+
+    .payment-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--brand);
+      letter-spacing: 0.18em;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, h4, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 18px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.06em;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    input, select {
+      width: 100%;
+      border: 1px solid rgba(118, 81, 170, 0.18);
+      background: rgba(255,255,255,0.8);
+      border-radius: 12px;
+      padding: 13px 14px;
+      font-size: 0.95rem;
+      color: var(--text);
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: rgba(118, 81, 170, 0.5);
+      box-shadow: 0 0 0 4px rgba(118, 81, 170, 0.08);
+    }
+
+    .card-fields {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .card-fields.visible {
+      display: block;
+    }
+
+    .summary-panel {
+      background: linear-gradient(180deg, rgba(118,81,170,0.08), rgba(213,92,141,0.08));
+    }
+
+    .summary-items {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.96rem;
+    }
+
+    .summary-item small {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    .totals {
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      margin-top: 6px;
+    }
+
+    .totals-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .totals-row.total {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .pay-btn,
+    .secondary-btn {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      padding: 14px 18px;
+      transition: transform 0.2s ease;
+    }
+
+    .pay-btn {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: white;
+      box-shadow: 0 16px 28px rgba(118, 81, 170, 0.2);
+    }
+
+    .secondary-btn {
+      margin-top: 18px;
+      background: rgba(118, 81, 170, 0.08);
+      color: var(--text);
+      border: 1px solid rgba(118, 81, 170, 0.18);
+    }
+
+    .pay-btn:hover,
+    .secondary-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .message {
+      min-height: 20px;
+      margin-top: 14px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .message.success { color: var(--success); }
+    .message.error { color: #d52f57; }
+
+    .empty-box {
+      padding: 30px 20px;
+      border: 1px dashed rgba(118, 81, 170, 0.25);
+      border-radius: 14px;
+      text-align: center;
+      color: var(--muted);
+      background: rgba(255,255,255,0.5);
+    }
+
+    @media (max-width: 900px) {
+      .payment-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-container { flex-wrap: wrap; justify-content: center; }
+      .field-row { grid-template-columns: 1fr; }
+      .panel { padding: 22px 18px; }
+      .checkout-wrap { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container">
+      <div class="brand">
+        <span class="brand-mark">✦</span>
+        <span>DermaCare</span>
+      </div>
+
+      <div class="nav-actions">
+        <a href="products.html" class="nav-link">Continue shopping</a>
+        <a href="home.html" class="pill-btn">Back to home</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="checkout-wrap">
+    <div class="payment-grid">
+      <section class="panel">
+        <p class="eyebrow">Secure checkout</p>
+        <h1>Complete your order</h1>
+
+        <form id="paymentForm">
+          <div class="field-row">
+            <div class="field">
+              <label for="fullName">Full name</label>
+              <input id="fullName" type="text" placeholder="Your full name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email address</label>
+              <input id="email" type="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="phone">Phone number</label>
+              <input id="phone" type="tel" placeholder="+94 77 123 4567" required />
+            </div>
+            <div class="field">
+              <label for="country">Country</label>
+              <select id="country">
+                <option>Sri Lanka</option>
+                <option>India</option>
+                <option>United Kingdom</option>
+                <option>United States</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="address">Street address</label>
+            <input id="address" type="text" placeholder="No. 12, Example Street" required />
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="city">City</label>
+              <input id="city" type="text" placeholder="Colombo" required />
+            </div>
+            <div class="field">
+              <label for="postal">Postal code</label>
+              <input id="postal" type="text" placeholder="10250" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="paymentMethod">Payment method</label>
+            <select id="paymentMethod">
+              <option value="card">Credit / Debit Card</option>
+              <option value="cash">Cash on Delivery</option>
+              <option value="bank">Bank Transfer</option>
+            </select>
+          </div>
+
+          <div id="cardFields" class="card-fields visible">
+            <div class="field-row">
+              <div class="field">
+                <label for="cardName">Name on card</label>
+                <input id="cardName" type="text" placeholder="John Doe" />
+              </div>
+              <div class="field">
+                <label for="cardNumber">Card number</label>
+                <input id="cardNumber" type="text" placeholder="4242 4242 4242 4242" />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="expiry">Expiry date</label>
+                <input id="expiry" type="text" placeholder="MM/YY" />
+              </div>
+              <div class="field">
+                <label for="cvv">CVV</label>
+                <input id="cvv" type="text" placeholder="123" />
+              </div>
+            </div>
+          </div>
+
+          <button class="pay-btn" type="submit">Pay now</button>
+          <p id="formMessage" class="message" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <aside class="panel summary-panel">
+        <p class="eyebrow">Order summary</p>
+        <h2>Your products</h2>
+        <div id="summaryItems" class="summary-items"></div>
+
+        <div class="totals">
+          <div class="totals-row">
+            <span>Subtotal</span>
+            <strong id="subtotal">LKR 0</strong>
+          </div>
+          <div class="totals-row">
+            <span>Delivery</span>
+            <strong id="delivery">LKR 500</strong>
+          </div>
+          <div class="totals-row total">
+            <span>Total</span>
+            <strong id="total">LKR 0</strong>
+          </div>
+        </div>
+
+        <button class="secondary-btn" type="button" onclick="window.location.href='products.html'">Continue shopping</button>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const CART_KEY = 'dermacare-cart';
+    const summaryItems = document.getElementById('summaryItems');
+    const subtotalEl = document.getElementById('subtotal');
+    const totalEl = document.getElementById('total');
+    const form = document.getElementById('paymentForm');
+    const messageEl = document.getElementById('formMessage');
+    const paymentMethod = document.getElementById('paymentMethod');
+    const cardFields = document.getElementById('cardFields');
+    const deliveryFee = 500;
+
+    function money(value) {
+      return 'LKR ' + Number(value).toLocaleString('en-LK');
+    }
+
+    function getCart() {
+      try {
+        return JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function renderSummary() {
+      const cart = getCart();
+      if (!cart.length) {
+        summaryItems.innerHTML = '<div class="empty-box">Your cart is empty. Add products before checkout.</div>';
+        subtotalEl.textContent = money(0);
+        totalEl.textContent = money(0);
+        return;
+      }
+
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const total = subtotal + deliveryFee;
+
+      summaryItems.innerHTML = cart.map(item => `
+        <div class="summary-item">
+          <div>
+            <strong>${item.name}</strong>
+            <small>Qty: ${item.quantity}</small>
+          </div>
+          <strong>${money(item.price * item.quantity)}</strong>
+        </div>
+      `).join('');
+
+      subtotalEl.textContent = money(subtotal);
+      totalEl.textContent = money(total);
+    }
+
+    paymentMethod.addEventListener('change', () => {
+      if (paymentMethod.value === 'card') {
+        cardFields.classList.add('visible');
+      } else {
+        cardFields.classList.remove('visible');
+      }
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const cart = getCart();
+      if (!cart.length) {
+        messageEl.textContent = 'Your cart is empty. Add products before payment.';
+        messageEl.className = 'message error';
+        return;
+      }
+
+      const requiredFields = [
+        document.getElementById('fullName'),
+        document.getElementById('email'),
+        document.getElementById('phone'),
+        document.getElementById('address'),
+        document.getElementById('city'),
+        document.getElementById('postal')
+      ];
+
+      const incomplete = requiredFields.some((field) => !field.value.trim());
+      if (incomplete) {
+        messageEl.textContent = 'Please complete all required billing details.';
+        messageEl.className = 'message error';
+        return;
+      }
+
+      if (paymentMethod.value === 'card') {
+        const cardNumber = document.getElementById('cardNumber').value.trim();
+        const expiry = document.getElementById('expiry').value.trim();
+        const cvv = document.getElementById('cvv').value.trim();
+        if (!cardNumber || !expiry || !cvv) {
+          messageEl.textContent = 'Please complete your card details.';
+          messageEl.className = 'message error';
+          return;
+        }
+      }
+
+      messageEl.textContent = 'Payment successful! Your order has been placed.';
+      messageEl.className = 'message success';
+      localStorage.removeItem(CART_KEY);
+      form.reset();
+      setTimeout(() => {
+        window.location.href = 'home.html';
+      }, 1600);
+    });
+
+    renderSummary();
+  </script>
+</body>
+</html>

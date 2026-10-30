@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DermoCare | Contact Us</title>
+  <link rel="stylesheet" href="contact.css" />
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="contact-page">
+  <header class="site-header">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-shield-heart"></i></div>
+        <span>DermoCare</span>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="home.html">Home</a>
+        <a href="home.html#treatments">Treatments</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html" class="active">Contact Us</a>
+      </nav>
+
+      <div class="nav-actions">
+         <a href="profile.html" class="profile-link" aria-label="Open profile" title="Profile">👤</a>
+        <a href="products.html" class="btn btn-outline">Shop</a>
+        <a href="appointment.html" class="btn btn-solid">Book Appointment</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="hero-content">
+        <p class="eyebrow">CONTACT US</p>
+        <h1>Let’s plan your skin goals together.</h1>
+        <p class="hero-sub">
+          Reach out for a consultation, treatment enquiry, or product guidance. Our experienced dermatology team is here to help you feel confident in every step.
+        </p>
+      </div>
+    </section>
+
+    <section class="contact-wrap">
+      <aside class="info-column">
+        <div class="info-card">
+          <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <h3>Visit our clinic</h3>
+            <p>12 Wellness Avenue, Colombo 07, Sri Lanka</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon"><i class="fa-solid fa-phone-volume"></i></div>
+          <div>
+            <h3>Call us</h3>
+            <p>+94 11 234 5678<br />+94 77 123 4567</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <h3>Email</h3>
+            <p>hello@dermocare.lk<br />support@dermocare.lk</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
+          <div>
+            <h3>Opening hours</h3>
+            <p>Monday - Saturday: 8:00 AM - 7:00 PM</p>
+            <p>Sunday: Closed</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon"><i class="fa-solid fa-share-nodes"></i></div>
+          <div>
+            <h3>Connect</h3>
+            <div class="social-row">
+              <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="form-card">
+        <h2>Send us a message</h2>
+        <p class="form-sub">We usually reply within one business day.</p>
+
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input id="fullName" name="fullName" type="text" placeholder="Your full name" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="phone" type="tel" placeholder="+94 77 123 4567" />
+            </div>
+
+            <div class="field">
+              <label for="topic">Topic</label>
+              <select id="topic" name="topic">
+                <option>General enquiry</option>
+                <option>Consultation booking</option>
+                <option>Skin treatment</option>
+                <option>Product inquiry</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="message">Your message</label>
+            <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
+          </div>
+
+          <button class="send-btn" type="submit">Send message</button>
+          <p id="formMessage" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="map-section" aria-label="Clinic map">
+      <iframe
+        src="https://www.google.com/maps?q=Colombo%20Sri%20Lanka&z=12&output=embed"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="DermoCare clinic location map">
+      </iframe>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 DermoCare Clinic</span>
+    <span><a href="home.html">Back to home</a></span>
+  </footer>
+
+  <script src="theme.js"></script>
+  <script>
+    const form = document.getElementById('contactForm');
+    const messageBox = document.getElementById('formMessage');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const fields = [document.getElementById('fullName'), document.getElementById('email'), document.getElementById('message')];
+      fields.forEach((field) => field.classList.remove('invalid'));
+
+      if (!name || !email || !message) {
+        messageBox.textContent = 'Please fill in your name, email, and message before sending.';
+        messageBox.className = 'error';
+
+        if (!name) document.getElementById('fullName').classList.add('invalid');
+        if (!email) document.getElementById('email').classList.add('invalid');
+        if (!message) document.getElementById('message').classList.add('invalid');
+        return;
+      }
+
+      messageBox.textContent = 'Thank you! Our team will get back to you soon.';
+      messageBox.className = 'success';
+      form.reset();
+    });
+  </script>
+</body>
+</html>

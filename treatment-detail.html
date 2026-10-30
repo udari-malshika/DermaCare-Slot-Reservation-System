@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Treatment Details | DermaCare</title>
+  <script src="theme.js"></script>
+  <link rel="stylesheet" href="treatment-detail.css">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="detail-header">
+    <a class="detail-logo" href="home.html">DermoCare</a>
+    <nav aria-label="Main navigation">
+      <a href="home.html">Home</a>
+      <a href="home.html#treatments">Treatments</a>
+      <a href="products.html">Products</a>
+      <a href="contact.html">Contact Us</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="detail-hero">
+      <div>
+        <p class="eyebrow">Personalized clinical care</p>
+        <h1 id="treatmentName">Treatment Details</h1>
+        <p id="treatmentIntro"></p>
+        <a id="bookButton" class="book-detail-btn" href="appointment.html">Book this appointment</a>
+      </div>
+      <img id="treatmentImage" src="Images/RF microneedling.jpg" alt="">
+    </section>
+
+    <section class="detail-content">
+      <article class="detail-card">
+        <h2>About this treatment</h2>
+        <p id="treatmentDescription"></p>
+        <h3>What it can help with</h3>
+        <p id="treatmentIndications"></p>
+        <div class="detail-facts">
+          <div><strong id="treatmentDuration"></strong><span>Typical session</span></div>
+          <div><strong>Personalized</strong><span>Care plan</span></div>
+          <div><strong>Expert-led</strong><span>Consultation</span></div>
+        </div>
+        <p class="notice">Your clinician will confirm suitability, expected results, and aftercare during the consultation.</p>
+        <a id="bottomBookButton" class="book-detail-btn" href="appointment.html">Got the details? Book your appointment</a>
+      </article>
+    </section>
+  </main>
+
+  <script src="treatment-detail.js"></script>
+</body>
+</html>

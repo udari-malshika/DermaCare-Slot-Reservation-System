@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products | DermaCare</title>
+  <script src="theme.js"></script>
+  <link rel="stylesheet" href="products.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="products.js" defer></script>
+</head>
+<body>
+  <div class="page-navigation">
+    <button type="button" class="back-btn" onclick="history.back()">← Back</button>
+    <a href="home.html" class="home-btn">⌂ Home</a>
+  </div>
+
+  <div class="top-note">
+    YOUR SKIN DESERVES THE BEST · DISCOVER YOUR ROUTINE
+  </div>
+
+  <header class="navbar">
+    <a href="home.html" class="logo">
+      <span class="logo-mark">✦</span> DermaCare
+    </a>
+
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="home.html#treatments">Treatments</a>
+    <a href="products.html" class="active">Products</a>
+    <a href="contact.html">Contact Us</a>
+  </nav>
+
+  <div class="nav-actions">
+    <button id="cartButton" class="cart-btn">
+      🛒 Cart <span id="cartCount">0</span>
+    </button>
+    <a href="login.html" class="login-btn">Log In</a>
+    <a href="profile.html" class="profile-link" aria-label="Open profile" title="Profile">👤</a>
+  </div>
+</header>
+
+<section class="hero">
+  <p class="eyebrow">YOUR SKINCARE JOURNEY STARTS HERE</p>
+  <h1>Professional Skin Care</h1>
+  <p>Discover dermatologist-inspired skincare products
+     selected for your unique skin.</p>
+</section>
+
+<main class="catalog">
+  <aside class="sidebar">
+    <h3>Find Your Products</h3>
+
+    <label for="category">Category</label>
+    <select id="category">
+      <option value="all">All Products</option>
+      <option value="Cleanser">Cleansers</option>
+      <option value="Serum">Serums</option>
+      <option value="Sunscreen">Sunscreens</option>
+      <option value="Moisturizer">Moisturizers</option>
+    </select>
+
+    <label for="skinType">Skin Type</label>
+    <select id="skinType">
+      <option value="all">All Skin Types</option>
+      <option value="Oily">Oily</option>
+      <option value="Dry">Dry</option>
+      <option value="Sensitive">Sensitive</option>
+      <option value="Combination">Combination</option>
+    </select>
+
+    <label for="maxPrice">Maximum Price (LKR)</label>
+    <input id="maxPrice" type="range"
+           min="1000" max="10000" step="500" value="10000">
+    <p>Up to LKR <span id="priceValue">10000</span></p>
+
+    <button id="resetButton" class="reset-btn">
+      Reset Filters
+    </button>
+
+    <div class="quiz-box">
+      <span class="quiz-icon">✧</span>
+      <h3>Not sure what you need?</h3>
+      <p>Find products that match your skin type.</p>
+      <button id="quizButton">Start Skin Quiz →</button>
+    </div>
+  </aside>
+
+  <section class="product-section">
+    <div class="catalog-heading">
+      <div>
+        <h2>Our Products</h2>
+        <p id="resultCount">Loading products...</p>
+      </div>
+
+      <select id="sortBy" aria-label="Sort products">
+        <option value="popular">Best Selling</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+        <option value="rating">Top Rated</option>
+      </select>
+    </div>
+
+    <div id="productGrid" class="product-grid"></div>
+    <p id="emptyMessage" hidden>No products found. Try changing your filters.</p>
+  </section>
+</main>
+
+<section class="help-banner">
+  <div>
+    <p class="eyebrow">PERSONALIZED SKINCARE</p>
+    <h2>Your skin deserves expert care.</h2>
+    <p>Need help choosing the right treatment or product?</p>
+  </div>
+  <a href="contact.html">Contact Our Team →</a>
+</section>
+
+<footer class="footer">
+  <div>
+    <h3><span class="logo-icon">✦</span> DermaCare</h3>
+    <p>Professional skincare and personalized dermatology care.</p>
+  </div>
+  <div>
+    <h4>Explore</h4>
+    <a href="index.html">Home</a>
+    <a href="#treatments">Treatments</a>
+    <a href="products.html">Products</a>
+  </div>
+  <div>
+    <h4>Support</h4>
+    <a href="contact.html">Contact Us</a>
+    <a href="contact.html">Need Help?</a>
+  </div>
+  <p class="copyright">© 2026 DermaCare. All rights reserved.</p>
+</footer>
+
+<div id="quizModal" class="modal" hidden>
+  <div class="modal-card">
+    <button id="closeQuiz" class="close-btn" aria-label="Close">×</button>
+    <p class="eyebrow">SKINCARE QUIZ</p>
+    <h2>Let's find your skincare match!</h2>
+    <label for="quizSkin">What is your skin type?</label>
+    <select id="quizSkin">
+      <option value="Oily">Oily</option>
+      <option value="Dry">Dry</option>
+      <option value="Sensitive">Sensitive</option>
+      <option value="Combination">Combination</option>
+    </select>
+    <button id="findProducts" class="primary-btn">Find My Products</button>
+  </div>
+</div>
+
+<div id="cartModal" class="modal" hidden>
+  <div class="modal-card">
+    <button id="closeCart" class="close-btn" aria-label="Close">×</button>
+    <h2>Your Shopping Cart</h2>
+    <div id="cartItems"></div>
+    <h3 id="cartTotal">Total: LKR 0</h3>
+    <button id="checkoutBtn" class="primary-btn" type="button">Proceed to Payment</button>
+    <p class="cart-note">Demo cart only. Online payments are not connected.</p>
+  </div>
+</div>
+
+</body>
+</html>

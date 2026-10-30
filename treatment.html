@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Treatments | DermaCare</title>
+
+  <script src="theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="treatment.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="treatment.js" defer></script>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span>Skin consultations • Personalized care • Certified experts</span>
+      <span>Mon–Sat · 9:00 AM–8:30 PM</span>
+    </div>
+  </div>
+
+  <header class="header">
+    <a href="home.html" class="logo">DERMA<span>CARE</span></a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+
+    <nav class="nav" id="navMenu">
+      <a href="home.html">Home</a>
+      <a href="treatment.html" class="active">Treatments</a>
+      <a href="products.html">Products</a>
+      <a href="appointment.html">Appointment</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html" class="login-btn">Log In</a>
+      <a href="profile.html" class="profile-link" aria-label="Open profile" title="Profile">👤</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-copy">
+          <p class="eyebrow">Advanced skin treatment studio</p>
+          <h1>Transform your skin with clinically led care.</h1>
+          <p class="hero-text">
+            Whether you want to smooth texture, brighten tone, reduce pigmentation, or restore healthy radiance,
+            DermaCare designs treatment plans around your skin goals.
+          </p>
+
+          <div class="hero-actions">
+            <a href="appointment.html" class="main-btn">Book a consultation</a>
+            <a href="#treatment-list" class="secondary-btn">Explore treatments</a>
+          </div>
+
+          <div class="hero-stats">
+            <div>
+              <strong>5K+</strong>
+              <span>happy clients</span>
+            </div>
+            <div>
+              <strong>8+</strong>
+              <span>skin procedures</span>
+            </div>
+            <div>
+              <strong>4.9/5</strong>
+              <span>care rating</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Featured skincare treatment">
+          <div class="visual-card featured-card">
+            <img src="Images/CO2%20Laser%20treatment.jpg" alt="CO2 laser treatment" loading="lazy">
+            <div class="visual-details">
+              <span class="pill">Most requested</span>
+              <h2>CO2 Laser Renewal</h2>
+              <p>Target texture, tone and visible skin concerns with professional resurfacing care.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <div class="benefit-card">
+        <span class="icon">✦</span>
+        <div>
+          <h3>Tailored treatment plans</h3>
+          <p>Every routine is customized to your skin type, goals and schedule.</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <span class="icon">✧</span>
+        <div>
+          <h3>Medical-grade technology</h3>
+          <p>We use advanced aesthetic procedures to support visible, lasting results.</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <span class="icon">❋</span>
+        <div>
+          <h3>Expert support</h3>
+          <p>From consultation to aftercare, our specialists guide each step.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="spotlight">
+      <div class="section-header">
+        <p class="eyebrow">What makes us different</p>
+        <h2>Advanced skin solutions designed for real results.</h2>
+      </div>
+
+      <div class="spotlight-grid">
+        <div class="spotlight-image">
+          <img src="Images/Carbon%20laser%20peel.jpg" alt="Carbon laser peel treatment" loading="lazy">
+        </div>
+
+        <div class="spotlight-copy">
+          <div class="mini-panel">
+            <span class="mini-tag">Signature treatment</span>
+            <h3>Carbon Laser Peel</h3>
+            <p>
+              A quick, targeted facial treatment designed to refresh tone, refine pores and help reveal a smoother, brighter complexion.
+            </p>
+          </div>
+
+          <ul class="feature-list">
+            <li>Personalized skin diagnosis before treatment</li>
+            <li>Comfort-first approach with expert aftercare guidance</li>
+            <li>Suitable for busy routines and event-ready glow plans</li>
+          </ul>
+
+          <a href="appointment.html?treatment=Carbon%20Laser%20Peel" class="main-btn">Reserve this treatment</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="treatments" id="treatment-list">
+      <div class="section-header center">
+        <p class="eyebrow">Treatment menu</p>
+        <h2>Choose your skin goal.</h2>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <img src="Images/botox%20%26%20filler.jpg" alt="Botox and filler" loading="lazy">
+          <div class="card-body">
+            <p class="category">Anti-aging</p>
+            <h3>Botox &amp; Filler</h3>
+            <p class="description">
+              Smooth fine lines and restore facial balance with refined, natural-looking enhancement.
+            </p>
+            <div class="card-meta">
+              <span>From LKR 22,000</span>
+              <a href="appointment.html?treatment=Botox%20%26%20Filler">Book now</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="Images/Carbon%20laser%20peel.jpg" alt="Carbon laser peel" loading="lazy">
+          <div class="card-body">
+            <p class="category">Skin rejuvenation</p>
+            <h3>Carbon Laser Peel</h3>
+            <p class="description">
+              Refresh dull skin and improve the look of enlarged pores with a gentle resurfacing treatment.
+            </p>
+            <div class="card-meta">
+              <span>From LKR 15,000</span>
+              <a href="appointment.html?treatment=Carbon%20Laser%20Peel">Book now</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="Images/chemical%20peeling.jpg" alt="Chemical peeling" loading="lazy">
+          <div class="card-body">
+            <p class="category">Skin renewal</p>
+            <h3>Chemical Peeling</h3>
+            <p class="description">
+              Gently refine texture and support a more even, luminous complexion with selected peel formulas.
+            </p>
+            <div class="card-meta">
+              <span>From LKR 18,000</span>
+              <a href="appointment.html?treatment=Chemical%20Peeling">Book now</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="Images/CO2%20Laser%20treatment.jpg" alt="CO2 laser treatment" loading="lazy">
+          <div class="card-body">
+            <p class="category">Skin resurfacing</p>
+            <h3>CO2 Laser</h3>
+            <p class="description">
+              Ideal for selected scars, texture concerns, and visible skin irregularities with advanced resurfacing support.
+            </p>
+            <div class="card-meta">
+              <span>From LKR 32,000</span>
+              <a href="appointment.html?treatment=CO2%20Laser">Book now</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="Images/Pigmentation%20Removel.jpg" alt="Pigmentation care" loading="lazy">
+          <div class="card-body">
+            <p class="category">Tone correction</p>
+            <h3>Pigmentation Care</h3>
+            <p class="description">
+              Address uneven tone and stubborn dark spots with a structured treatment routine and home-care guidance.
+            </p>
+            <div class="card-meta">
+              <span>From LKR 17,000</span>
+              <a href="appointment.html?treatment=Pigmentation%20Care">Book now</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card highlight">
+          <img src="Images/PRP%20therepy.jpg" alt="Skin consultation" loading="lazy">
+          <div class="card-body">
+            <p class="category">Personalized care</p>
+            <h3>Skin Consultation</h3>
+            <p class="description">
+              Not sure where to begin? Meet with our skin therapist to build a plan that fits your goals and skin history.
+            </p>
+            <div class="card-meta">
+              <span>Free consultation</span>
+              <a href="appointment.html?treatment=Skin%20Consultation">Book now</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="section-header center">
+        <p class="eyebrow">How it works</p>
+        <h2>From consultation to glow.</h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-step">
+          <span>01</span>
+          <h3>Consultation</h3>
+          <p>We assess your skin, concerns, and goals before recommending the best treatment path.</p>
+        </div>
+        <div class="process-step">
+          <span>02</span>
+          <h3>Plan</h3>
+          <p>Your treatment plan is designed around your skin type, tolerance and lifestyle needs.</p>
+        </div>
+        <div class="process-step">
+          <span>03</span>
+          <h3>Treat</h3>
+          <p>Our specialists apply the procedure with care and clear aftercare instructions.</p>
+        </div>
+        <div class="process-step">
+          <span>04</span>
+          <h3>Follow-up</h3>
+          <p>We monitor progress and support your long-term skin wellness journey.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking-section" id="booking">
+      <div class="booking-container">
+        <div class="booking-info">
+          <p class="eyebrow">Your beauty journey</p>
+          <h2>Book your <span>appointment</span></h2>
+          <p>Select a treatment, choose a convenient date and time, and send your booking request.</p>
+
+          <div class="booking-feature">
+            <span>♡</span>
+            <div>
+              <h3>Personalized care</h3>
+              <p>Every consultation is aligned with your individual skin profile.</p>
+            </div>
+          </div>
+
+          <div class="booking-feature">
+            <span>◷</span>
+            <div>
+              <h3>Flexible scheduling</h3>
+              <p>Choose a time that works best for your daily routine.</p>
+            </div>
+          </div>
+        </div>
+
+        <form id="bookingForm" class="booking-form">
+          <h3>Appointment details</h3>
+          <p class="form-subtitle">Fill in your details below.</p>
+
+          <label for="customerName">Full Name</label>
+          <input id="customerName" name="customerName" type="text" placeholder="Enter your full name" required>
+
+          <label for="customerEmail">Email Address</label>
+          <input id="customerEmail" name="customerEmail" type="email" placeholder="Enter your email" required>
+
+          <label for="customerPhone">Phone Number</label>
+          <input id="customerPhone" name="customerPhone" type="tel" placeholder="Enter your phone number" pattern="[0-9+() -]{7,20}" required>
+
+          <label for="treatmentSelect">Select Treatment</label>
+          <select id="treatmentSelect" name="treatment" required>
+            <option value="">-- Choose a Treatment --</option>
+            <option value="Botox & Filler">Botox &amp; Filler</option>
+            <option value="Carbon Laser Peel">Carbon Laser Peel</option>
+            <option value="Chemical Peeling">Chemical Peeling</option>
+            <option value="CO2 Laser">CO2 Laser</option>
+            <option value="Pigmentation Care">Pigmentation Care</option>
+            <option value="Skin Consultation">Skin Consultation</option>
+          </select>
+
+          <div class="date-time-row">
+            <div>
+              <label for="bookingDate">Choose Date</label>
+              <input id="bookingDate" name="date" type="date" required>
+            </div>
+
+            <div>
+              <label for="bookingTime">Choose Time</label>
+              <select id="bookingTime" name="time" required>
+                <option value="">-- Select Time --</option>
+                <option value="09:00">09:00 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="12:00">12:00 PM</option>
+                <option value="13:00">01:00 PM</option>
+                <option value="14:00">02:00 PM</option>
+                <option value="15:00">03:00 PM</option>
+                <option value="16:00">04:00 PM</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="bookingNotes">Additional Notes (Optional)</label>
+          <textarea id="bookingNotes" name="notes" placeholder="Tell us about your preferences..." rows="3"></textarea>
+
+          <button type="submit" class="booking-submit">Confirm appointment</button>
+
+          <p class="form-note">Your request will be displayed for confirmation. Appointment availability must be verified by the clinic.</p>
+
+          <div id="bookingMessage" class="booking-message" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <section class="closing">
+    <p class="eyebrow">Your skincare journey</p>
+    <h2>Beauty begins with <span>self-care</span>.</h2>
+    <p>Take the next step toward a customized skin plan built around your goals.</p>
+    <a href="appointment.html" class="main-btn">Make an appointment</a>
+  </section>
+
+  <footer>
+    <a href="home.html" class="logo">DERMA<span>CARE</span></a>
+    <p>Care for your skin. Celebrate your beauty.</p>
+    <p class="copyright">© <span id="year">2026</span> DermaCare. All rights reserved.</p>
+  </footer>
+</body>
+</html>

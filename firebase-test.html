@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DermoCare Firebase Test</title>
+</head>
+<body>
+  <h1>DermoCare Firebase Test</h1>
+
+  <button id="saveBtn">Save Test Data</button>
+  <p id="status">Ready</p>
+
+  <script type="module">
+    import { db } from "./firebase.js";
+
+    import {
+      collection,
+      addDoc
+    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    document.getElementById("saveBtn").addEventListener("click", async () => {
+      const status = document.getElementById("status");
+
+      try {
+        const docRef = await addDoc(
+          collection(db, "connection_test"),
+          {
+            message: "DermoCare Firebase Connected",
+            status: "success",
+            createdAt: new Date()
+          }
+        );
+
+        status.textContent = "Data saved successfully! ID: " + docRef.id;
+      } catch (error) {
+        console.error(error);
+        status.textContent = "Error: " + error.message;
+      }
+    });
+  </script>
+</body>
+</html>
+
