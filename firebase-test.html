@@ -33,9 +33,14 @@
         );
 
         status.textContent = "Data saved successfully! ID: " + docRef.id;
-      } catch (error) {
-        console.error(error);
-        status.textContent = "Error: " + error.message;
+      }  catch (error) {
+  console.error("Firebase Error Code:", error.code);
+  console.error("Firebase Error Message:", error.message);
+
+  status.textContent =
+    "Error Code: " + error.code +
+    " | Message: " + error.message;
+
       }
     });
   </script>
