@@ -3,21 +3,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DermoCare Firebase Test</title>
 </head>
 <body>
   <h1>DermoCare Firebase Test</h1>
-  <p id="status">Connecting...</p>
+
+  <button id="saveBtn">Save Test Data</button>
+  <p id="status">Ready</p>
 
   <script type="module">
-    import { auth, db } from "./firebase.js";
+    import { db } from "./firebase.js";
 
-    document.getElementById("status").textContent =
-      "Firebase initialized successfully!";
+    import {
+      collection,
+      addDoc
+    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-    console.log("Auth:", auth);
-    console.log("Firestore:", db);
+    document.getElementById("saveBtn").addEventListener("click", async () => {
+      const status = document.getElementById("status");
+
+      try {
+        const docRef = await addDoc(
+          collection(db, "connection_test"),
+          {
+            message: "DermoCare Firebase Connected",
+            status: "success",
+            createdAt: new Date()
+          }
+        );
+
+        status.textContent = "Data saved successfully! ID: " + docRef.id;
+      } catch (error) {
+        console.error(error);
+        status.textContent = "Error: " + error.message;
+      }
+    });
   </script>
 </body>
 </html>
+
