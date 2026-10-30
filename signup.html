@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="auth.css">
   <link rel="stylesheet" href="theme.css">
+  <script src="auth.js" defer></script>
 </head>
 <body>
   <main class="auth-card">
@@ -31,12 +32,5 @@
     </form>
     <p class="switch">Already have an account? <a href="login.html">Log in</a></p>
   </main>
-  <script>
-    document.getElementById("signupForm").addEventListener("submit", (event) => {
-      event.preventDefault();
-      document.getElementById("message").textContent =
-        "Demo account created successfully. You can now log in.";
-    });
-  </script>
 </body>
 </html>

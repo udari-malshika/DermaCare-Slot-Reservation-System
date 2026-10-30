@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="auth.css">
   <link rel="stylesheet" href="theme.css">
+  <script src="auth.js" defer></script>
 </head>
 <body>
   <main class="auth-card">
@@ -28,12 +29,5 @@
     </form>
     <p class="switch">New to DermoCare? <a href="signup.html">Create an account</a></p>
   </main>
-  <script>
-    document.getElementById("loginForm").addEventListener("submit", (event) => {
-      event.preventDefault();
-      document.getElementById("message").textContent =
-        "Demo login successful. You can now book an appointment.";
-    });
-  </script>
 </body>
 </html>
