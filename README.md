@@ -23,7 +23,7 @@ The project is implemented with HTML, CSS, vanilla JavaScript, and a small Node.
   - PRP Therapy
   - Chemical Peeling
   - Botox and fillers
-- Contact page with clinic information and contact form
+- Contact page with clinic information, opening hours, map, social links, and a client-side enquiry form
 - Responsive navigation bars with links to treatments, products, contact, appointments, login, and profile
 - Light and dark theme toggle. The selected theme is saved in browser storage.
 
@@ -52,7 +52,7 @@ The project is implemented with HTML, CSS, vanilla JavaScript, and a small Node.
 - Query-string treatment preselection, for example:
 
   ```text
-  appointment.html?treatment=CO2%20Laser
+  HTML/appointment.html?treatment=CO2%20Laser
   ```
 
 The appointment flow validates the form and sends the request to `POST /api/appointments`. The API sends a confirmation email to the email address entered in the appointment form. The clinic still needs to confirm availability separately.
@@ -72,61 +72,35 @@ The checkout page is a frontend demonstration only. It does not process real pay
 
 | Page | Purpose |
 | --- | --- |
-| `index.html` | Redirects visitors to the homepage |
-| `home.html` | Main clinic homepage |
-| `treatment.html` | Treatment catalogue and booking prompts |
-| `treatment-detail.html` | Dynamic treatment detail page |
-| `CO2.html` | CO2 Laser treatment information |
-| `carbonLaser.html` | Carbon Laser Peel information |
-| `pigmentation.html` | Pigmentation treatment information |
-| `products.html` | Skincare product catalogue and cart |
-| `payment.html` | Demo checkout/payment page |
-| `appointment.html` | Appointment selection and patient information |
-| `contact.html` | Clinic contact and enquiry page |
-| `login.html` | Demo login page |
-| `signup.html` | Demo account creation page |
-| `register.html` | Redirects to the signup page |
-| `profile.html` | Current user's demo profile and logout page |
+| `HTML/index.html` | Redirects visitors to the homepage |
+| `HTML/home.html` | Main clinic homepage |
+| `HTML/treatment.html` | Treatment catalogue and booking prompts |
+| `HTML/treatment-detail.html` | Dynamic treatment detail page |
+| `HTML/CO2.html` | CO2 Laser treatment information |
+| `HTML/carbonLaser.html` | Carbon Laser Peel information |
+| `HTML/pigmentation.html` | Pigmentation treatment information |
+| `HTML/products.html` | Skincare product catalogue and cart |
+| `HTML/payment.html` | Demo checkout/payment page |
+| `HTML/appointment.html` | Appointment selection and patient information |
+| `HTML/contact.html` | Clinic contact details, map, and demo enquiry form |
+| `HTML/login.html` | Demo login page |
+| `HTML/signup.html` | Demo account creation page |
+| `HTML/register.html` | Redirects to the signup page |
+| `HTML/profile.html` | Current user's demo profile and logout page |
 
 ## Project structure
 
 ```text
 .
 ├── Images/                  # Treatment and product images
-├── index.html               # Entry redirect
-├── home.html                # Homepage
-├── treatment.html           # Treatment catalogue
-├── treatment-detail.html   # Dynamic treatment details
-├── appointment.html         # Slot reservation page
-├── products.html            # Product catalogue and cart
-├── payment.html             # Demo checkout page
-├── contact.html             # Contact page
-├── login.html               # Login page
-├── signup.html              # Signup page
-├── profile.html             # Profile page
-├── auth.js                  # Signup, login, session, and logout logic
-├── theme.js                 # Theme toggle and theme persistence
-├── appointment.js           # Appointment calendar, slots, and validation
-├── server.js                # Node.js static server and appointment email API
+├── HTML/                    # Website pages
+├── CSS/                     # Page and shared stylesheets
+├── JS/                      # Browser scripts and Node.js API server
 ├── package.json             # Node.js scripts and dependencies
 ├── package-lock.json        # Locked npm dependency versions
 ├── .env.example             # SMTP configuration template
 ├── .gitignore               # Local secrets and dependency exclusions
-├── products.js              # Product search and cart logic
-├── treatment.js              # Treatment page form behavior
-├── treatment-detail.js      # Dynamic treatment details
-├── home.css                 # Homepage styles
-├── appointment.css          # Appointment page styles
-├── auth.css                 # Login, signup, and profile styles
-├── products.css             # Product page styles
-├── treatment.css            # Treatment catalogue styles
-├── treatment-detail.css     # Treatment detail styles
-├── contact.css              # Contact page styles
-├── theme.css                # Shared theme and profile icon styles
-├── pigmentation.css         # Shared treatment detail styling
-├── CO2.css                 # CO2 page styles
-├── carbonLaser.css         # Carbon Laser page styles
-└── appoinment.js            # Legacy appointment script retained in the project
+└── README.md
 ```
 
 ## Running the project
@@ -180,7 +154,7 @@ python -m http.server 8000
 Then open:
 
 ```text
-http://localhost:8000/
+http://localhost:8000/HTML/index.html
 ```
 
 If Python is not installed, use any static file server that serves the project root.
@@ -209,10 +183,10 @@ localStorage.removeItem("dermacare-theme");
 
 | Key | Used by | Purpose |
 | --- | --- | --- |
-| `dermacare-users` | `auth.js` | Stores demo signup accounts |
-| `dermacare-session` | `auth.js` | Stores the current logged-in user's name and email |
-| `dermacare-cart` | `products.js` | Stores the demo cart |
-| `dermacare-theme` | `theme.js` | Stores the selected light/dark theme |
+| `dermacare-users` | `JS/auth.js` | Stores demo signup accounts |
+| `dermacare-session` | `JS/auth.js` | Stores the current logged-in user's name and email |
+| `dermacare-cart` | `JS/products.js` | Stores the demo cart |
+| `dermacare-theme` | `JS/theme.js` | Stores the selected light/dark theme |
 
 ## Technology
 
@@ -232,9 +206,11 @@ localStorage.removeItem("dermacare-theme");
 
 ## Development notes
 
-- Keep all relative links and asset paths aligned with the current project root.
+- Keep page files in `HTML/`, stylesheets in `CSS/`, browser scripts in `JS/`, and media in `Images/`.
+- HTML pages use `../CSS/`, `../JS/`, and `../Images/` for local assets.
 - Use a local HTTP server when testing navigation and browser storage.
 - The project contains multiple page-specific stylesheets as well as shared styles in `theme.css`.
+- The contact form is a frontend demo: it validates required fields and displays a success message but does not send data to the server.
 - Client-side validation improves the demo experience but is not a security boundary.
 - Before production deployment, replace demo authentication with server-backed authentication and protect the appointment API with rate limiting, authentication where required, and persistent booking storage.
 
