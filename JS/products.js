@@ -8,7 +8,7 @@ const products = [
     tag: "BESTSELLER",
     skin: ["Oily", "Sensitive", "Combination"],
     description: "A gentle daily cleanser for fresh, balanced skin.",
-    image: "Images/Centella cleanser.jpg"
+    image: "../Images/Centella cleanser.jpg"
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const products = [
     tag: "POPULAR",
     skin: ["Dry", "Oily", "Combination"],
     description: "A lightweight serum for a radiant-looking complexion.",
-    image: "Images/Arencia vitemin C.jpg"
+    image: "../Images/Arencia vitemin C.jpg"
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const products = [
     tag: "NEW",
     skin: ["Dry", "Sensitive"],
     description: "A rich moisturizer to support your skin barrier.",
-    image: "Images/345 cream.jpg"
+    image: "../Images/345 cream.jpg"
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const products = [
     tag: "",
     skin: ["Sensitive", "Dry", "Combination"],
     description: "Daily sun protection for your skincare routine.",
-    image: "Images/Ord Moisture.jpg"
+    image: "../Images/Ord Moisture.jpg"
   },
   {
     id: 5,
@@ -52,7 +52,7 @@ const products = [
     tag: "",
     skin: ["Dry", "Oily", "Combination"],
     description: "A night serum for a smoother-looking complexion.",
-    image: "Images/Ord Ratinol.jpg"
+    image: "../Images/Ord Ratinol.jpg"
   },
   {
     id: 6,
@@ -63,7 +63,7 @@ const products = [
     tag: "",
     skin: ["Dry", "Sensitive"],
     description: "A simple cleanser for a comfortable daily routine.",
-    image: "Images/Ord Clens.jpg"
+    image: "../Images/Ord Clens.jpg"
   },
   {
     id: 7,
@@ -74,7 +74,7 @@ const products = [
     tag: "POPULAR",
     skin: ["Oily", "Combination"],
     description: "Lightweight hydration without a heavy finish.",
-    image: "Images/Medicube Pink cap cream.jpg"
+    image: "../Images/Medicube Pink cap cream.jpg"
   },
   {
     id: 8,
@@ -85,7 +85,7 @@ const products = [
     tag: "",
     skin: ["Oily", "Dry", "Combination"],
     description: "A daily sunscreen for your morning routine.",
-    image: "Images/Ord Moisture.jpg"
+    image: "../Images/Ord Moisture.jpg"
   },
   {
     id: 9,
@@ -96,7 +96,7 @@ const products = [
     tag: "TOP RATED",
     skin: ["Sensitive", "Dry"],
     description: "A gentle-feeling serum for a simple skincare routine.",
-    image: "Images/Anua Niasinamide.jpg"
+    image: "../Images/Anua Niasinamide.jpg"
   },
   {
     id: 10,
@@ -107,7 +107,7 @@ const products = [
     tag: "NEW",
     skin: ["Sensitive", "Dry"],
     description: "Comforting hydration with a soothing, barrier-supporting finish.",
-    image: "Images/centella cream.jpg"
+    image: "../Images/centella cream.jpg"
   },
   {
     id: 11,
@@ -118,7 +118,7 @@ const products = [
     tag: "BESTSELLER",
     skin: ["Oily", "Combination", "Sensitive"],
     description: "A calming, brightening serum for more refreshed-looking skin.",
-    image: "Images/Anua Green.jpg"
+    image: "../Images/Anua Green.jpg"
   },
   {
     id: 12,
@@ -129,7 +129,7 @@ const products = [
     tag: "POPULAR",
     skin: ["Oily", "Combination"],
     description: "Targets texture and dullness for a more refined complexion.",
-    image: "Images/Medicube Pink serum.jpg"
+    image: "../Images/Medicube Pink serum.jpg"
   },
   {
     id: 13,
@@ -140,7 +140,7 @@ const products = [
     tag: "",
     skin: ["Dry", "Sensitive"],
     description: "A deep-hydrating mask for soft, replenished skin after a long day.",
-    image: "Images/Biodance mask.jpg"
+    image: "../Images/Biodance mask.jpg"
   },
   {
     id: 14,
@@ -151,7 +151,7 @@ const products = [
     tag: "TOP RATED",
     skin: ["Oily", "Combination", "Sensitive"],
     description: "Helps refine skin tone and support a smoother-looking finish.",
-    image: "Images/Ord Niacinamide.jpg"
+    image: "../Images/Ord Niacinamide.jpg"
   }
 ];
 

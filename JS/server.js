@@ -3,10 +3,10 @@ const fs = require("node:fs");
 const path = require("node:path");
 const nodemailer = require("nodemailer");
 
+const publicRoot = path.resolve(__dirname, "..");
 loadEnvFile();
 
 const port = Number(process.env.PORT || 8000);
-const publicRoot = __dirname;
 const allowedMethods = new Set(["GET", "HEAD"]);
 const contentTypes = {
   ".css": "text/css; charset=utf-8",
@@ -17,7 +17,7 @@ const contentTypes = {
 };
 
 function loadEnvFile() {
-  const envPath = path.join(__dirname, ".env");
+  const envPath = path.join(publicRoot, ".env");
   if (!fs.existsSync(envPath)) return;
 
   for (const line of fs.readFileSync(envPath, "utf8").split(/\r?\n/)) {
@@ -185,7 +185,7 @@ function serveStatic(request, response) {
   }
 
   const requestedPath = decodeURIComponent(new URL(request.url, `http://${request.headers.host}`).pathname);
-  const relativePath = requestedPath === "/" ? "index.html" : requestedPath.slice(1);
+  const relativePath = requestedPath === "/" ? "HTML/index.html" : requestedPath.slice(1);
   const filePath = path.resolve(publicRoot, relativePath);
   if (!filePath.startsWith(`${publicRoot}${path.sep}`) || !fs.existsSync(filePath)) {
     response.writeHead(404);

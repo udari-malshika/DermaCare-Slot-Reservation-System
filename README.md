@@ -135,7 +135,7 @@ The static pages do not need a build step. The application server requires Node.
 
 ### Option 1: Open directly
 
-Open `index.html` in a browser. For the most reliable behavior, especially when testing browser storage and linked pages, use a local HTTP server instead.
+Open `HTML/index.html` in a browser. For the most reliable behavior, especially when testing browser storage and linked pages, use a local HTTP server instead.
 
 ### Option 2: Start the application server
 
