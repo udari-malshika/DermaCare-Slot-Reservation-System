@@ -1,0 +1,13 @@
+{
+  "name": "dermacare-slot-reservation-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DermoCare static website and appointment email API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "nodemailer": "^7.0.3"
+  }
+}

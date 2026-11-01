@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (bookingForm) {
-    bookingForm.addEventListener("submit", (event) => {
+    bookingForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       if (!bookingForm.reportValidity()) return;
@@ -296,10 +296,32 @@ document.addEventListener("DOMContentLoaded", () => {
         notes: document.getElementById("notes").value.trim()
       };
 
-      console.log("Demo appointment request:", request);
+      const submitButton = bookingForm.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      formMessage.style.color = "";
+      formMessage.textContent = "Sending your appointment confirmation...";
 
-      formMessage.style.color = "#26734d";
-      formMessage.textContent = "Your booking request has been prepared successfully. This is a demo only and not sent to the clinic.";
+      try {
+        const response = await fetch("/api/appointments", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(request)
+        });
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || "Unable to send the appointment email.");
+        }
+
+        formMessage.style.color = "#26734d";
+        formMessage.textContent = result.message;
+      } catch (error) {
+        console.error("Appointment request failed:", error);
+        formMessage.style.color = "#b42318";
+        formMessage.textContent = error.message || "Unable to send the appointment email. Please try again.";
+      } finally {
+        submitButton.disabled = false;
+      }
     });
   }
 

@@ -2,7 +2,7 @@
 
 DermoCare is a responsive static website for a dermatology and aesthetic skincare clinic. It helps visitors explore treatments, view skincare products, create a local demo account, select an appointment slot, and review a demo shopping cart and checkout flow.
 
-The project is implemented with HTML, CSS, and vanilla JavaScript. It does not currently use a backend, database, payment gateway, or real clinic booking API.
+The project is implemented with HTML, CSS, vanilla JavaScript, and a small Node.js API. It does not use a database or payment gateway. The appointment API sends confirmation emails through the configured SMTP provider.
 
 ## Features
 
@@ -55,7 +55,7 @@ The project is implemented with HTML, CSS, and vanilla JavaScript. It does not c
   appointment.html?treatment=CO2%20Laser
   ```
 
-The current appointment flow is a demonstration. It validates the form and prepares a booking request in the browser console, but it does not save or send an appointment to the clinic.
+The appointment flow validates the form and sends the request to `POST /api/appointments`. The API sends a confirmation email to the email address entered in the appointment form. The clinic still needs to confirm availability separately.
 
 ### Products and checkout
 
@@ -107,6 +107,11 @@ The checkout page is a frontend demonstration only. It does not process real pay
 ├── auth.js                  # Signup, login, session, and logout logic
 ├── theme.js                 # Theme toggle and theme persistence
 ├── appointment.js           # Appointment calendar, slots, and validation
+├── server.js                # Node.js static server and appointment email API
+├── package.json             # Node.js scripts and dependencies
+├── package-lock.json        # Locked npm dependency versions
+├── .env.example             # SMTP configuration template
+├── .gitignore               # Local secrets and dependency exclusions
 ├── products.js              # Product search and cart logic
 ├── treatment.js              # Treatment page form behavior
 ├── treatment-detail.js      # Dynamic treatment details
@@ -126,13 +131,45 @@ The checkout page is a frontend demonstration only. It does not process real pay
 
 ## Running the project
 
-No package installation or build step is required.
+The static pages do not need a build step. The application server requires Node.js and one package installation.
 
 ### Option 1: Open directly
 
 Open `index.html` in a browser. For the most reliable behavior, especially when testing browser storage and linked pages, use a local HTTP server instead.
 
-### Option 2: Start a local server
+### Option 2: Start the application server
+
+Install the email dependency and copy `.env.example` to `.env`. Fill in the SMTP values before starting the server:
+
+```powershell
+npm install
+Copy-Item .env.example .env
+npm start
+```
+
+Never commit `.env`; it contains the SMTP password.
+
+The application server exposes:
+
+| Method | Endpoint | Purpose |
+| --- | --- | --- |
+| `POST` | `/api/appointments` | Validates appointment details and emails a confirmation to the patient |
+
+Required `.env` values:
+
+```text
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-smtp-username
+SMTP_PASSWORD=your-smtp-password
+MAIL_FROM=DermaCare <appointments@example.com>
+PORT=8000
+```
+
+Use the application server, rather than `python -m http.server`, when testing appointment email delivery.
+
+### Option 3: Start a static local server (frontend only)
 
 From the project directory, run one of the following commands:
 
@@ -156,7 +193,7 @@ If Python is not installed, use any static file server that serves the project r
 4. Log in using the saved demo account.
 5. Open the profile icon to view the profile and test logout.
 6. Select a treatment and open **Book Appointment**.
-7. Choose a date and time, complete the patient form, and submit the demo request.
+7. Choose a date and time, complete the patient form, and submit the appointment request.
 8. Open **Products**, add items to the cart, and continue to the demo checkout page.
 
 To reset demo data, open the browser developer console and run:
@@ -182,6 +219,8 @@ localStorage.removeItem("dermacare-theme");
 - HTML5
 - CSS3
 - Vanilla JavaScript
+- Node.js HTTP server
+- Nodemailer SMTP integration
 - CSS custom properties
 - Responsive layouts and media queries
 - Browser `localStorage`
@@ -197,7 +236,7 @@ localStorage.removeItem("dermacare-theme");
 - Use a local HTTP server when testing navigation and browser storage.
 - The project contains multiple page-specific stylesheets as well as shared styles in `theme.css`.
 - Client-side validation improves the demo experience but is not a security boundary.
-- Before production deployment, replace demo authentication, appointment submission, and payment behavior with server-backed implementations.
+- Before production deployment, replace demo authentication with server-backed authentication and protect the appointment API with rate limiting, authentication where required, and persistent booking storage.
 
 ## Design and prototype
 
@@ -207,12 +246,12 @@ localStorage.removeItem("dermacare-theme");
 
 The following work is required before using this as a real clinic system:
 
-1. Add a backend API and database for users, appointments, products, and orders.
+1. Add a database for users, appointments, products, and orders, and persist requests received by the appointment API.
 2. Hash passwords with a modern password-hashing algorithm such as Argon2id or bcrypt.
 3. Replace `localStorage` authentication with secure, server-managed sessions.
 4. Add server-side authorization and input validation.
 5. Connect appointment availability to real clinic schedules.
 6. Prevent double booking with transactional server-side checks.
 7. Integrate a compliant payment provider instead of collecting payment details in the frontend.
-8. Add email/SMS confirmations and clinic-side appointment management.
+8. Add clinic-side appointment management and improve email/SMS delivery tracking.
 9. Add automated tests, accessibility checks, monitoring, and deployment configuration.
