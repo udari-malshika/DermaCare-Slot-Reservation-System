@@ -1,26 +1,10 @@
-import { auth, db } from "./firebase.js";
-import {
-  addDoc,
-  collection,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-
 const CART_KEY = "dermacare-cart-v1";
+const ORDERS_KEY = "dermacare-orders";
 const money = (amount) => `LKR ${Number(amount).toLocaleString("en-LK")}`;
 const form = document.getElementById("checkoutForm");
 const itemsEl = document.getElementById("orderItems");
 const totalEl = document.getElementById("orderTotal");
 const messageEl = document.getElementById("checkoutMessage");
-let authReady = false;
-
-onAuthStateChanged(auth, (user) => {
-  authReady = true;
-  if (user) {
-    form.elements.name.value ||= user.displayName || "";
-    form.elements.email.value ||= user.email || "";
-  }
-});
 
 function getCart() {
   try {
@@ -48,7 +32,20 @@ function escapeHTML(value) {
   }[character]));
 }
 
-form.addEventListener("submit", async (event) => {
+function saveOrder(order) {
+  try {
+    const saved = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]");
+    const orders = Array.isArray(saved) ? saved : [];
+    orders.unshift(order);
+    localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+    return true;
+  } catch (error) {
+    console.error("Unable to save order for the admin dashboard.", error);
+    return false;
+  }
+}
+
+form.addEventListener("submit", (event) => {
   event.preventDefault();
   const cart = getCart();
   if (!form.reportValidity() || !cart.length) {
@@ -56,28 +53,11 @@ form.addEventListener("submit", async (event) => {
     messageEl.className = "checkout-message error";
     return;
   }
-
-  if (!authReady) {
-    messageEl.textContent = "Checking your sign-in. Please try again in a moment.";
-    messageEl.className = "checkout-message error";
-    return;
-  }
-
-  const user = auth.currentUser;
-  if (!user) {
-    messageEl.innerHTML = 'Please <a href="login.html?next=checkout.html">log in</a> before placing your order.';
-    messageEl.className = "checkout-message error";
-    return;
-  }
-
-  const submitButton = form.querySelector('button[type="submit"]');
-  submitButton.disabled = true;
   const orderId = `DC-${Date.now().toString().slice(-8)}`;
   const formData = new FormData(form);
   const total = cart.reduce((sum, item) => sum + Number(item.price) * Number(item.quantity), 0);
   const order = {
     id: orderId,
-    ownerUid: user.uid,
     customerName: String(formData.get("name")).trim(),
     email: String(formData.get("email")).trim().toLowerCase(),
     phone: String(formData.get("phone")).trim(),
@@ -91,23 +71,20 @@ form.addEventListener("submit", async (event) => {
     })),
     total,
     status: "Pending",
-    createdAt: serverTimestamp()
+    createdAt: new Date().toISOString()
   };
 
-  try {
-    await addDoc(collection(db, "orders"), order);
-    localStorage.removeItem(CART_KEY);
-    form.reset();
-    messageEl.textContent = `Order ${orderId} prepared successfully. Our team will contact you shortly.`;
-    messageEl.className = "checkout-message success";
-    renderOrder();
-  } catch (error) {
-    console.error("Unable to save order to Firebase.", error);
+  if (!saveOrder(order)) {
     messageEl.textContent = "Unable to save your order. Please try again.";
     messageEl.className = "checkout-message error";
-  } finally {
-    submitButton.disabled = getCart().length === 0;
+    return;
   }
+
+  localStorage.removeItem(CART_KEY);
+  form.reset();
+  messageEl.textContent = `Order ${orderId} prepared successfully. Our team will contact you shortly.`;
+  messageEl.className = "checkout-message success";
+  renderOrder();
 });
 
 renderOrder();

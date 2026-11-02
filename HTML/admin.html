@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/admin.css">
   <link rel="stylesheet" href="../CSS/theme.css">
-  <script type="module" src="../JS/admin.js"></script>
+  <script src="../JS/admin.js" defer></script>
 </head>
 <body class="admin-page">
   <header class="admin-header">
@@ -30,7 +30,6 @@
       </div>
       <a class="primary-action" href="appointment.html">Create appointment</a>
     </section>
-    <p id="dashboardMessage" role="status" aria-live="polite"></p>
 
     <section class="stats-grid" aria-label="Dashboard summary">
       <article class="stat-card"><span>Total appointments</span><strong id="totalAppointments">0</strong></article>

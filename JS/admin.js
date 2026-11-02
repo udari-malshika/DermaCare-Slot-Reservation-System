@@ -1,24 +1,66 @@
-import { auth, db, ADMIN_EMAIL } from "./firebase.js";
-import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-import {
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  updateDoc
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
 (function () {
+  const sessionKey = "dermacare-session";
+  const appointmentsKey = "dermacare-appointments";
+  const usersKey = "dermacare-users";
+  const ordersKey = "dermacare-orders";
+  let session = null;
+  try {
+    session = JSON.parse(localStorage.getItem(sessionKey) || "null");
+  } catch (error) {
+    console.error("Unable to read the current session.", error);
+  }
+
+  if (!session || session.role !== "admin") {
+    window.location.replace("../HTML/admin-login.html");
+    return;
+  }
+
+  const readArray = function (key) {
+    try {
+      const value = JSON.parse(localStorage.getItem(key) || "[]");
+      return Array.isArray(value) ? value : [];
+    } catch (error) {
+      console.error("Unable to read dashboard data.", error);
+      return [];
+    }
+  };
+
   let appointments = [];
   let users = [];
   let orders = [];
   const formatDate = (date) => date ? new Date(date + "T00:00:00").toLocaleDateString("en-GB") : "Not selected";
 
-  function renderDashboard() {
+  function loadDashboardData() {
+    appointments = readArray(appointmentsKey).map((item, index) => ({
+      ...item,
+      id: item.id || "appointment-" + index,
+      status: item.status || "Pending"
+    }));
+    users = readArray(usersKey);
+    orders = readArray(ordersKey).map((item, index) => ({
+      ...item,
+      id: item.id || "order-" + index,
+      status: item.status || "Pending",
+      items: Array.isArray(item.items) ? item.items : []
+    }));
+  }
+
+  function refreshDashboard() {
+    loadDashboardData();
     renderStats();
     renderAppointments();
     renderUsers();
     renderOrders();
+  }
+
+  function saveAppointments() {
+    try {
+      localStorage.setItem(appointmentsKey, JSON.stringify(appointments));
+      return true;
+    } catch (error) {
+      console.error("Unable to save dashboard changes.", error);
+      return false;
+    }
   }
 
   function renderStats() {
@@ -115,110 +157,86 @@ import {
     return `LKR ${Number(amount || 0).toLocaleString("en-LK")}`;
   }
 
+  function saveOrders() {
+    try {
+      localStorage.setItem(ordersKey, JSON.stringify(orders));
+      return true;
+    } catch (error) {
+      console.error("Unable to save order changes.", error);
+      return false;
+    }
+  }
+
   function escapeHtml(value) {
     return String(value || "").replace(/[&<>"']/g, (character) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
     }[character]));
   }
 
-  async function refreshDashboard() {
-    try {
-      const [appointmentSnapshot, userSnapshot, orderSnapshot] = await Promise.all([
-        getDocs(collection(db, "appointments")),
-        getDocs(collection(db, "users")),
-        getDocs(collection(db, "orders"))
-      ]);
-      appointments = appointmentSnapshot.docs.map((item) => ({
-        ...item.data(),
-        id: item.id,
-        status: ["Pending", "Confirmed", "Cancelled"].includes(item.data().status)
-          ? item.data().status
-          : "Pending"
-      }));
-      users = userSnapshot.docs.map((item) => item.data());
-      orders = orderSnapshot.docs.map((item) => ({
-        ...item.data(),
-        documentId: item.id,
-        id: item.data().id || item.id,
-        status: ["Pending", "Processing", "Completed", "Cancelled"].includes(item.data().status)
-          ? item.data().status
-          : "Pending",
-        items: Array.isArray(item.data().items) ? item.data().items : []
-      }));
-      renderDashboard();
-    } catch (error) {
-      console.error("Unable to load dashboard data from Firestore.", error);
-      document.getElementById("dashboardMessage").textContent =
-        "Unable to load dashboard data. Check your Firestore rules and connection.";
-    }
-  }
-
-  function showActionError(action, error) {
-    console.error(`Unable to ${action}.`, error);
-    window.alert(`Unable to ${action}. Please try again.`);
-  }
-
   document.getElementById("statusFilter").addEventListener("change", renderAppointments);
-  document.getElementById("appointmentsList").addEventListener("change", async (event) => {
+  document.getElementById("appointmentsList").addEventListener("change", (event) => {
     const id = event.target.dataset.statusId;
     if (!id) return;
-    try {
-      await updateDoc(doc(db, "appointments", id), { status: event.target.value });
-      await refreshDashboard();
-    } catch (error) {
-      showActionError("save this appointment status", error);
+    const appointment = appointments.find((item) => item.id === id);
+    if (!appointment) return;
+    const previousStatus = appointment.status;
+    appointment.status = event.target.value;
+    if (!saveAppointments()) {
+      appointment.status = previousStatus;
+      window.alert("Unable to save this status update in the browser.");
     }
+    renderStats();
+    renderAppointments();
   });
-  document.getElementById("appointmentsList").addEventListener("click", async (event) => {
+  document.getElementById("appointmentsList").addEventListener("click", (event) => {
     const id = event.target.dataset.deleteId;
     if (!id || !window.confirm("Delete this appointment request?")) return;
-    try {
-      await deleteDoc(doc(db, "appointments", id));
-      await refreshDashboard();
-    } catch (error) {
-      showActionError("delete this appointment", error);
+    const previousAppointments = appointments;
+    appointments = appointments.filter((item) => item.id !== id);
+    if (!saveAppointments()) {
+      appointments = previousAppointments;
+      window.alert("Unable to delete this appointment in the browser.");
     }
+    renderStats();
+    renderAppointments();
   });
   document.getElementById("orderStatusFilter").addEventListener("change", renderOrders);
-  document.getElementById("ordersList").addEventListener("change", async (event) => {
+  document.getElementById("ordersList").addEventListener("change", (event) => {
     const id = event.target.dataset.orderStatusId;
     if (!id) return;
     const order = orders.find((item) => item.id === id);
     if (!order) return;
-    try {
-      await updateDoc(doc(db, "orders", order.documentId), { status: event.target.value });
-      await refreshDashboard();
-    } catch (error) {
-      showActionError("save this order status", error);
+    const previousStatus = order.status;
+    order.status = event.target.value;
+    if (!saveOrders()) {
+      order.status = previousStatus;
+      window.alert("Unable to save this order status in the browser.");
     }
+    refreshDashboard();
   });
-  document.getElementById("ordersList").addEventListener("click", async (event) => {
+  document.getElementById("ordersList").addEventListener("click", (event) => {
     const id = event.target.dataset.deleteOrderId;
     if (!id || !window.confirm("Delete this product order?")) return;
-    const order = orders.find((item) => item.id === id);
-    if (!order) return;
-    try {
-      await deleteDoc(doc(db, "orders", order.documentId));
-      await refreshDashboard();
-    } catch (error) {
-      showActionError("delete this order", error);
+    const previousOrders = orders;
+    orders = orders.filter((item) => item.id !== id);
+    if (!saveOrders()) {
+      orders = previousOrders;
+      window.alert("Unable to delete this order in the browser.");
     }
+    refreshDashboard();
   });
-  document.getElementById("logoutButton").addEventListener("click", async () => {
-    try {
-      await signOut(auth);
-      window.location.replace("../HTML/admin-login.html");
-    } catch (error) {
-      showActionError("log out", error);
+  document.getElementById("logoutButton").addEventListener("click", () => {
+    localStorage.removeItem(sessionKey);
+    window.location.replace("../HTML/admin-login.html");
+  });
+
+  window.addEventListener("storage", (event) => {
+    if (event.key === appointmentsKey || event.key === usersKey || event.key === ordersKey) {
+      refreshDashboard();
     }
   });
 
-  onAuthStateChanged(auth, (user) => {
-    if (!user || user.email?.toLowerCase() !== ADMIN_EMAIL || !user.emailVerified) {
-      window.location.replace("../HTML/admin-login.html");
-      return;
-    }
-    document.getElementById("dashboardMessage").textContent = "";
-    refreshDashboard();
-  });
+  window.setInterval(refreshDashboard, 2000);
+
+  refreshDashboard();
 })();
