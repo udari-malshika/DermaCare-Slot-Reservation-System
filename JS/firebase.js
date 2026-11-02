@@ -13,6 +13,8 @@ const firebaseConfig = {
   measurementId: "G-T3KXPX9L38"
 };
 
+export const ADMIN_EMAIL = "admin@dermacare.lk";
+
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);

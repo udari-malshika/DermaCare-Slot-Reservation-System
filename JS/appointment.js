@@ -1,5 +1,12 @@
+import { auth, db } from "./firebase.js";
+import {
+  addDoc,
+  collection,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
 document.addEventListener("DOMContentLoaded", () => {
-  const appointmentsKey = "dermacare-appointments";
   const treatmentButtons = [...document.querySelectorAll(".treatment")];
 
   const searchInput = document.getElementById("treatmentSearch");
@@ -9,26 +16,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectedDateLabel = document.getElementById("selectedDateLabel");
   const bookingForm = document.getElementById("bookingForm");
   const formMessage = document.getElementById("formMessage");
+  let authReady = false;
+
+  onAuthStateChanged(auth, (user) => {
+    authReady = true;
+    if (user) {
+      document.getElementById("fullName").value ||= user.displayName || "";
+      document.getElementById("email").value ||= user.email || "";
+    }
+  });
 
   const consultationFee = 2000;
-
-  function saveAppointment(request) {
-    try {
-      const saved = JSON.parse(localStorage.getItem(appointmentsKey) || "[]");
-      const appointments = Array.isArray(saved) ? saved : [];
-      appointments.push({
-        ...request,
-        id: `appointment-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-        status: "Pending",
-        createdAt: new Date().toISOString()
-      });
-      localStorage.setItem(appointmentsKey, JSON.stringify(appointments));
-      return true;
-    } catch (error) {
-      console.error("Unable to save appointment for the dashboard.", error);
-      return false;
-    }
-  }
 
   function getAppointmentApiUrl() {
     const localHost = window.location.hostname === "localhost" ||
@@ -329,37 +327,53 @@ document.addEventListener("DOMContentLoaded", () => {
       const submitButton = bookingForm.querySelector('button[type="submit"]');
       submitButton.disabled = true;
       formMessage.style.color = "";
-      formMessage.textContent = "Sending your appointment confirmation...";
+      formMessage.textContent = "Saving your appointment...";
 
       try {
-        const response = await fetch(getAppointmentApiUrl(), {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(request)
+        if (!authReady) {
+          formMessage.textContent = "Checking your sign-in. Please try again in a moment.";
+          return;
+        }
+        const user = auth.currentUser;
+        if (!user) {
+          formMessage.innerHTML = 'Please <a href="login.html?next=appointment.html">log in</a> before booking.';
+          formMessage.style.color = "#b42318";
+          return;
+        }
+
+        await addDoc(collection(db, "appointments"), {
+          ...request,
+          ownerUid: user.uid,
+          status: "Pending",
+          createdAt: serverTimestamp()
         });
-        const responseText = await response.text();
-        let result;
 
+        let confirmation = "Appointment request saved successfully.";
         try {
-          result = responseText ? JSON.parse(responseText) : {};
+          const response = await fetch(getAppointmentApiUrl(), {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(request)
+          });
+          const responseText = await response.text();
+          const result = responseText ? JSON.parse(responseText) : {};
+
+          if (response.ok && result.message) {
+            confirmation = result.message;
+          } else if (!response.ok) {
+            throw new Error(result.message || `Appointment request failed (${response.status}).`);
+          }
         } catch (error) {
-          throw new Error("The appointment server returned an invalid response. Please run the project with npm start.");
-        }
-
-        if (!response.ok) {
-          throw new Error(result.message || `Appointment request failed (${response.status}).`);
-        }
-
-        if (!saveAppointment(request)) {
-          throw new Error("Appointment sent, but it could not be added to the admin dashboard.");
+          console.error("Appointment saved, but email confirmation failed.", error);
+          confirmation = "Appointment saved. Email confirmation could not be sent; the clinic can still see your request.";
         }
 
         formMessage.style.color = "#26734d";
-        formMessage.textContent = result.message;
+        formMessage.textContent = confirmation;
       } catch (error) {
-        console.error("Appointment request failed:", error);
+        console.error("Unable to save appointment to Firebase.", error);
         formMessage.style.color = "#b42318";
-        formMessage.textContent = error.message || "Unable to send the appointment email. Please try again.";
+        formMessage.textContent = error.message || "Unable to save your appointment. Please try again.";
       } finally {
         submitButton.disabled = false;
       }

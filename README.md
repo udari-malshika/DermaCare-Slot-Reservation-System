@@ -1,6 +1,6 @@
 # DermoCare Slot Reservation System
 
-DermoCare is a responsive static website for a dermatology and aesthetic skincare clinic. Visitors can explore treatments, browse products, create a demo account, and submit appointment requests.
+DermoCare is a responsive website for a dermatology and aesthetic skincare clinic. Visitors can explore treatments, browse products, create an account, and submit appointment requests.
 
 The repository contains:
 
@@ -17,14 +17,19 @@ The repository contains:
 - Product catalogue with search and demo cart
 - Light/dark theme toggle persisted in browser storage
 
-### Demo authentication and profile
+### Authentication and profile
 
-- Signup and login with client-side validation
-- Duplicate email detection during signup
-- Session persistence in browser `localStorage`
+- Signup and login with Firebase Authentication
+- Password reset email through Firebase Authentication
+- User profiles stored in Firestore
 - Profile page and logout flow
 
-> Demo authentication is frontend-only and not production-safe.
+### Appointments and orders
+
+- Appointment requests and product orders are stored in Firestore
+- Appointment confirmation emails are sent by the Node.js API when SMTP is configured
+- Customers must be signed in to book appointments or place orders
+- Firestore rules restrict customer records to their owner and dashboard access to the verified administrator account
 
 ### Appointment booking
 
@@ -34,7 +39,7 @@ The repository contains:
 - Submission to `POST /api/appointments`
 - Confirmation email sent by the Node.js API when SMTP credentials are configured
 - Appointment requests are still accepted when SMTP is not configured
-- New bookings appear in the admin dashboard automatically across open browser tabs
+- New bookings appear in the admin dashboard
 
 ## Pages
 
@@ -53,10 +58,10 @@ The repository contains:
 | `HTML/checkout.html` | Order checkout |
 | `HTML/payment.html` | Demo checkout page |
 | `HTML/contact.html` | Contact and enquiry page |
-| `HTML/login.html` | Demo login page |
-| `HTML/signup.html` | Demo signup page |
+| `HTML/login.html` | Customer login page |
+| `HTML/signup.html` | Customer signup page |
 | `HTML/register.html` | Redirect page to signup |
-| `HTML/profile.html` | Demo profile page |
+| `HTML/profile.html` | Customer profile page |
 | `HTML/admin-login.html` | Admin login |
 | `HTML/admin.html` | Admin dashboard for appointments and product orders |
 
@@ -71,6 +76,7 @@ The repository contains:
 ├── package.json             # Node.js scripts and dependencies
 ├── package-lock.json        # Locked npm dependency versions
 ├── .env.example             # SMTP configuration template
+├── firestore.rules          # Firestore access rules
 └── README.md
 ```
 
@@ -85,6 +91,17 @@ npm start
 ```
 
 Then open: `http://localhost:8000/HTML/index.html`
+
+### Firebase setup
+
+1. In Firebase Console, enable **Authentication → Email/Password**.
+2. Create a **Cloud Firestore** database.
+3. Publish `firestore.rules` under **Firestore Database → Rules**.
+4. Create `admin@dermacare.lk` in Firebase Authentication. Use the admin login page once to receive a verification email, verify it, then sign in again.
+5. Add the domain used to run the website under **Authentication → Settings → Authorized domains**.
+6. Open `HTML/firebase-test.html` while signed in to verify Auth and Firestore.
+
+The Firebase web config is in `JS/firebase.js`. Existing accounts and appointments saved in browser `localStorage` are not copied automatically to Firebase.
 
 Required `.env` variables:
 
@@ -112,11 +129,8 @@ Then open: `http://localhost:8000/HTML/index.html`
 
 | Key | Used by | Purpose |
 | --- | --- | --- |
-| `dermacare-users` | `JS/auth.js` | Stores demo signup accounts |
-| `dermacare-session` | `JS/auth.js` | Stores current logged-in user details |
 | `dermacare-cart` | `JS/products.js` | Stores demo cart items |
 | `dermacare-cart-v1` | `JS/cart.js`, `JS/checkout.js` | Stores the current product cart |
-| `dermacare-orders` | `JS/checkout.js`, `JS/admin.js` | Stores product orders for the admin dashboard |
 | `dermacare-theme` | `JS/theme.js` | Stores selected light/dark theme |
 
 ## Technology
@@ -126,7 +140,9 @@ Then open: `http://localhost:8000/HTML/index.html`
 - Vanilla JavaScript
 - Node.js
 - Nodemailer
-- Browser `localStorage`
+- Firebase Authentication
+- Cloud Firestore
+- Browser `localStorage` for cart and theme preferences
 
 ## Design prototype
 
