@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Checkout | DermaCare</title>
   <script src="theme.js"></script>
-  <script type="module" src="order.js"></script>
   <link rel="stylesheet" href="theme.css" />
   <style>
     :root {
@@ -319,9 +318,8 @@
   <main class="checkout-wrap">
     <div class="payment-grid">
       <section class="panel">
-        <p class="eyebrow">Order details</p>
+        <p class="eyebrow">Secure checkout</p>
         <h1>Complete your order</h1>
-        <p>Place your order now. Online payment is not available yet, so no payment will be taken.</p>
 
         <form id="paymentForm">
           <div class="field-row">
@@ -331,7 +329,7 @@
             </div>
             <div class="field">
               <label for="email">Email address</label>
-              <input id="email" type="email" placeholder="you@example.com" required readonly />
+              <input id="email" type="email" placeholder="you@example.com" required />
             </div>
           </div>
 
@@ -367,7 +365,40 @@
             </div>
           </div>
 
-          <button class="pay-btn" type="submit">Place order (payment later)</button>
+          <div class="field">
+            <label for="paymentMethod">Payment method</label>
+            <select id="paymentMethod">
+              <option value="card">Credit / Debit Card</option>
+              <option value="cash">Cash on Delivery</option>
+              <option value="bank">Bank Transfer</option>
+            </select>
+          </div>
+
+          <div id="cardFields" class="card-fields visible">
+            <div class="field-row">
+              <div class="field">
+                <label for="cardName">Name on card</label>
+                <input id="cardName" type="text" placeholder="John Doe" />
+              </div>
+              <div class="field">
+                <label for="cardNumber">Card number</label>
+                <input id="cardNumber" type="text" placeholder="4242 4242 4242 4242" />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="expiry">Expiry date</label>
+                <input id="expiry" type="text" placeholder="MM/YY" />
+              </div>
+              <div class="field">
+                <label for="cvv">CVV</label>
+                <input id="cvv" type="text" placeholder="123" />
+              </div>
+            </div>
+          </div>
+
+          <button class="pay-btn" type="submit">Pay now</button>
           <p id="formMessage" class="message" aria-live="polite"></p>
         </form>
       </section>
@@ -397,5 +428,110 @@
     </div>
   </main>
 
+  <script>
+    const CART_KEY = 'dermacare-cart';
+    const summaryItems = document.getElementById('summaryItems');
+    const subtotalEl = document.getElementById('subtotal');
+    const totalEl = document.getElementById('total');
+    const form = document.getElementById('paymentForm');
+    const messageEl = document.getElementById('formMessage');
+    const paymentMethod = document.getElementById('paymentMethod');
+    const cardFields = document.getElementById('cardFields');
+    const deliveryFee = 500;
+
+    function money(value) {
+      return 'LKR ' + Number(value).toLocaleString('en-LK');
+    }
+
+    function getCart() {
+      try {
+        return JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function renderSummary() {
+      const cart = getCart();
+      if (!cart.length) {
+        summaryItems.innerHTML = '<div class="empty-box">Your cart is empty. Add products before checkout.</div>';
+        subtotalEl.textContent = money(0);
+        totalEl.textContent = money(0);
+        return;
+      }
+
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const total = subtotal + deliveryFee;
+
+      summaryItems.innerHTML = cart.map(item => `
+        <div class="summary-item">
+          <div>
+            <strong>${item.name}</strong>
+            <small>Qty: ${item.quantity}</small>
+          </div>
+          <strong>${money(item.price * item.quantity)}</strong>
+        </div>
+      `).join('');
+
+      subtotalEl.textContent = money(subtotal);
+      totalEl.textContent = money(total);
+    }
+
+    paymentMethod.addEventListener('change', () => {
+      if (paymentMethod.value === 'card') {
+        cardFields.classList.add('visible');
+      } else {
+        cardFields.classList.remove('visible');
+      }
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const cart = getCart();
+      if (!cart.length) {
+        messageEl.textContent = 'Your cart is empty. Add products before payment.';
+        messageEl.className = 'message error';
+        return;
+      }
+
+      const requiredFields = [
+        document.getElementById('fullName'),
+        document.getElementById('email'),
+        document.getElementById('phone'),
+        document.getElementById('address'),
+        document.getElementById('city'),
+        document.getElementById('postal')
+      ];
+
+      const incomplete = requiredFields.some((field) => !field.value.trim());
+      if (incomplete) {
+        messageEl.textContent = 'Please complete all required billing details.';
+        messageEl.className = 'message error';
+        return;
+      }
+
+      if (paymentMethod.value === 'card') {
+        const cardNumber = document.getElementById('cardNumber').value.trim();
+        const expiry = document.getElementById('expiry').value.trim();
+        const cvv = document.getElementById('cvv').value.trim();
+        if (!cardNumber || !expiry || !cvv) {
+          messageEl.textContent = 'Please complete your card details.';
+          messageEl.className = 'message error';
+          return;
+        }
+      }
+
+      messageEl.textContent = 'Payment successful! Your order has been placed.';
+      messageEl.className = 'message success';
+      localStorage.removeItem(CART_KEY);
+      form.reset();
+      setTimeout(() => {
+        window.location.href = 'home.html';
+      }, 1600);
+    });
+
+    renderSummary();
+  </script>
 </body>
 </html>

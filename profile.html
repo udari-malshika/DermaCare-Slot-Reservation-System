@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="auth.css">
   <link rel="stylesheet" href="theme.css">
   <script type="module" src="auth.js"></script>
-  <script type="module" src="account.js"></script>
 </head>
 <body>
   <main class="auth-card profile-card">
@@ -20,16 +19,6 @@
     <h1>My profile</h1>
     <div id="profileContent" class="profile-content" aria-live="polite"></div>
     <p class="message" id="profileMessage" role="status" aria-live="polite"></p>
-    <section class="history-section">
-      <h2>My appointments</h2>
-      <p id="appointmentHistoryMessage" class="history-message" aria-live="polite"></p>
-      <div id="appointmentHistory"></div>
-    </section>
-    <section class="history-section">
-      <h2>My orders</h2>
-      <p id="orderHistoryMessage" class="history-message" aria-live="polite"></p>
-      <div id="orderHistory"></div>
-    </section>
     <div class="profile-actions">
       <a class="profile-button" href="appointment.html">Book an appointment</a>
       <button id="logoutButton" type="button" class="logout-button" hidden>Log out</button>
