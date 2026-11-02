@@ -3,89 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#7b2283">
-  <title>Login | DermaCare</title>
-
+  <title>Log In | DermaCare</title>
+  <script src="theme.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="login.css">
-  <script src="login.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="auth.js" defer></script>
 </head>
 <body>
-
-  <a href="home.html" class="back-link">← Back to Home</a>
-
-  <main class="login-screen">
-
-    <div class="logo-circle">
-      <div class="logo-inner">✿</div>
-    </div>
-
-    <h1 class="brand-name">DermaCare</h1>
-
-    <form id="loginForm" class="login-form">
-
-      <div class="pill-field">
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Email address"
-          autocomplete="username"
-          required
-        >
-      </div>
-
-      <div class="pill-field">
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Password"
-          autocomplete="current-password"
-          required
-        >
-        <button
-          type="button"
-          id="togglePassword"
-          class="show-password"
-          aria-label="Show password"
-          aria-pressed="false"
-        >Show</button>
-      </div>
-
-      <div class="options-row">
-        <label class="remember-option">
-          <input type="checkbox" id="rememberMe">
-          <span class="checkmark"></span>
-          <span>Remember me</span>
-        </label>
-        <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
-      </div>
-
-      <button type="submit" class="login-button">LOG IN</button>
-
-      <p id="loginMessage" role="status" aria-live="polite"></p>
+  <main class="auth-card">
+    <a class="brand" href="home.html">DermoCare</a>
+    <h1>Welcome back</h1>
+    <p class="intro">Log in to keep your appointment details in one place.</p>
+    <form id="loginForm">
+      <label for="email">Email address
+        <input id="email" name="email" type="email" autocomplete="email" required>
+      </label>
+      <label for="password">Password
+        <input id="password" name="password" type="password" autocomplete="current-password" minlength="6" required>
+      </label>
+      <button type="submit">Log In</button>
+      <p class="message" id="message" role="status" aria-live="polite"></p>
     </form>
-
-    <p class="signup-text">
-      Don't have an account?
-      <a href="signup.html">Create Account</a>
-    </p>
-
+    <p class="switch">New to DermoCare? <a href="signup.html">Create an account</a></p>
+    <p class="switch"><a href="admin-login.html">Admin login</a></p>
   </main>
-
-  <p class="footer">© 2026 DermaCare. All rights reserved.</p>
-
-  <!-- Browser Back button එක එබුවත් Home page එකටම යන්න -->
-  <script>
-    history.pushState(null, "", location.href);
-    window.addEventListener("popstate", function () {
-      window.location.replace("home.html");
-    });
-  </script>
-
 </body>
 </html>

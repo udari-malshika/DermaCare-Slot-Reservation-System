@@ -1,7 +1,7 @@
 // DermaCare product listing and shopping cart
 // Demo products: change these details to your actual products.
 
-const FALLBACK_PRODUCT_IMAGE = "Images/centella%20cream.jpg";
+const FALLBACK_PRODUCT_IMAGE = "../Images/centella%20cream.jpg";
 
 const productCatalog = [
   {
@@ -10,7 +10,7 @@ const productCatalog = [
     category: "Serum",
     skin: "Sensitive",
     price: 5500,
-    image: "Images/Anua%20Green.jpg",
+    image: "../Images/Anua%20Green.jpg",
     description: "A gentle radiance-boosting serum designed for a calm, even-looking finish."
   },
   {
@@ -19,7 +19,7 @@ const productCatalog = [
     category: "Moisturizer",
     skin: "Normal",
     price: 6800,
-    image: "Images/Medicube%20Deep%20Vita%20C%20cap%20cream.jpg",
+    image: "../Images/Medicube%20Deep%20Vita%20C%20cap%20cream.jpg",
     description: "A brightening cream with vitamin-rich care for a healthy glow."
   },
   {
@@ -28,7 +28,7 @@ const productCatalog = [
     category: "Moisturizer",
     skin: "Dry",
     price: 6200,
-    image: "Images/Snail%2092%20Cream.jpg",
+    image: "../Images/Snail%2092%20Cream.jpg",
     description: "A deeply nourishing cream for hydration and skin comfort."
   },
   {
@@ -37,7 +37,7 @@ const productCatalog = [
     category: "Serum",
     skin: "Oily",
     price: 5200,
-    image: "Images/Ord%20AHA.jpg",
+    image: "../Images/Ord%20AHA.jpg",
     description: "A targeted exfoliating treatment for a smoother skin texture."
   },
   {
@@ -46,7 +46,7 @@ const productCatalog = [
     category: "Mask",
     skin: "Sensitive",
     price: 3800,
-    image: "Images/mediheal%20green.jpg",
+    image: "../Images/mediheal%20green.jpg",
     description: "A calming sheet mask to refresh and soothe tired-looking skin."
   },
   {
@@ -55,7 +55,7 @@ const productCatalog = [
     category: "Moisturizer",
     skin: "Dry",
     price: 4300,
-    image: "Images/Medicube%20Pink%20eye%20Cream.jpg",
+    image: "../Images/Medicube%20Pink%20eye%20Cream.jpg",
     description: "A lightweight eye cream that helps hydrate and soften the eye area."
   },
   {
@@ -64,7 +64,7 @@ const productCatalog = [
     category: "Serum",
     skin: "Sensitive",
     price: 4800,
-    image: "Images/Centella%20green%20serum.jpg",
+    image: "../Images/Centella%20green%20serum.jpg",
     description: "A soothing serum that supports a balanced and calm complexion."
   },
   {
@@ -73,7 +73,7 @@ const productCatalog = [
     category: "Cleanser",
     skin: "Sensitive",
     price: 4600,
-    image: "Images/Snail%20cleanser.jpg",
+    image: "../Images/Snail%20cleanser.jpg",
     description: "A gentle cleanser that refreshes skin without stripping moisture."
   },
   {
@@ -82,7 +82,7 @@ const productCatalog = [
     category: "Serum",
     skin: "Normal",
     price: 6900,
-    image: "Images/Arencia%20vitemin%20C.jpg",
+    image: "../Images/Arencia%20vitemin%20C.jpg",
     description: "A glow-boosting vitamin C treatment designed for daily radiance."
   }
 ];
@@ -212,7 +212,7 @@ function renderProducts() {
           src="${product.image}"
           alt="${product.name}"
           loading="lazy"
-          onerror="this.onerror=null;this.src='Images/centella%20cream.jpg';"
+          onerror="this.onerror=null;this.src='../Images/centella%20cream.jpg';"
         >
       </button>
 
@@ -378,7 +378,7 @@ function showDetails(id) {
         class="detail-image"
         src="${product.image}"
         alt="${product.name}"
-        onerror="this.onerror=null;this.src='Images/centella%20cream.jpg';"
+        onerror="this.onerror=null;this.src='../Images/centella%20cream.jpg';"
       >
 
       <div class="detail-info">
@@ -814,7 +814,7 @@ function openLightbox(index) {
   const item = lightboxItems[lightboxIndex];
 
   lbImg.onerror = () => {
-    lbImg.src = "Images/centella%20cream.jpg";
+    lbImg.src = "../Images/centella%20cream.jpg";
   };
   lbImg.src = item.image;
   lbCaption.textContent = item.name;
