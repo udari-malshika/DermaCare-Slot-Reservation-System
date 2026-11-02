@@ -1,130 +1,226 @@
-(function () {
-  const usersKey = "dermacare-users";
-  const sessionKey = "dermacare-session";
-  const adminEmail = "admin@dermacare.lk";
-  const adminPassword = "Admin@123";
+import { auth } from "./JS/firebase.js";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-  function getUsers() {
+const usersKey = "dermacare-users";
+const sessionKey = "dermacare-session";
+const adminEmail = "admin@dermacare.lk";
+const adminPassword = "Admin@123";
+
+function getUsers() {
+  try {
+    const users = JSON.parse(localStorage.getItem(usersKey) || "[]");
+    return Array.isArray(users) ? users : [];
+  } catch (error) {
+    console.error("Unable to read saved accounts.", error);
+    return [];
+  }
+}
+
+function saveUsers(users) {
+  try {
+    localStorage.setItem(usersKey, JSON.stringify(users));
+    return true;
+  } catch (error) {
+    console.error("Unable to save account.", error);
+    return false;
+  }
+}
+
+function normalizeEmail(email) {
+  return String(email || "").trim().toLowerCase();
+}
+
+function showMessage(element, message, type) {
+  if (!element) return;
+
+  element.textContent = message;
+  element.dataset.type = type;
+}
+
+function getAuthErrorMessage(error) {
+  const messages = {
+    "auth/email-already-in-use": "An account with this email already exists. Log in instead.",
+    "auth/invalid-credential": "Email or password is incorrect.",
+    "auth/invalid-email": "Enter a valid email address.",
+    "auth/network-request-failed": "Unable to connect. Check your internet connection and try again.",
+    "auth/operation-not-allowed": "Email and password sign-in is not enabled. Contact the site administrator.",
+    "auth/too-many-requests": "Too many attempts. Please wait a while and try again.",
+    "auth/weak-password": "Choose a stronger password with at least 6 characters."
+  };
+
+  return messages[error.code] || error.message || "Authentication failed. Please try again.";
+}
+
+function getNextPage() {
+  const next = new URLSearchParams(window.location.search).get("next");
+  return next && next.endsWith(".html") ? next : "appointment.html";
+}
+
+function setFormSubmitting(form, isSubmitting) {
+  if (!form) return;
+
+  const submitButton = form.querySelector('button[type="submit"]');
+  if (submitButton) submitButton.disabled = isSubmitting;
+}
+
+const loginForm = document.getElementById("loginForm");
+if (loginForm) {
+  const message = document.getElementById("message");
+
+  loginForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    showMessage(message, "", "");
+    setFormSubmitting(loginForm, true);
+
+    const email = normalizeEmail(loginForm.elements.email.value);
+    const password = loginForm.elements.password.value;
+    const adminLogin = loginForm.dataset.role === "admin";
+
     try {
-      const users = JSON.parse(localStorage.getItem(usersKey) || "[]");
-      return Array.isArray(users) ? users : [];
-    } catch (error) {
-      console.error("Unable to read saved accounts.", error);
-      return [];
-    }
-  }
+      if (adminLogin) {
+        if (email !== adminEmail || password !== adminPassword) {
+          throw { code: "auth/invalid-credential", message: "Email or password is incorrect." };
+        }
 
-  function saveUsers(users) {
-    try {
-      localStorage.setItem(usersKey, JSON.stringify(users));
-      return true;
-    } catch (error) {
-      console.error("Unable to save account.", error);
-      return false;
-    }
-  }
+        localStorage.setItem(sessionKey, JSON.stringify({
+          name: "DermoCare Administrator",
+          email,
+          role: "admin"
+        }));
 
-  function normalizeEmail(email) {
-    return email.trim().toLowerCase();
-  }
-
-  function showMessage(message, type) {
-    const element = document.getElementById("message");
-    element.textContent = message;
-    element.dataset.type = type;
-  }
-
-  function getNextPage() {
-    const next = new URLSearchParams(window.location.search).get("next");
-    return next && next.endsWith(".html") ? next : "appointment.html";
-  }
-
-  const loginForm = document.getElementById("loginForm");
-  if (loginForm) {
-    loginForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const email = normalizeEmail(loginForm.elements.email.value);
-      const password = loginForm.elements.password.value;
-      const adminLogin = loginForm.dataset.role === "admin";
-      const user = getUsers().find((account) => account.email === email);
-      const validAdmin = adminLogin && email === adminEmail && password === adminPassword;
-
-      if ((!adminLogin && (!user || user.password !== password)) || (adminLogin && !validAdmin)) {
-        showMessage("Email or password is incorrect.", "error");
+        showMessage(message, "Login successful. Redirecting...", "success");
+        window.setTimeout(() => {
+          window.location.href = "admin.html";
+        }, 400);
         return;
       }
 
-      localStorage.setItem(sessionKey, JSON.stringify({
-        name: adminLogin ? "DermoCare Administrator" : user.name,
-        email,
-        role: adminLogin ? "admin" : "user"
-      }));
-      showMessage("Login successful. Redirecting...", "success");
-      window.setTimeout(function () {
-        window.location.href = adminLogin ? "admin.html" : getNextPage();
+      await signInWithEmailAndPassword(auth, email, password);
+      showMessage(message, "Login successful. Redirecting...", "success");
+      window.setTimeout(() => {
+        window.location.href = getNextPage();
       }, 400);
-    });
-  }
+    } catch (error) {
+      console.error("Firebase login failed:", error);
+      showMessage(message, getAuthErrorMessage(error), "error");
+      setFormSubmitting(loginForm, false);
+    }
+  });
+}
 
-  const signupForm = document.getElementById("signupForm");
-  if (signupForm) {
-    signupForm.addEventListener("submit", function (event) {
-      event.preventDefault();
+const signupForm = document.getElementById("signupForm");
+if (signupForm) {
+  const message = document.getElementById("message");
 
-      const name = signupForm.elements.name.value.trim();
-      const email = normalizeEmail(signupForm.elements.email.value);
-      const password = signupForm.elements.password.value;
+  signupForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    showMessage(message, "", "");
+    setFormSubmitting(signupForm, true);
+
+    try {
+      const credential = await createUserWithEmailAndPassword(
+        auth,
+        normalizeEmail(signupForm.elements.email.value),
+        signupForm.elements.password.value
+      );
+
+      await updateProfile(credential.user, {
+        displayName: signupForm.elements.name.value.trim()
+      });
+
       const users = getUsers();
+      users.push({
+        name: signupForm.elements.name.value.trim(),
+        email: normalizeEmail(signupForm.elements.email.value),
+        password: signupForm.elements.password.value,
+        role: "user"
+      });
 
-      if (users.some((account) => account.email === email)) {
-        showMessage("An account with this email already exists. Log in instead.", "error");
-        return;
-      }
-
-      users.push({ name: name, email: email, password: password, role: "user" });
       if (!saveUsers(users)) {
-        showMessage("Unable to create the account in this browser. Please try again.", "error");
+        showMessage(message, "Unable to create the account in this browser. Please try again.", "error");
+        setFormSubmitting(signupForm, false);
         return;
       }
-      showMessage("Account created. Redirecting to login...", "success");
-      window.setTimeout(function () {
+
+      await signOut(auth);
+      showMessage(message, "Account created. Redirecting to login...", "success");
+      window.setTimeout(() => {
         window.location.href = "login.html";
       }, 600);
-    });
-  }
-
-  const profileContent = document.getElementById("profileContent");
-  const logoutButton = document.getElementById("logoutButton");
-  if (profileContent && logoutButton) {
-    let session = null;
-    try {
-      session = JSON.parse(localStorage.getItem(sessionKey) || "null");
     } catch (error) {
-      console.error("Unable to read the current session.", error);
+      console.error("Firebase signup failed:", error);
+      showMessage(message, getAuthErrorMessage(error), "error");
+      setFormSubmitting(signupForm, false);
     }
+  });
+}
 
-    if (!session || !session.name || !session.email || session.role === "admin") {
-      profileContent.innerHTML =
-        '<p>You are not logged in yet.</p><a class="profile-login-link" href="login.html?next=profile.html">Log in to view your profile</a>';
-    } else {
+const profileContent = document.getElementById("profileContent");
+const logoutButton = document.getElementById("logoutButton");
+const profileMessage = document.getElementById("profileMessage");
+
+if (profileContent && logoutButton) {
+  profileContent.textContent = "Loading profile...";
+
+  onAuthStateChanged(
+    auth,
+    (user) => {
+      profileContent.replaceChildren();
+
+      if (!user || user.isAnonymous) {
+        const prompt = document.createElement("p");
+        prompt.textContent = "You are not logged in yet.";
+
+        const loginLink = document.createElement("a");
+        loginLink.className = "profile-login-link";
+        loginLink.href = "login.html?next=profile.html";
+        loginLink.textContent = "Log in to view your profile";
+
+        profileContent.append(prompt, loginLink);
+        logoutButton.hidden = true;
+        return;
+      }
+
+      const name = user.displayName || user.email || "DermoCare user";
       const avatar = document.createElement("div");
       avatar.className = "profile-avatar";
       avatar.setAttribute("aria-hidden", "true");
-      avatar.textContent = session.name.charAt(0).toUpperCase();
+      avatar.textContent = name.charAt(0).toUpperCase();
 
       const details = document.createElement("div");
-      const name = document.createElement("h2");
-      name.textContent = session.name;
+      const nameHeading = document.createElement("h2");
+      nameHeading.textContent = name;
+
       const email = document.createElement("p");
-      email.textContent = session.email;
-      details.append(name, email);
+      email.textContent = user.email || "";
+
+      details.append(nameHeading, email);
       profileContent.append(avatar, details);
       logoutButton.hidden = false;
-      logoutButton.addEventListener("click", function () {
-        localStorage.removeItem(sessionKey);
-        window.location.reload();
-      });
+    },
+    (error) => {
+      console.error("Unable to load Firebase profile:", error);
+      profileContent.textContent = "Unable to load your profile. Please refresh and try again.";
+      showMessage(profileMessage, error.message, "error");
     }
-  }
-})();
+  );
+
+  logoutButton.addEventListener("click", async () => {
+    logoutButton.disabled = true;
+    showMessage(profileMessage, "", "");
+
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Firebase logout failed:", error);
+      showMessage(profileMessage, getAuthErrorMessage(error), "error");
+      logoutButton.disabled = false;
+    }
+  });
+}
