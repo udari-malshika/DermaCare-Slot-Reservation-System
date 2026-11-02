@@ -1,8 +1,8 @@
 # DermoCare Slot Reservation System
 
-DermoCare is a responsive static website for a dermatology and aesthetic skincare clinic. It helps visitors explore treatments, view skincare products, create a local demo account, select an appointment slot, and review a demo shopping cart and checkout flow.
+DermoCare is a responsive static website for a dermatology and aesthetic skincare clinic. It helps visitors explore treatments, create an account with Firebase Authentication, select an appointment slot, and review a demo shopping cart and checkout flow.
 
-The project is implemented with HTML, CSS, and vanilla JavaScript. It does not currently use a backend, database, payment gateway, or real clinic booking API.
+The project is implemented with HTML, CSS, and vanilla JavaScript. Firebase Authentication is used for accounts; appointments, products, and payments are still frontend demonstrations without a real booking or payment service.
 
 ## Features
 
@@ -29,15 +29,14 @@ The project is implemented with HTML, CSS, and vanilla JavaScript. It does not c
 
 ### Authentication and profile
 
-- Signup form for creating a demo account
-- Login form with email and password validation
-- Duplicate email detection during signup
-- Login session saved in `localStorage`
-- Profile page showing the logged-in user's name and email
-- Logout action that clears the current session
+- Firebase Authentication signup and login with email and password
+- Account display name stored in the Firebase Authentication profile
+- Firebase-managed login session
+- Profile page showing the authenticated user's name and email
+- Logout action that ends the Firebase session
 - Profile icon in the navigation bars linking to the profile page
 
-> **Important:** This is frontend-only demo authentication. Passwords are stored in browser `localStorage` and are not suitable for production use. A real application must use a secure backend, password hashing, HTTPS, session management, and server-side validation.
+Enable the **Email/Password** provider in Firebase Console under **Authentication → Sign-in method** before using signup or login. Authentication errors are shown on the relevant page.
 
 ### Appointment booking
 
@@ -153,7 +152,7 @@ If Python is not installed, use any static file server that serves the project r
 1. Open the homepage.
 2. Select **Log in** or the profile icon.
 3. Select **Create an account** and submit a name, email, and password.
-4. Log in using the saved demo account.
+4. Log in using the Firebase account.
 5. Open the profile icon to view the profile and test logout.
 6. Select a treatment and open **Book Appointment**.
 7. Choose a date and time, complete the patient form, and submit the demo request.
@@ -162,18 +161,16 @@ If Python is not installed, use any static file server that serves the project r
 To reset demo data, open the browser developer console and run:
 
 ```javascript
-localStorage.removeItem("dermacare-users");
-localStorage.removeItem("dermacare-session");
 localStorage.removeItem("dermacare-cart");
 localStorage.removeItem("dermacare-theme");
 ```
+
+Accounts previously stored in browser `localStorage` are not migrated to Firebase; users need to create a new account.
 
 ## Browser storage keys
 
 | Key | Used by | Purpose |
 | --- | --- | --- |
-| `dermacare-users` | `auth.js` | Stores demo signup accounts |
-| `dermacare-session` | `auth.js` | Stores the current logged-in user's name and email |
 | `dermacare-cart` | `products.js` | Stores the demo cart |
 | `dermacare-theme` | `theme.js` | Stores the selected light/dark theme |
 
@@ -185,6 +182,7 @@ localStorage.removeItem("dermacare-theme");
 - CSS custom properties
 - Responsive layouts and media queries
 - Browser `localStorage`
+- Firebase Authentication (email/password)
 - Google Fonts:
   - DM Serif Display
   - Manrope
@@ -208,9 +206,7 @@ localStorage.removeItem("dermacare-theme");
 The following work is required before using this as a real clinic system:
 
 1. Add a backend API and database for users, appointments, products, and orders.
-2. Hash passwords with a modern password-hashing algorithm such as Argon2id or bcrypt.
-3. Replace `localStorage` authentication with secure, server-managed sessions.
-4. Add server-side authorization and input validation.
+2. Add server-side authorization and input validation.
 5. Connect appointment availability to real clinic schedules.
 6. Prevent double booking with transactional server-side checks.
 7. Integrate a compliant payment provider instead of collecting payment details in the frontend.
