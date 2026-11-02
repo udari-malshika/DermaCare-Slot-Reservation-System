@@ -175,6 +175,53 @@ button {
   gap: 10px;
 }
 
+.history-section {
+  margin: 24px 0;
+  text-align: left;
+}
+
+.history-section h2 {
+  font-size: 1.15rem;
+}
+
+.history-message {
+  color: var(--muted);
+}
+
+.history-card {
+  margin: 12px 0;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-wrap: anywhere;
+}
+
+.history-card h3,
+.history-card p {
+  margin: 0 0 8px;
+}
+
+.history-card button,
+.history-card input,
+.history-card select {
+  margin: 5px 5px 5px 0;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.history-card button {
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+.history-card button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
 .profile-button,
 .logout-button {
   display: block;

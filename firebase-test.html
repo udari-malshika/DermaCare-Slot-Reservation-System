@@ -4,26 +4,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DermoCare Firebase Test</title>
+  <title>DermaCare Firebase Test</title>
 </head>
 
 <body>
-  <h1>DermoCare Firebase Test</h1>
+  <h1>DermaCare Firebase Test</h1>
 
-  <button id="saveBtn">Save Test Data</button>
+  <button id="saveBtn">Test Firebase Connection</button>
   <p id="status">Ready</p>
 
   <script type="module">
-    // Import Firebase Authentication and Firestore
     import { auth, db } from "./firebase.js";
-
     import {
       signInAnonymously
     } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-
     import {
-      collection,
-      addDoc
+      doc,
+      getDoc
     } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
     const saveBtn = document.getElementById("saveBtn");
@@ -42,35 +39,26 @@
         console.log("Anonymous login successful!");
         console.log("User UID:", credential.user.uid);
 
-        status.textContent = "Login successful! Saving data...";
-
-        // STEP 2: Save data to Firestore
-        currentStep = "Firestore data save";
-
-        const docRef = await addDoc(
-          collection(db, "connection_test"),
-          {
-            message: "DermoCare Firebase Connected",
-            status: "success",
-            createdAt: new Date()
-          }
-        );
-
-        console.log("Data saved successfully!");
-        console.log("Document ID:", docRef.id);
-
-        status.textContent =
-          "SUCCESS! Data saved successfully. ID: " + docRef.id;
+        status.textContent = "Login successful! Checking Firestore...";
+        currentStep = "Firestore read";
+        await getDoc(doc(db, "clinicSettings", "weeklySchedule"));
+        status.textContent = "SUCCESS! Firebase Authentication and Firestore are connected.";
 
       } catch (error) {
         console.error("Failed step:", currentStep);
         console.error("Firebase Error Code:", error.code);
         console.error("Firebase Error Message:", error.message);
 
-        status.textContent =
-          "FAILED STEP: " + currentStep +
-          " | Error Code: " + (error.code || "unknown") +
-          " | Message: " + error.message;
+        if (error.code === "permission-denied") {
+          status.textContent =
+            "Authentication succeeded, but Firestore denied the read. Deploy the latest Firestore rules with " +
+            "'firebase deploy --only firestore:rules', then test again.";
+        } else {
+          status.textContent =
+            "FAILED STEP: " + currentStep +
+            " | Error Code: " + (error.code || "unknown") +
+            " | Message: " + error.message;
+        }
 
       } finally {
         saveBtn.disabled = false;

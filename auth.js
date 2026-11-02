@@ -34,7 +34,7 @@ function getAuthErrorMessage(error) {
 
 function getNextPage() {
   const next = new URLSearchParams(window.location.search).get("next");
-  return next && next.endsWith(".html") ? next : "appointment.html";
+  return next && /^[A-Za-z0-9_-]+\.html$/.test(next) ? next : "appointment.html";
 }
 
 function setFormSubmitting(form, isSubmitting) {

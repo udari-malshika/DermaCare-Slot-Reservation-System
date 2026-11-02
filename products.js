@@ -1,3 +1,7 @@
+import { auth, db } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { doc, getDoc, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
 const products = [
   {
     id: 1,
@@ -165,7 +169,9 @@ const resultCount = document.getElementById("resultCount");
 const emptyMessage = document.getElementById("emptyMessage");
 
 const CART_KEY = "dermacare-cart";
+const CART_OWNER_KEY = "dermacare-cart-owner";
 let cart = [];
+let currentUserId = null;
 
 function loadCart() {
   try {
@@ -178,8 +184,41 @@ function loadCart() {
   }
 }
 
-function saveCart() {
+async function saveCart() {
   localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  if (!currentUserId) return;
+  localStorage.setItem(CART_OWNER_KEY, currentUserId);
+
+  await setDoc(doc(db, "carts", currentUserId), {
+    items: cart.map((item) => ({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity
+    })),
+    updatedAt: serverTimestamp()
+  });
+}
+
+function cartFromFirestore(items) {
+  return items.map(({ id, quantity }) => {
+    const product = products.find((item) => item.id === Number(id));
+    return product && Number.isInteger(quantity) && quantity > 0
+      ? { ...product, quantity }
+      : null;
+  }).filter(Boolean);
+}
+
+function mergeCarts(first, second) {
+  const merged = new Map();
+  [...first, ...second].forEach((item) => {
+    const previous = merged.get(item.id);
+    merged.set(item.id, {
+      ...item,
+      quantity: Math.min(20, (previous?.quantity || 0) + item.quantity)
+    });
+  });
+  return [...merged.values()];
 }
 
 function renderProducts() {
@@ -268,7 +307,7 @@ document.getElementById("resetButton").addEventListener("click", () => {
   renderProducts();
 });
 
-// Add products to the demo shopping cart
+// Add products to the shopping cart.
 grid.addEventListener("click", event => {
   const button = event.target.closest("[data-add]");
   if (!button) return;
@@ -283,7 +322,10 @@ grid.addEventListener("click", event => {
     cart.push({ ...product, quantity: 1 });
   }
 
-  saveCart();
+  saveCart().catch((error) => {
+    console.error("Unable to sync cart with Firestore:", error);
+    document.getElementById("cartStatus").textContent = "Unable to sync your cart. Check your connection before checkout.";
+  });
   updateCart();
   button.textContent = "✓ Added to Cart";
   setTimeout(() => {
@@ -319,7 +361,6 @@ function updateCart() {
     checkoutButton.style.opacity = cart.length === 0 ? "0.5" : "1";
   }
 
-  saveCart();
 }
 
 document.getElementById("cartItems").addEventListener("click", event => {
@@ -336,6 +377,10 @@ document.getElementById("cartItems").addEventListener("click", event => {
     }
   }
 
+  saveCart().catch((error) => {
+    console.error("Unable to sync cart with Firestore:", error);
+    document.getElementById("cartStatus").textContent = "Unable to sync your cart. Check your connection before checkout.";
+  });
   updateCart();
 });
 
@@ -343,8 +388,17 @@ const cartModal = document.getElementById("cartModal");
 const checkoutBtn = document.getElementById("checkoutBtn");
 
 if (checkoutBtn) {
-  checkoutBtn.addEventListener("click", () => {
+  checkoutBtn.addEventListener("click", async () => {
     if (!cart.length) return;
+    checkoutBtn.disabled = true;
+    try {
+      await saveCart();
+    } catch (error) {
+      console.error("Unable to save cart before checkout:", error);
+      document.getElementById("cartStatus").textContent = "Unable to save your cart. Please try again.";
+      checkoutBtn.disabled = false;
+      return;
+    }
     cartModal.hidden = true;
     window.location.href = "payment.html";
   });
@@ -400,3 +454,42 @@ search.addEventListener("input", renderProducts);
 
 renderProducts();
 updateCart();
+
+onAuthStateChanged(auth, async (user) => {
+  currentUserId = user && !user.isAnonymous ? user.uid : null;
+  const savedOwner = localStorage.getItem(CART_OWNER_KEY);
+  if (!currentUserId) {
+    if (savedOwner) {
+      cart = [];
+      localStorage.removeItem(CART_KEY);
+      localStorage.removeItem(CART_OWNER_KEY);
+    }
+    loadCart();
+    updateCart();
+    return;
+  }
+
+  if (savedOwner && savedOwner !== currentUserId) {
+    cart = [];
+    localStorage.removeItem(CART_KEY);
+    localStorage.removeItem(CART_OWNER_KEY);
+  } else {
+    loadCart();
+  }
+
+  try {
+    const snapshot = await getDoc(doc(db, "carts", currentUserId));
+    const savedItems = snapshot.exists() && Array.isArray(snapshot.data().items)
+      ? cartFromFirestore(snapshot.data().items)
+      : [];
+    if (snapshot.exists()) {
+      cart = savedOwner === currentUserId ? savedItems : mergeCarts(savedItems, cart);
+    }
+    await saveCart();
+    updateCart();
+  } catch (error) {
+    console.error("Unable to load the Firestore cart:", error);
+    const status = document.getElementById("cartStatus");
+    if (status) status.textContent = "Unable to sync your cart. Your browser cart is still available.";
+  }
+});

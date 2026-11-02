@@ -638,6 +638,16 @@ img { max-width: 100%; display: block; }
   transform: translateY(-1px);
 }
 
+.slot:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.slot:disabled:hover {
+  transform: none;
+}
+
 .slot.selected {
   background: linear-gradient(135deg, var(--dp-400), var(--rose-500));
   border-color: transparent;
@@ -911,6 +921,12 @@ img { max-width: 100%; display: block; }
   background: rgba(16, 185, 129, 0.1);
   border: 1px solid rgba(16, 185, 129, 0.25);
   color: #34d399;
+}
+
+#formMessage[data-type="error"] {
+  background: rgba(185, 28, 28, 0.12);
+  border-color: rgba(248, 113, 113, 0.3);
+  color: #fca5a5;
 }
 
 /* ── Footer ── */
