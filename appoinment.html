@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#170826">
+<title>Book Appointment | DermaCare</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #120720;
+  --bg-2: #1a0b2e;
+  --card: #231238;
+  --card-2: #2c1747;
+  --line: rgba(238, 106, 147, 0.22);
+  --purple: #9b5de5;
+  --purple-deep: #6a2fa3;
+  --rose: #ee6a93;
+  --rose-dark: #d63f6c;
+  --text: #f6ecfb;
+  --muted: #b9a3cf;
+  --green: #5fd49a;
+  --grad: linear-gradient(135deg, #8a4bd8, #e0457b);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Montserrat", system-ui, "Segoe UI", sans-serif;
+  color: var(--text);
+  line-height: 1.55;
+  background:
+    radial-gradient(60% 40% at 100% 0%, rgba(238, 106, 147, 0.18), transparent 60%),
+    radial-gradient(50% 40% at 0% 30%, rgba(155, 93, 229, 0.18), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+}
+
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+a { text-decoration: none; color: inherit; }
+:focus-visible { outline: 3px solid var(--rose); outline-offset: 2px; }
+
+/* ===== Header ===== */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 14px max(5%, calc((100% - 1240px) / 2));
+  background: rgba(18, 7, 32, 0.9);
+  border-bottom: 2px solid var(--rose-dark);
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-icon {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--grad);
+  font-size: 19px;
+}
+.brand-text {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  font-size: 1.7rem;
+  letter-spacing: 0.1em;
+  line-height: 1.05;
+}
+.brand-text small {
+  display: block;
+  margin-top: 3px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2.4px;
+  color: var(--rose);
+}
+.nav-actions { display: flex; gap: 10px; }
+.nav-btn {
+  display: inline-block;
+  padding: 10px 22px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 2px solid var(--rose);
+  border-radius: 999px;
+  background: transparent;
+  transition: transform 0.2s, background 0.2s;
+}
+.nav-btn:hover { transform: translateY(-2px); background: var(--rose-dark); }
+.home-btn { background: var(--rose-dark); border-color: var(--rose-dark); }
+
+/* ===== Hero ===== */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 44px max(5%, calc((100% - 1240px) / 2));
+  background:
+    radial-gradient(50% 140% at 100% 0%, rgba(238, 106, 147, 0.4), transparent 60%),
+    linear-gradient(135deg, #1c0a31, #3b1763);
+  border-bottom: 1px solid var(--line);
+}
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; color: var(--rose); margin-bottom: 8px; }
+.hero h1 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 8px;
+}
+.hero-content > p:last-child { color: var(--muted); }
+.hero-decoration {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  text-align: right;
+  color: #f1c6d7;
+}
+
+/* ===== Layout ===== */
+.container { width: min(1220px, 92%); margin: 32px auto 0; }
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: start;
+}
+.card {
+  padding: 26px;
+  background: linear-gradient(180deg, var(--card-2), var(--card));
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--rose);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.section-heading { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+.heading-icon {
+  width: 42px; height: 42px;
+  flex-shrink: 0;
+  display: grid; place-items: center;
+  border-radius: 12px;
+  background: var(--grad);
+  font-size: 19px;
+}
+.section-heading h2 { font-family: "Open Sans", sans-serif; font-size: 1.25rem; }
+.section-heading p { font-size: 0.82rem; color: var(--muted); }
+
+/* ===== Calendar ===== */
+.month-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding: 8px 10px;
+  background: rgba(155, 93, 229, 0.16);
+  border-radius: 12px;
+}
+.month-navigation h3 { flex: 1; text-align: center; font-size: 1.05rem; }
+.month-navigation button {
+  width: 38px; height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--rose);
+  font-size: 24px;
+  line-height: 1;
+  transition: background 0.2s, color 0.2s;
+}
+.month-navigation button:hover { background: var(--rose-dark); color: #fff; }
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+.day-name {
+  padding: 8px 0;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.calendar-grid button {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: transform 0.15s, background 0.15s, border-color 0.15s;
+}
+.calendar-grid button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--rose);
+  background: rgba(238, 106, 147, 0.18);
+}
+.calendar-grid button.today { border-color: var(--purple); box-shadow: inset 0 0 0 1px var(--purple); }
+.calendar-grid button.selected {
+  background: var(--grad);
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(224, 69, 123, 0.45);
+}
+.calendar-grid button:disabled {
+  background: transparent;
+  border-color: transparent;
+  color: #5d4a73;
+  cursor: not-allowed;
+}
+
+.selected-date-box {
+  margin: 22px 0 4px;
+  padding: 14px 16px;
+  background: rgba(238, 106, 147, 0.12);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--rose);
+  border-radius: 12px;
+}
+.selected-date-box small { display: block; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.selected-date-box strong { font-size: 1rem; color: #fff; }
+
+/* ===== Time slots ===== */
+.time-section { margin-top: 20px; }
+.time-section h3 { margin-bottom: 10px; font-size: 0.95rem; color: var(--rose); }
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 10px;
+}
+.time-slot {
+  padding: 11px 6px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.86rem;
+  font-weight: 600;
+  transition: transform 0.15s, background 0.15s, border-color 0.15s;
+}
+.time-slot:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--rose); background: rgba(238, 106, 147, 0.18); }
+.time-slot.selected {
+  background: var(--grad);
+  border-color: transparent;
+  box-shadow: 0 6px 16px rgba(224, 69, 123, 0.4);
+}
+.time-slot:disabled {
+  color: #5d4a73;
+  background: rgba(255, 255, 255, 0.02);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+.legend { display: flex; gap: 18px; margin-top: 20px; font-size: 0.8rem; color: var(--muted); }
+.dot { display: inline-block; width: 11px; height: 11px; margin-right: 5px; border-radius: 50%; vertical-align: middle; }
+.dot-open { background: var(--purple); }
+.dot-selected { background: var(--rose); }
+
+/* ===== Form ===== */
+#bookingForm { display: flex; flex-direction: column; gap: 18px; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field label { font-size: 0.85rem; font-weight: 600; color: #f1c6d7; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.field input, .field select, .field textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.field select option { background: #231238; color: #f6ecfb; }
+.field textarea { min-height: 100px; resize: vertical; }
+.field input::placeholder, .field textarea::placeholder { color: #8d77a6; }
+.field input:hover, .field select:hover, .field textarea:hover { border-color: var(--line); }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--rose);
+  box-shadow: 0 0 0 4px rgba(238, 106, 147, 0.2);
+}
+
+.summary-box {
+  padding: 18px;
+  background: linear-gradient(135deg, rgba(155, 93, 229, 0.2), rgba(238, 106, 147, 0.18));
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.summary-box h3 { margin-bottom: 14px; font-size: 1rem; }
+.summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.summary-grid small { display: block; margin-bottom: 4px; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.summary-grid strong { font-size: 0.86rem; color: var(--rose); }
+
+.book-button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--grad);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 26px rgba(224, 69, 123, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.book-button:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(224, 69, 123, 0.5); }
+
+#message { min-height: 20px; font-size: 0.9rem; font-weight: 600; }
+.privacy-note { text-align: center; font-size: 0.78rem; color: var(--muted); }
+
+/* ===== My appointments ===== */
+.appointments-card { margin-top: 24px; }
+.appointments-card .section-heading { flex-wrap: wrap; }
+.count-badge {
+  margin-left: auto;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(238, 106, 147, 0.18);
+  color: #ffb3cb;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+#appointmentsList { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.empty-message { grid-column: 1 / -1; color: var(--muted); }
+.appointment-item {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--rose);
+  border-radius: 12px;
+}
+.appointment-item h3 { margin-bottom: 4px; font-size: 1rem; }
+.appointment-item p { font-size: 0.86rem; color: var(--muted); }
+.status-badge {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(95, 212, 154, 0.16);
+  color: var(--green);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+.cancel-button {
+  margin-top: 10px;
+  padding: 4px 14px;
+  border: 1.5px solid var(--rose);
+  border-radius: 999px;
+  background: transparent;
+  color: #ffb3cb;
+  font-size: 0.74rem;
+  font-weight: 700;
+  transition: background 0.2s;
+}
+.cancel-button:hover { background: var(--rose-dark); color: #fff; }
+
+footer {
+  margin-top: 44px;
+  padding: 26px 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--muted);
+  background: #0c0416;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 960px) {
+  .booking-layout { grid-template-columns: 1fr; }
+  .hero-decoration { display: none; }
+}
+@media (max-width: 620px) {
+  .brand-text { font-size: 1.3rem; }
+  .nav-btn { padding: 8px 14px; font-size: 0.8rem; }
+  .card { padding: 18px; }
+  .form-row, #appointmentsList, .summary-grid { grid-template-columns: 1fr; }
+  .calendar-grid { gap: 5px; }
+  .calendar-grid button { font-size: 0.82rem; border-radius: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <a href="home.html" class="brand">
+    <span class="brand-icon">✿</span>
+    <span class="brand-text">DermaCare<small>SKIN · HEALTH · CONFIDENCE</small></span>
+  </a>
+  <div class="nav-actions">
+    <button type="button" class="nav-btn" onclick="history.back()">← Back</button>
+    <a href="home.html" class="nav-btn home-btn">⌂ Home</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">YOUR SKIN DESERVES THE BEST</p>
+    <h1>Book Your Appointment</h1>
+    <p>Choose a date and time, then fill in your details.</p>
+  </div>
+  <div class="hero-decoration">Healthy Skin<br>Brighter You</div>
+</section>
+
+<main class="container">
+  <div class="booking-layout">
+
+    <!-- LEFT: calendar + time -->
+    <section class="card">
+      <div class="section-heading">
+        <span class="heading-icon">▦</span>
+        <div>
+          <h2>Select Date &amp; Time</h2>
+          <p>Pick an available day, then a time slot.</p>
+        </div>
+      </div>
+
+      <div class="month-navigation">
+        <button type="button" id="prevMonth" aria-label="Previous month">‹</button>
+        <h3 id="monthTitle"></h3>
+        <button type="button" id="nextMonth" aria-label="Next month">›</button>
+      </div>
+
+      <div class="calendar-grid" id="calendar"></div>
+
+      <div class="selected-date-box">
+        <small>Selected date</small>
+        <strong id="selectedDate">Choose a date</strong>
+      </div>
+
+      <div class="time-section"><h3>Morning</h3><div class="time-grid" id="morning"></div></div>
+      <div class="time-section"><h3>Afternoon</h3><div class="time-grid" id="afternoon"></div></div>
+      <div class="time-section"><h3>Evening</h3><div class="time-grid" id="evening"></div></div>
+
+      <div class="legend">
+        <span><i class="dot dot-open"></i>Available</span>
+        <span><i class="dot dot-selected"></i>Selected</span>
+      </div>
+    </section>
+
+    <!-- RIGHT: details form -->
+    <section class="card">
+      <div class="section-heading">
+        <span class="heading-icon">✚</span>
+        <div>
+          <h2>Your Details</h2>
+          <p>Tell us about the treatment you want.</p>
+        </div>
+      </div>
+
+      <form id="bookingForm" novalidate>
+        <div class="field">
+          <label for="service">Treatment</label>
+          <select id="service">
+            <option value="">Choose a treatment</option>
+            <option>Consultation</option>
+            <option>Botox and filler</option>
+            <option>Carbon laser peel</option>
+            <option>Chemical peeling</option>
+            <option>CO2 laser</option>
+            <option>Pigmentation care</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="customerName">Full name</label>
+          <input type="text" id="customerName" placeholder="e.g. Nimali Perera" autocomplete="name">
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" placeholder="07X XXX XXXX" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="notes">Notes (optional)</label>
+          <textarea id="notes" placeholder="Tell us about your skin concerns"></textarea>
+        </div>
+
+        <div class="summary-box">
+          <h3>Booking summary</h3>
+          <div class="summary-grid">
+            <div><small>Treatment</small><strong id="summaryService">Not selected</strong></div>
+            <div><small>Date</small><strong id="summaryDate">Not selected</strong></div>
+            <div><small>Time</small><strong id="summaryTime">Not selected</strong></div>
+          </div>
+        </div>
+
+        <p id="message" role="status" aria-live="polite"></p>
+
+        <button type="submit" class="book-button">Confirm appointment</button>
+        <p class="privacy-note">Your details are only used to manage your booking.</p>
+      </form>
+    </section>
+  </div>
+
+  <!-- MY APPOINTMENTS -->
+  <section class="card appointments-card">
+    <div class="section-heading">
+      <span class="heading-icon">✓</span>
+      <div>
+        <h2>My Appointments</h2>
+        <p>Bookings made on this device.</p>
+      </div>
+      <span class="count-badge" id="appointmentCount">0 appointments</span>
+    </div>
+    <div id="appointmentsList"></div>
+  </section>
+</main>
+
+<footer>© 2026 DermaCare. All rights reserved.</footer>
+
+<script>
+"use strict";
+
+(() => {
+  const $ = (id) => document.getElementById(id);
+
+  const STORAGE_KEY = "dermacareAppointments";
+  const MAX_DAYS_AHEAD = 60;
+  const CLOSED_WEEKDAYS = [0];                 // 0 = Sunday closed
+  const HOLIDAYS = ["01-01", "02-04", "05-01", "12-25"];
+  const START_OF_DAY = 9 * 60;
+  const END_OF_DAY = 20 * 60 + 30;
+
+  const TIME_GROUPS = {
+    morning:   ["9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM"],
+    afternoon: ["12:00 PM", "12:30 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM"],
+    evening:   ["5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM"]
+  };
+
+  const MONTH_NAMES = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+  const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  const state = {
+    currentMonth: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+    selectedDate: null,
+    selectedTime: null,
+    appointments: loadAppointments()
+  };
+
+  const el = {
+    monthTitle: $("monthTitle"),
+    calendar: $("calendar"),
+    selectedDate: $("selectedDate"),
+    summaryService: $("summaryService"),
+    summaryDate: $("summaryDate"),
+    summaryTime: $("summaryTime"),
+    bookingForm: $("bookingForm"),
+    service: $("service"),
+    customerName: $("customerName"),
+    phone: $("phone"),
+    email: $("email"),
+    notes: $("notes"),
+    message: $("message"),
+    appointmentsList: $("appointmentsList"),
+    appointmentCount: $("appointmentCount"),
+    prevMonth: $("prevMonth"),
+    nextMonth: $("nextMonth")
+  };
+
+  function loadAppointments() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch { return []; }
+  }
+
+  function saveAppointments() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.appointments));
+  }
+
+  const pad = (v) => String(v).padStart(2, "0");
+
+  function formatDateKey(d) {
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  }
+
+  function parseDateKey(key) {
+    const [y, m, d] = key.split("-").map(Number);
+    return new Date(y, m - 1, d);
+  }
+
+  function formatDisplayDate(d) {
+    return d.toLocaleDateString("en-US", {
+      weekday: "long", month: "long", day: "numeric", year: "numeric"
+    });
+  }
+
+  function isHoliday(d) {
+    return HOLIDAYS.includes(`${pad(d.getMonth() + 1)}-${pad(d.getDate())}`);
+  }
+
+  function isBeforeToday(d) {
+    const t = new Date();
+    t.setHours(0, 0, 0, 0);
+    return d < t;
+  }
+
+  function isBeyondWindow(d) {
+    const limit = new Date();
+    limit.setHours(0, 0, 0, 0);
+    limit.setDate(limit.getDate() + MAX_DAYS_AHEAD);
+    return d > limit;
+  }
+
+  function isDateBlocked(d) {
+    return isBeforeToday(d) || CLOSED_WEEKDAYS.includes(d.getDay()) ||
+           isHoliday(d) || isBeyondWindow(d);
+  }
+
+  function toMinutes(text) {
+    const m = String(text).match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+    if (!m) return 0;
+    let h = Number(m[1]);
+    const min = Number(m[2]);
+    const s = m[3].toUpperCase();
+    if (s === "PM" && h !== 12) h += 12;
+    if (s === "AM" && h === 12) h = 0;
+    return h * 60 + min;
+  }
+
+  function timeIsAvailable(dateKey, timeText) {
+    const mins = toMinutes(timeText);
+    if (mins < START_OF_DAY || mins > END_OF_DAY) return false;
+
+    // hide times that already passed today
+    const now = new Date();
+    if (dateKey === formatDateKey(now) && mins <= now.getHours() * 60 + now.getMinutes()) {
+      return false;
+    }
+
+    return !state.appointments.some((a) => a.date === dateKey && a.time === timeText);
+  }
+
+  function renderCalendar() {
+    const year = state.currentMonth.getFullYear();
+    const month = state.currentMonth.getMonth();
+    el.monthTitle.textContent = `${MONTH_NAMES[month]} ${year}`;
+
+    const startWeekDay = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+    const todayKey = formatDateKey(new Date());
+    const fragment = document.createDocumentFragment();
+
+    DAY_NAMES.forEach((name) => {
+      const label = document.createElement("div");
+      label.className = "day-name";
+      label.textContent = name;
+      fragment.appendChild(label);
+    });
+
+    for (let i = 0; i < startWeekDay; i++) {
+      const blank = document.createElement("div");
+      blank.setAttribute("aria-hidden", "true");
+      fragment.appendChild(blank);
+    }
+
+    for (let day = 1; day <= totalDays; day++) {
+      const date = new Date(year, month, day);
+      const key = formatDateKey(date);
+      const btn = document.createElement("button");
+
+      btn.type = "button";
+      btn.textContent = String(day);
+      btn.className = [
+        key === state.selectedDate ? "selected" : "",
+        key === todayKey ? "today" : ""
+      ].join(" ").trim();
+      btn.disabled = isDateBlocked(date);
+
+      if (!btn.disabled) {
+        btn.addEventListener("click", () => {
+          state.selectedDate = key;
+          state.selectedTime = null;
+          renderCalendar();
+          renderTimeSlots();
+          updateSummary();
+          saveDraft();
+        });
+      }
+      fragment.appendChild(btn);
+    }
+
+    el.calendar.innerHTML = "";
+    el.calendar.appendChild(fragment);
+  }
+
+  function renderTimeSlots() {
+    Object.keys(TIME_GROUPS).forEach((group) => {
+      const container = $(group);
+      if (!container) return;
+      container.innerHTML = "";
+
+      TIME_GROUPS[group].forEach((time) => {
+        const slot = document.createElement("button");
+        slot.type = "button";
+        slot.className = "time-slot" + (state.selectedTime === time ? " selected" : "");
+        slot.textContent = time;
+        slot.disabled = !state.selectedDate || !timeIsAvailable(state.selectedDate, time);
+
+        slot.addEventListener("click", () => {
+          if (slot.disabled) return;
+          state.selectedTime = time;
+          renderTimeSlots();
+          updateSummary();
+          saveDraft();
+        });
+        container.appendChild(slot);
+      });
+    });
+  }
+
+  function updateSummary() {
+    el.summaryService.textContent = el.service.value || "Not selected";
+    el.summaryDate.textContent = state.selectedDate
+      ? formatDisplayDate(parseDateKey(state.selectedDate)) : "Not selected";
+    el.summaryTime.textContent = state.selectedTime || "Not selected";
+    el.selectedDate.textContent = state.selectedDate
+      ? formatDisplayDate(parseDateKey(state.selectedDate)) : "Choose a date";
+  }
+
+  function renderAppointments() {
+    const list = el.appointmentsList;
+    list.innerHTML = "";
+
+    if (!state.appointments.length) {
+      list.innerHTML = '<p class="empty-message">No appointments booked yet.</p>';
+      el.appointmentCount.textContent = "0 appointments";
+      return;
+    }
+
+    state.appointments.slice()
+      .sort((a, b) => a.date.localeCompare(b.date) || toMinutes(a.time) - toMinutes(b.time))
+      .forEach((appt) => {
+        const item = document.createElement("div");
+        item.className = "appointment-item";
+
+        const h = document.createElement("h3");
+        h.textContent = appt.service;
+        const p1 = document.createElement("p");
+        p1.textContent = `${appt.dateText} • ${appt.time}`;
+        const p2 = document.createElement("p");
+        p2.textContent = `${appt.name} • ${appt.phone}`;
+
+        const badge = document.createElement("span");
+        badge.className = "status-badge";
+        badge.textContent = "Confirmed";
+
+        const cancel = document.createElement("button");
+        cancel.type = "button";
+        cancel.className = "cancel-button";
+        cancel.textContent = "Cancel";
+        cancel.addEventListener("click", () => {
+          state.appointments = state.appointments.filter((a) => a.id !== appt.id);
+          saveAppointments();
+          renderAppointments();
+          renderTimeSlots();
+        });
+
+        item.append(h, p1, p2, badge, cancel);
+        list.appendChild(item);
+      });
+
+    const n = state.appointments.length;
+    el.appointmentCount.textContent = `${n} appointment${n === 1 ? "" : "s"}`;
+  }
+
+  function saveDraft() {
+    try {
+      localStorage.setItem("dermacareDraft", JSON.stringify({
+        selectedDate: state.selectedDate,
+        selectedTime: state.selectedTime,
+        service: el.service.value,
+        customerName: el.customerName.value,
+        phone: el.phone.value,
+        email: el.email.value,
+        notes: el.notes.value
+      }));
+    } catch {}
+  }
+
+  function restoreDraft() {
+    try {
+      const d = JSON.parse(localStorage.getItem("dermacareDraft") || "null");
+      if (!d) return;
+      if (d.service) el.service.value = d.service;
+      if (d.customerName) el.customerName.value = d.customerName;
+      if (d.phone) el.phone.value = d.phone;
+      if (d.email) el.email.value = d.email;
+      if (d.notes) el.notes.value = d.notes;
+
+      // only restore a date that is still bookable
+      if (d.selectedDate && !isDateBlocked(parseDateKey(d.selectedDate))) {
+        state.selectedDate = d.selectedDate;
+        state.currentMonth = new Date(parseDateKey(d.selectedDate).getFullYear(),
+                                      parseDateKey(d.selectedDate).getMonth(), 1);
+        if (d.selectedTime && timeIsAvailable(d.selectedDate, d.selectedTime)) {
+          state.selectedTime = d.selectedTime;
+        }
+      }
+    } catch {}
+  }
+
+  function validateForm() {
+    if (!el.service.value) throw new Error("Please select a treatment.");
+    if (!state.selectedDate) throw new Error("Please select a date.");
+    if (!state.selectedTime) throw new Error("Please select a time slot.");
+    if (!el.customerName.value.trim()) throw new Error("Please enter your full name.");
+    if (!/^\+?[0-9\s()-]{9,16}$/.test(el.phone.value.trim())) throw new Error("Please enter a valid phone number.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.email.value.trim())) throw new Error("Please enter a valid email address.");
+    if (!timeIsAvailable(state.selectedDate, state.selectedTime)) throw new Error("That time was just taken. Please pick another.");
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    try {
+      validateForm();
+
+      // Firebase: save this object to Firestore here later
+      const appointment = {
+        id: Date.now().toString(),
+        service: el.service.value,
+        date: state.selectedDate,
+        dateText: formatDisplayDate(parseDateKey(state.selectedDate)),
+        time: state.selectedTime,
+        name: el.customerName.value.trim(),
+        phone: el.phone.value.trim(),
+        email: el.email.value.trim(),
+        notes: el.notes.value.trim(),
+        createdAt: new Date().toISOString()
+      };
+
+      state.appointments.push(appointment);
+      saveAppointments();
+      renderAppointments();
+
+      localStorage.removeItem("dermacareDraft");
+      el.bookingForm.reset();
+      state.selectedDate = null;
+      state.selectedTime = null;
+      renderCalendar();
+      renderTimeSlots();
+      updateSummary();
+
+      el.message.textContent = "Appointment booked successfully.";
+      el.message.style.color = "#5fd49a";
+    } catch (error) {
+      el.message.textContent = error.message;
+      el.message.style.color = "#ff8fb0";
+    }
+  }
+
+  function bindEvents() {
+    el.service.addEventListener("change", () => { updateSummary(); saveDraft(); });
+    [el.customerName, el.phone, el.email, el.notes].forEach((i) => i.addEventListener("input", saveDraft));
+    el.bookingForm.addEventListener("submit", handleSubmit);
+
+    el.prevMonth.addEventListener("click", () => {
+      state.currentMonth = new Date(state.currentMonth.getFullYear(), state.currentMonth.getMonth() - 1, 1);
+      renderCalendar();
+    });
+    el.nextMonth.addEventListener("click", () => {
+      state.currentMonth = new Date(state.currentMonth.getFullYear(), state.currentMonth.getMonth() + 1, 1);
+      renderCalendar();
+    });
+  }
+
+  function init() {
+    restoreDraft();
+    bindEvents();
+    renderCalendar();
+    renderTimeSlots();
+    updateSummary();
+    renderAppointments();
+  }
+
+  init();
+})();
+</script>
+
+</body>
+</html> 

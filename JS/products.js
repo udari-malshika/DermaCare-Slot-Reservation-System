@@ -1,402 +1,868 @@
-const products = [
+// DermaCare product listing and shopping cart
+// Demo products: change these details to your actual products.
+
+const FALLBACK_PRODUCT_IMAGE = "../Images/centella%20cream.jpg";
+
+const productCatalog = [
   {
     id: 1,
-    name: "Gentle Foaming Cleanser",
-    category: "Cleanser",
-    price: 4200,
-    rating: 4.8,
-    tag: "BESTSELLER",
-    skin: ["Oily", "Sensitive", "Combination"],
-    description: "A gentle daily cleanser for fresh, balanced skin.",
-    image: "../Images/Centella cleanser.jpg"
+    name: "Anua 10+ Azelaic Serum",
+    category: "Serum",
+    skin: "Sensitive",
+    price: 5500,
+    image: "../Images/Anua%20Green.jpg",
+    description: "A gentle radiance-boosting serum designed for a calm, even-looking finish."
   },
   {
     id: 2,
-    name: "Vitamin C Brightening Serum",
-    category: "Serum",
-    price: 5850,
-    rating: 4.9,
-    tag: "POPULAR",
-    skin: ["Dry", "Oily", "Combination"],
-    description: "A lightweight serum for a radiant-looking complexion.",
-    image: "../Images/Arencia vitemin C.jpg"
+    name: "Medicube Deep Vita C Cream",
+    category: "Moisturizer",
+    skin: "Normal",
+    price: 6800,
+    image: "../Images/Medicube%20Deep%20Vita%20C%20cap%20cream.jpg",
+    description: "A brightening cream with vitamin-rich care for a healthy glow."
   },
   {
     id: 3,
-    name: "Hydrating Barrier Cream",
+    name: "COSRX Advanced Snail 92 Cream",
     category: "Moisturizer",
-    price: 6400,
-    rating: 4.7,
-    tag: "NEW",
-    skin: ["Dry", "Sensitive"],
-    description: "A rich moisturizer to support your skin barrier.",
-    image: "../Images/345 cream.jpg"
+    skin: "Dry",
+    price: 6200,
+    image: "../Images/Snail%2092%20Cream.jpg",
+    description: "A deeply nourishing cream for hydration and skin comfort."
   },
   {
     id: 4,
-    name: "Mineral SPF 50 Shield",
-    category: "Sunscreen",
-    price: 3800,
-    rating: 4.6,
-    tag: "",
-    skin: ["Sensitive", "Dry", "Combination"],
-    description: "Daily sun protection for your skincare routine.",
-    image: "../Images/Ord Moisture.jpg"
+    name: "The Ordinary AHA 30% BHA 2%",
+    category: "Serum",
+    skin: "Oily",
+    price: 5200,
+    image: "../Images/Ord%20AHA.jpg",
+    description: "A targeted exfoliating treatment for a smoother skin texture."
   },
   {
     id: 5,
-    name: "Advanced Retinol Serum",
-    category: "Serum",
-    price: 3980,
-    rating: 4.5,
-    tag: "",
-    skin: ["Dry", "Oily", "Combination"],
-    description: "A night serum for a smoother-looking complexion.",
-    image: "../Images/Ord Ratinol.jpg"
+    name: "Mediheal Green Essence Mask",
+    category: "Mask",
+    skin: "Sensitive",
+    price: 3800,
+    image: "../Images/mediheal%20green.jpg",
+    description: "A calming sheet mask to refresh and soothe tired-looking skin."
   },
   {
     id: 6,
-    name: "Daily Hydrating Cleanser",
-    category: "Cleanser",
-    price: 3200,
-    rating: 4.4,
-    tag: "",
-    skin: ["Dry", "Sensitive"],
-    description: "A simple cleanser for a comfortable daily routine.",
-    image: "../Images/Ord Clens.jpg"
+    name: "Medicube Pink Eye Cream",
+    category: "Moisturizer",
+    skin: "Dry",
+    price: 4300,
+    image: "../Images/Medicube%20Pink%20eye%20Cream.jpg",
+    description: "A lightweight eye cream that helps hydrate and soften the eye area."
   },
   {
     id: 7,
-    name: "Oil Control Moisturizer",
-    category: "Moisturizer",
-    price: 4500,
-    rating: 4.7,
-    tag: "POPULAR",
-    skin: ["Oily", "Combination"],
-    description: "Lightweight hydration without a heavy finish.",
-    image: "../Images/Medicube Pink cap cream.jpg"
+    name: "Centella Green Serum",
+    category: "Serum",
+    skin: "Sensitive",
+    price: 4800,
+    image: "../Images/Centella%20green%20serum.jpg",
+    description: "A soothing serum that supports a balanced and calm complexion."
   },
   {
     id: 8,
-    name: "Daily Glow Sunscreen",
-    category: "Sunscreen",
-    price: 3500,
-    rating: 4.6,
-    tag: "",
-    skin: ["Oily", "Dry", "Combination"],
-    description: "A daily sunscreen for your morning routine.",
-    image: "../Images/Ord Moisture.jpg"
+    name: "Snail Mucin Gel Cleanser",
+    category: "Cleanser",
+    skin: "Sensitive",
+    price: 4600,
+    image: "../Images/Snail%20cleanser.jpg",
+    description: "A gentle cleanser that refreshes skin without stripping moisture."
   },
   {
     id: 9,
-    name: "Soothing Skin Serum",
+    name: "Arencia Vitamin C Serum",
     category: "Serum",
-    price: 5200,
-    rating: 4.8,
-    tag: "TOP RATED",
-    skin: ["Sensitive", "Dry"],
-    description: "A gentle-feeling serum for a simple skincare routine.",
-    image: "../Images/Anua Niasinamide.jpg"
-  },
-  {
-    id: 10,
-    name: "Centella Recovery Cream",
-    category: "Moisturizer",
-    price: 6100,
-    rating: 4.8,
-    tag: "NEW",
-    skin: ["Sensitive", "Dry"],
-    description: "Comforting hydration with a soothing, barrier-supporting finish.",
-    image: "../Images/centella cream.jpg"
-  },
-  {
-    id: 11,
-    name: "Green Glow Essence",
-    category: "Serum",
-    price: 5750,
-    rating: 4.9,
-    tag: "BESTSELLER",
-    skin: ["Oily", "Combination", "Sensitive"],
-    description: "A calming, brightening serum for more refreshed-looking skin.",
-    image: "../Images/Anua Green.jpg"
-  },
-  {
-    id: 12,
-    name: "Pore Refining Serum",
-    category: "Serum",
-    price: 4900,
-    rating: 4.7,
-    tag: "POPULAR",
-    skin: ["Oily", "Combination"],
-    description: "Targets texture and dullness for a more refined complexion.",
-    image: "../Images/Medicube Pink serum.jpg"
-  },
-  {
-    id: 13,
-    name: "Barrier Repair Mask",
-    category: "Moisturizer",
-    price: 4700,
-    rating: 4.6,
-    tag: "",
-    skin: ["Dry", "Sensitive"],
-    description: "A deep-hydrating mask for soft, replenished skin after a long day.",
-    image: "../Images/Biodance mask.jpg"
-  },
-  {
-    id: 14,
-    name: "Niacinamide Daily Essence",
-    category: "Serum",
-    price: 5600,
-    rating: 4.8,
-    tag: "TOP RATED",
-    skin: ["Oily", "Combination", "Sensitive"],
-    description: "Helps refine skin tone and support a smoother-looking finish.",
-    image: "../Images/Ord Niacinamide.jpg"
+    skin: "Normal",
+    price: 6900,
+    image: "../Images/Arencia%20vitemin%20C.jpg",
+    description: "A glow-boosting vitamin C treatment designed for daily radiance."
   }
 ];
 
-const grid = document.getElementById("productGrid");
-const category = document.getElementById("category");
-const skinType = document.getElementById("skinType");
-const maxPrice = document.getElementById("maxPrice");
-const priceValue = document.getElementById("priceValue");
-const sortBy = document.getElementById("sortBy");
-const resultCount = document.getElementById("resultCount");
-const emptyMessage = document.getElementById("emptyMessage");
+const products = productCatalog;
 
-const CART_KEY = "dermacare-cart";
-let cart = [];
+const $ = id => document.getElementById(id);
 
-function loadCart() {
+const grid = $("productsGrid");
+const cartCount = $("cartCount");
+const cartButton = $("cartButton");
+const category = $("category");
+const skin = $("skin");
+const priceRange = $("priceRange");
+const priceValue = $("priceValue");
+const search = $("search");
+const sort = $("sort");
+const resultCount = $("resultCount");
+const emptyState = $("emptyState");
+
+const CART_KEY = "dermacare-cart-v1";
+
+let cart = readCart();
+
+// Load cart from localStorage
+function readCart() {
   try {
-    const stored = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-    if (Array.isArray(stored)) {
-      cart = stored;
-    }
-  } catch (error) {
-    cart = [];
+    const saved = JSON.parse(
+      localStorage.getItem(CART_KEY) || "[]"
+    );
+
+    return Array.isArray(saved)
+      ? saved
+          .filter(item =>
+            products.some(
+              product => product.id === Number(item.id)
+            ) &&
+            Number(item.quantity) > 0
+          )
+          .map(item => ({
+            ...products.find(
+              product => product.id === Number(item.id)
+            ),
+            quantity: Math.floor(Number(item.quantity))
+          }))
+      : [];
+  } catch {
+    return [];
   }
 }
 
+// Format prices in Sri Lankan rupees
+const money = amount =>
+  "LKR " + Number(amount).toLocaleString("en-LK");
+
+// Save cart and refresh cart count
 function saveCart() {
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  localStorage.setItem(
+    CART_KEY,
+    JSON.stringify(cart)
+  );
+
+  updateCartCount();
 }
 
+// Update number displayed on Cart button
+function updateCartCount() {
+  cartCount.textContent = cart.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
+}
+
+// Display products
 function renderProducts() {
-  const searchTerm = document.getElementById("searchInput")?.value
-    .toLowerCase().trim() || "";
+  let list = products.filter(product => {
+    const q = search.value.trim().toLowerCase();
 
-  let filtered = products.filter(product => {
-    const matchesCategory =
-      category.value === "all" ||
-      product.category === category.value;
+    return (
+      (category.value === "all" ||
+        product.category === category.value) &&
 
-    const matchesSkin =
-      skinType.value === "all" ||
-      product.skin.includes(skinType.value);
+      (skin.value === "all" ||
+        product.skin === skin.value) &&
 
-    const matchesPrice =
-      product.price <= Number(maxPrice.value);
+      product.price <= Number(priceRange.value) &&
 
-    const matchesSearch =
-      product.name.toLowerCase().includes(searchTerm) ||
-      product.category.toLowerCase().includes(searchTerm) ||
-      product.description.toLowerCase().includes(searchTerm);
-
-    return matchesCategory && matchesSkin &&
-      matchesPrice && matchesSearch;
+      (
+        product.name.toLowerCase().includes(q) ||
+        product.category.toLowerCase().includes(q) ||
+        product.skin.toLowerCase().includes(q)
+      )
+    );
   });
 
-  if (sortBy.value === "low") {
-    filtered.sort((a, b) => a.price - b.price);
-  } else if (sortBy.value === "high") {
-    filtered.sort((a, b) => b.price - a.price);
-  } else if (sortBy.value === "rating") {
-    filtered.sort((a, b) => b.rating - a.rating);
+  // Sorting
+  if (sort.value === "low") {
+    list.sort((a, b) => a.price - b.price);
+  }
+
+  if (sort.value === "high") {
+    list.sort((a, b) => b.price - a.price);
+  }
+
+  if (sort.value === "name") {
+    list.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
   }
 
   resultCount.textContent =
-    `Showing ${filtered.length} of ${products.length} products`;
+    `Showing ${list.length} product${list.length === 1 ? "" : "s"}`;
 
-  emptyMessage.hidden = filtered.length > 0;
+  emptyState.hidden = list.length !== 0;
 
-  grid.innerHTML = filtered.map(product => `
+  grid.innerHTML = list.map(product => `
     <article class="product-card">
-      <div class="product-image">
+
+      <button
+        class="product-image-button"
+        type="button"
+        data-action="details"
+        data-id="${product.id}"
+        aria-label="View ${product.name} details"
+      >
         <img
           src="${product.image}"
           alt="${product.name}"
           loading="lazy"
-          onerror="this.onerror=null;this.src='https://placehold.co/500x400/f0efff/6558f5?text=DermaCare'">
-        ${product.tag ? `<span class="tag">${product.tag}</span>` : ""}
-      </div>
+          onerror="this.onerror=null;this.src='../Images/centella%20cream.jpg';"
+        >
+      </button>
+
       <div class="product-info">
-        <span class="product-category">${product.category}</span>
+
+        <span class="product-category">
+          ${product.category}
+        </span>
+
         <h3>${product.name}</h3>
-        <p>${product.description}</p>
-        <div class="product-bottom">
-          <span class="price">LKR ${product.price.toLocaleString("en-LK")}</span>
-          <span class="rating">★ ${product.rating}</span>
+
+        <p class="product-skin">
+          ${product.skin} skin
+        </p>
+
+        <div class="product-price">
+          ${money(product.price)}
         </div>
-        <button class="add-btn" data-add="${product.id}">
-          + Add to Cart
+
+        <button
+          class="details-btn"
+          type="button"
+          data-action="details"
+          data-id="${product.id}"
+        >
+          View Details
         </button>
+
+        <button
+          class="add-cart-btn"
+          type="button"
+          data-action="add"
+          data-id="${product.id}"
+        >
+          ＋ Add to Cart
+        </button>
+
       </div>
     </article>
   `).join("");
 }
 
-[category, skinType, sortBy].forEach(control => {
-  control.addEventListener("change", renderProducts);
-});
+// Show notification
+let toastTimer;
 
-maxPrice.addEventListener("input", () => {
-  priceValue.textContent = Number(maxPrice.value).toLocaleString("en-LK");
-  renderProducts();
-});
+function showMessage(message) {
+  const toast = $("toast");
 
-document.getElementById("resetButton").addEventListener("click", () => {
-  category.value = "all";
-  skinType.value = "all";
-  maxPrice.value = "10000";
-  priceValue.textContent = "10000";
-  sortBy.value = "popular";
+  toast.textContent = message;
+  toast.classList.add("show");
 
-  const searchInput = document.getElementById("searchInput");
-  if (searchInput) searchInput.value = "";
+  clearTimeout(toastTimer);
 
-  renderProducts();
-});
-
-// Add products to the demo shopping cart
-grid.addEventListener("click", event => {
-  const button = event.target.closest("[data-add]");
-  if (!button) return;
-
-  const id = Number(button.dataset.add);
-  const product = products.find(item => item.id === id);
-  const existing = cart.find(item => item.id === id);
-
-  if (existing) {
-    existing.quantity++;
-  } else {
-    cart.push({ ...product, quantity: 1 });
-  }
-
-  saveCart();
-  updateCart();
-  button.textContent = "✓ Added to Cart";
-  setTimeout(() => {
-    button.textContent = "+ Add to Cart";
-  }, 900);
-});
-
-function updateCart() {
-  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-  document.getElementById("cartCount").textContent = count;
-
-  document.getElementById("cartItems").innerHTML = cart.length
-    ? cart.map(item => `
-      <div class="cart-line">
-        <strong>${item.name}</strong>
-        <p>Quantity: ${item.quantity} × LKR ${item.price.toLocaleString("en-LK")}</p>
-        <button data-remove="${item.id}">Remove one</button>
-      </div>
-    `).join("")
-    : "<p>Your cart is empty. Add a product to get started!</p>";
-
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity, 0
-  );
-
-  document.getElementById("cartTotal").textContent =
-    `Total: LKR ${total.toLocaleString("en-LK")}`;
-
-  const checkoutButton = document.getElementById("checkoutBtn");
-  if (checkoutButton) {
-    checkoutButton.disabled = cart.length === 0;
-    checkoutButton.style.opacity = cart.length === 0 ? "0.5" : "1";
-  }
-
-  saveCart();
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2400);
 }
 
-document.getElementById("cartItems").addEventListener("click", event => {
-  const button = event.target.closest("[data-remove]");
-  if (!button) return;
+// Add product to cart
+function addToCart(id) {
+  const product = products.find(
+    item => item.id === Number(id)
+  );
 
-  const id = Number(button.dataset.remove);
-  const item = cart.find(product => product.id === id);
+  if (!product) return;
 
-  if (item) {
-    item.quantity--;
-    if (item.quantity <= 0) {
-      cart = cart.filter(product => product.id !== id);
+  const existing = cart.find(
+    item => item.id === product.id
+  );
+
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({
+      ...product,
+      quantity: 1
+    });
+  }
+
+  saveCart();
+
+  showMessage(
+    `${product.name} added to cart 💜`
+  );
+}
+
+// Create modal window
+function ensureModal() {
+  if ($("storeModal")) return;
+
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    `
+      <div
+        class="store-modal"
+        id="storeModal"
+        aria-hidden="true"
+      >
+        <section
+          class="store-panel"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modalTitle"
+        >
+          <button
+            class="modal-close"
+            type="button"
+            data-action="close"
+            aria-label="Close"
+          >×</button>
+
+          <div id="modalContent"></div>
+        </section>
+      </div>
+    `
+  );
+}
+
+// Open modal with selected content
+function openModal(content) {
+  ensureModal();
+
+  $("modalContent").innerHTML = content;
+
+  $("storeModal").classList.add("open");
+
+  $("storeModal").setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.classList.add("modal-open");
+}
+
+// Close modal
+function closeModal() {
+  const modal = $("storeModal");
+
+  if (!modal) return;
+
+  modal.classList.remove("open");
+
+  modal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.classList.remove("modal-open");
+}
+
+// Show product details
+function showDetails(id) {
+  const product = products.find(
+    item => item.id === Number(id)
+  );
+
+  if (!product) return;
+
+  openModal(`
+    <div class="detail-layout">
+
+      <img
+        class="detail-image"
+        src="${product.image}"
+        alt="${product.name}"
+        onerror="this.onerror=null;this.src='../Images/centella%20cream.jpg';"
+      >
+
+      <div class="detail-info">
+
+        <span class="product-category">
+          ${product.category}
+        </span>
+
+        <h2 id="modalTitle">
+          ${product.name}
+        </h2>
+
+        <p>${product.description}</p>
+
+        <p>
+          <strong>Skin type:</strong>
+          ${product.skin}
+        </p>
+
+        <div class="product-price">
+          ${money(product.price)}
+        </div>
+
+        <button
+          class="add-cart-btn"
+          type="button"
+          data-action="add"
+          data-id="${product.id}"
+        >
+          ＋ Add to Cart
+        </button>
+
+      </div>
+    </div>
+  `);
+}
+
+// Display shopping cart
+function showCart() {
+  const total = cart.reduce(
+    (sum, item) =>
+      sum + item.price * item.quantity,
+    0
+  );
+
+  const itemsHTML = cart.length
+    ? cart.map(item => `
+        <div class="cart-item">
+
+          <img
+            src="${item.image}"
+            alt="${item.name}"
+          >
+
+          <div class="cart-item-info">
+
+            <strong>${item.name}</strong>
+
+            <span>
+              ${money(item.price)} each
+            </span>
+
+            <div class="quantity-controls">
+
+              <button
+                type="button"
+                data-action="decrease"
+                data-id="${item.id}"
+                aria-label="Decrease quantity"
+              >−</button>
+
+              <span>${item.quantity}</span>
+
+              <button
+                type="button"
+                data-action="increase"
+                data-id="${item.id}"
+                aria-label="Increase quantity"
+              >＋</button>
+
+            </div>
+          </div>
+
+          <button
+            class="remove-item"
+            type="button"
+            data-action="remove"
+            data-id="${item.id}"
+          >
+            Remove
+          </button>
+
+        </div>
+      `).join("")
+    : `
+        <div class="cart-empty">
+          <p>Your cart is empty 🛍️</p>
+          <p>Add a product to get started.</p>
+        </div>
+      `;
+
+  openModal(`
+    <h2 id="modalTitle">
+      Your Shopping Cart 🛒
+    </h2>
+
+    <div class="cart-items">
+      ${itemsHTML}
+    </div>
+
+    <div class="cart-total">
+      <span>Subtotal</span>
+      <strong>${money(total)}</strong>
+    </div>
+
+    <p class="cart-note">
+      Delivery charges, if applicable, are not included.
+    </p>
+
+    ${
+      cart.length
+        ? `
+          <button
+            class="checkout-btn"
+            type="button"
+            data-action="checkout"
+          >
+            Continue to Order
+          </button>
+        `
+        : ""
+    }
+  `);
+}
+
+// Increase or decrease item quantity
+function updateQuantity(id, amount) {
+  const item = cart.find(
+    product => product.id === Number(id)
+  );
+
+  if (!item) return;
+
+  item.quantity += amount;
+
+  if (item.quantity <= 0) {
+    cart = cart.filter(
+      product => product.id !== Number(id)
+    );
+  }
+
+  saveCart();
+  showCart();
+}
+
+// Remove product from cart
+function removeItem(id) {
+  cart = cart.filter(
+    item => item.id !== Number(id)
+  );
+
+  saveCart();
+  showCart();
+}
+
+// Prepare checkout form
+function showCheckout() {
+  if (!cart.length) {
+    return showCart();
+  }
+
+  const total = cart.reduce(
+    (sum, item) =>
+      sum + item.price * item.quantity,
+    0
+  );
+
+  openModal(`
+    <h2 id="modalTitle">
+      Order Details
+    </h2>
+
+    <p class="cart-note">
+      Enter your details to prepare your order.
+      This demo does not process online payments.
+    </p>
+
+    <form class="checkout-form" id="checkoutForm">
+
+      <label>
+        Full name
+        <input
+          name="name"
+          required
+          autocomplete="name"
+        >
+      </label>
+
+      <label>
+        Phone number
+        <input
+          name="phone"
+          required
+          type="tel"
+          autocomplete="tel"
+        >
+      </label>
+
+      <label>
+        Delivery address
+        <textarea
+          name="address"
+          required
+          rows="3"
+          autocomplete="street-address"
+        ></textarea>
+      </label>
+
+      <div class="cart-total">
+        <span>Order subtotal</span>
+        <strong>${money(total)}</strong>
+      </div>
+
+      <button
+        class="checkout-btn"
+        type="submit"
+      >
+        Prepare Order
+      </button>
+
+    </form>
+  `);
+}
+
+// Handle buttons throughout the page
+document.addEventListener("click", event => {
+  const actionButton = event.target.closest(
+    "[data-action]"
+  );
+
+  if (actionButton) {
+    const action = actionButton.dataset.action;
+    const id = actionButton.dataset.id;
+
+    if (action === "details") showDetails(id);
+    if (action === "add") addToCart(id);
+    if (action === "close") closeModal();
+    if (action === "increase") updateQuantity(id, 1);
+    if (action === "decrease") updateQuantity(id, -1);
+    if (action === "remove") removeItem(id);
+    if (action === "checkout") showCheckout();
+  }
+
+  const productImageButton = event.target.closest(".product-image-button");
+  if (productImageButton) {
+    const productId = Number(productImageButton.dataset.id);
+    const product = products.find(item => item.id === productId);
+    if (product) {
+      openLightbox(products.findIndex(item => item.id === product.id));
     }
   }
 
-  updateCart();
+  if (event.target.id === "storeModal") {
+    closeModal();
+  }
 });
 
-const cartModal = document.getElementById("cartModal");
-const checkoutBtn = document.getElementById("checkoutBtn");
+// Prevent the checkout form from refreshing the page
+document.addEventListener("submit", event => {
+  if (event.target.id !== "checkoutForm") return;
 
-if (checkoutBtn) {
-  checkoutBtn.addEventListener("click", () => {
-    if (!cart.length) return;
-    cartModal.hidden = true;
-    window.location.href = "payment.html";
-  });
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+
+  const name = String(
+    formData.get("name")
+  ).trim();
+
+  const phone = String(
+    formData.get("phone")
+  ).trim();
+
+  const address = String(
+    formData.get("address")
+  ).trim();
+
+  if (!name || !phone || !address) return;
+
+  const orderLines = cart.map(item =>
+    `${item.name} x ${item.quantity} — ${money(item.price * item.quantity)}`
+  ).join("\n");
+
+  const total = cart.reduce(
+    (sum, item) =>
+      sum + item.price * item.quantity,
+    0
+  );
+
+  openModal(`
+    <h2 id="modalTitle">
+      Order Prepared 💜
+    </h2>
+
+    <p>
+      Thank you, ${escapeHTML(name)}.
+      Your order summary is ready.
+    </p>
+
+    <pre style="
+      white-space:pre-wrap;
+      overflow-wrap:anywhere;
+      background:#fff4f8;
+      padding:14px;
+      border-radius:12px;
+      font:13px/1.7 'DM Sans',sans-serif
+    ">${escapeHTML(orderLines)}
+
+Subtotal: ${money(total)}
+Phone: ${escapeHTML(phone)}
+Address: ${escapeHTML(address)}</pre>
+
+    <p class="cart-note">
+      This website currently prepares an order summary only.
+      Connect a backend or order service to actually submit
+      and save orders.
+    </p>
+
+    <button
+      class="checkout-btn"
+      type="button"
+      data-action="finish-order"
+    >
+      Finish
+    </button>
+  `);
+});
+
+// Escape text before displaying user-entered details
+function escapeHTML(value) {
+  return String(value).replace(
+    /[&<>"']/g,
+    char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]
+  );
 }
 
-document.getElementById("cartButton").addEventListener("click", () => {
-  cartModal.hidden = false;
+// Finish demo order
+document.addEventListener("click", event => {
+  if (
+    event.target.closest(
+      '[data-action="finish-order"]'
+    )
+  ) {
+    cart = [];
+
+    saveCart();
+    closeModal();
+
+    showMessage(
+      "Order summary completed. Cart cleared."
+    );
+  }
 });
 
-document.getElementById("closeCart").addEventListener("click", () => {
-  cartModal.hidden = true;
-});
+// Cart button
+cartButton.addEventListener("click", showCart);
 
-// Skin quiz
-const quizModal = document.getElementById("quizModal");
+// Search, filters and sorting
+[category, skin, priceRange, search, sort].forEach(
+  control => {
+    control.addEventListener("input", renderProducts);
+    control.addEventListener("change", renderProducts);
+  }
+);
 
-document.getElementById("quizButton").addEventListener("click", () => {
-  quizModal.hidden = false;
-});
+// Reset all filters
+function resetFilters() {
+  category.value = "all";
+  skin.value = "all";
+  priceRange.value = "10000";
+  search.value = "";
+  sort.value = "featured";
 
-document.getElementById("closeQuiz").addEventListener("click", () => {
-  quizModal.hidden = true;
-});
+  priceValue.textContent = "Up to LKR 10,000";
 
-document.getElementById("findProducts").addEventListener("click", () => {
-  skinType.value = document.getElementById("quizSkin").value;
-  quizModal.hidden = true;
   renderProducts();
+}
 
-  document.querySelector(".catalog").scrollIntoView({
-    behavior: "smooth"
-  });
+priceRange.addEventListener("input", () => {
+  priceValue.textContent =
+    `Up to ${money(Number(priceRange.value))}`;
 });
 
-// Close a modal by clicking outside its content
-[quizModal, cartModal].forEach(modal => {
-  modal.addEventListener("click", event => {
-    if (event.target === modal) modal.hidden = true;
-  });
+$("reset").addEventListener("click", resetFilters);
+
+$("resetEmpty").addEventListener(
+  "click",
+  resetFilters
+);
+
+// Close modal with Escape key
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closeModal();
+  }
 });
 
-// Search field added to the catalog heading
-const search = document.createElement("input");
-search.id = "searchInput";
-search.type = "search";
-search.placeholder = "Search skincare products...";
-search.setAttribute("aria-label", "Search products");
-search.style.cssText =
-  "width:100%;max-width:300px;padding:11px;border:1px solid #e9eaf1;border-radius:8px;margin-bottom:18px";
-
-document.querySelector(".catalog-heading").after(search);
-search.addEventListener("input", renderProducts);
-
+// Initial page setup
+updateCartCount();
 renderProducts();
-updateCart();
+
+// Lightbox for product images
+const lightbox = document.getElementById("lightbox");
+const lbImg = document.getElementById("lbImg");
+const lbCaption = document.getElementById("lbCaption");
+const lbClose = document.getElementById("lbClose");
+const lbPrev = document.getElementById("lbPrev");
+const lbNext = document.getElementById("lbNext");
+
+let lightboxIndex = 0;
+let lightboxItems = [];
+
+function openLightbox(index) {
+  if (!lightboxItems.length) return;
+
+  lightboxIndex = (index + lightboxItems.length) % lightboxItems.length;
+  const item = lightboxItems[lightboxIndex];
+
+  lbImg.onerror = () => {
+    lbImg.src = "../Images/centella%20cream.jpg";
+  };
+  lbImg.src = item.image;
+  lbCaption.textContent = item.name;
+  lightbox.classList.add("open");
+  document.body.classList.add("modal-open");
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  document.body.classList.remove("modal-open");
+}
+
+function moveLightbox(step) {
+  if (!lightboxItems.length) return;
+  openLightbox(lightboxIndex + step);
+}
+
+function updateLightboxItems() {
+  lightboxItems = products.map(product => ({
+    name: product.name,
+    image: product.image
+  }));
+}
+
+lbClose.addEventListener("click", closeLightbox);
+lbPrev.addEventListener("click", () => moveLightbox(-1));
+lbNext.addEventListener("click", () => moveLightbox(1));
+
+lightbox.addEventListener("click", event => {
+  if (event.target === lightbox) closeLightbox();
+});
+
+window.addEventListener("keydown", event => {
+  if (!lightbox.classList.contains("open")) return;
+
+  if (event.key === "Escape") closeLightbox();
+  if (event.key === "ArrowLeft") moveLightbox(-1);
+  if (event.key === "ArrowRight") moveLightbox(1);
+});
+
+updateLightboxItems();
+
+function setProductImageFallback(imgElement, imageUrl) {
+  imgElement.onerror = () => {
+    if (imgElement.src !== location.origin + "/" + FALLBACK_PRODUCT_IMAGE) {
+      imgElement.src = FALLBACK_PRODUCT_IMAGE;
+    }
+  };
+
+  imgElement.src = imageUrl;
+}
