@@ -1,248 +1,125 @@
-<<<<<<< Updated upstream
-# DermaCare-Slot-Reservation-System
-=======
 # DermoCare Slot Reservation System
 
-DermoCare is a responsive static website for a dermatology and aesthetic skincare clinic. It helps visitors explore treatments, view skincare products, create a local demo account, select an appointment slot, and review a demo shopping cart and checkout flow.
+DermoCare is a responsive static website for a dermatology and aesthetic skincare clinic. Visitors can explore treatments, browse products, create a demo account, and submit appointment requests.
 
-The project is implemented with HTML, CSS, and vanilla JavaScript. It does not currently use a backend, database, payment gateway, or real clinic booking API.
+The repository contains:
+
+- A static frontend under `HTML/`, `CSS/`, and `JS/`
+- A small Node.js API (`JS/server.js`) used to accept appointment requests and send confirmation emails via SMTP
 
 ## Features
 
 ### Public website
 
-- Responsive homepage with:
-  - Clinic introduction and hero section
-  - Treatment highlights
-  - Clinic statistics and trust indicators
-  - Product and appointment calls to action
+- Responsive homepage with treatment and product call-to-actions
 - Treatment catalogue and treatment detail pages
-- Dedicated information pages for:
-  - CO2 Laser
-  - Carbon Laser Peel
-  - Pigmentation care
-  - Laser Hair Removal
-  - RF Microneedling
-  - PRP Therapy
-  - Chemical Peeling
-  - Botox and fillers
-- Contact page with clinic information and contact form
-- Responsive navigation bars with links to treatments, products, contact, appointments, login, and profile
-- Light and dark theme toggle. The selected theme is saved in browser storage.
+- Contact page with clinic details, map, social links, and a client-side enquiry form
+- Product catalogue with search and demo cart
+- Light/dark theme toggle persisted in browser storage
 
-### Authentication and profile
+### Demo authentication and profile
 
-- Signup form for creating a demo account
-- Login form with email and password validation
+- Signup and login with client-side validation
 - Duplicate email detection during signup
-- Login session saved in `localStorage`
-- Profile page showing the logged-in user's name and email
-- Logout action that clears the current session
-- Profile icon in the navigation bars linking to the profile page
-- Separate admin login and dashboard for clinic operations
+- Session persistence in browser `localStorage`
+- Profile page and logout flow
 
-> **Important:** This is frontend-only demo authentication. Passwords are stored in browser `localStorage` and are not suitable for production use. A real application must use a secure backend, password hashing, HTTPS, session management, and server-side validation.
+> Demo authentication is frontend-only and not production-safe.
 
 ### Appointment booking
 
-- Treatment selection with treatment-specific price and duration
-- Treatment search
-- Interactive calendar
-- Previous and next month controls
-- Past dates and Sundays disabled
-- Available time slots grouped by morning, afternoon, and evening
-- Patient information form
-- Appointment summary with treatment, date, time, duration, and cost
-- Query-string treatment preselection, for example:
-
-  ```text
-  appointment.html?treatment=CO2%20Laser
-  ```
-
-The current appointment flow is a demonstration. It validates the form and saves a booking request in browser storage for the admin dashboard; it is not sent to the clinic.
-
-### Admin dashboard
-
-- Admin login at `admin-login.html`
-- Dashboard at `admin.html`
-- Appointment requests can be filtered, confirmed, cancelled, or deleted
-- Dashboard summary cards show appointment and registered-user counts
-- Registered customer accounts can be reviewed from the dashboard
-
-The demo admin credentials are:
-
-```text
-Email: admin@dermacare.lk
-Password: Admin@123
-```
-
-This is frontend-only demo access. The credentials and dashboard are not secure for production use; replace them with server-side authentication and authorization before deployment.
-
-### Products and checkout
-
-- Product catalogue using local product images
-- Product search/filtering
-- Demo shopping cart
-- Quantity updates and item removal
-- Cart state saved in `localStorage`
-- Demo checkout/payment page
-
-The checkout page is a frontend demonstration only. It does not process real payments or create an order in a backend system.
+- Treatment search and selection
+- Interactive date picker and slot selection
+- Appointment summary and patient details form
+- Submission to `POST /api/appointments`
+- Confirmation email sent by the Node.js API through configured SMTP credentials
 
 ## Pages
 
 | Page | Purpose |
 | --- | --- |
-| `index.html` | Redirects visitors to the homepage |
-| `home.html` | Main clinic homepage |
-| `treatment.html` | Treatment catalogue and booking prompts |
-| `treatment-detail.html` | Dynamic treatment detail page |
-| `CO2.html` | CO2 Laser treatment information |
-| `carbonLaser.html` | Carbon Laser Peel information |
-| `pigmentation.html` | Pigmentation treatment information |
-| `products.html` | Skincare product catalogue and cart |
-| `payment.html` | Demo checkout/payment page |
-| `appointment.html` | Appointment selection and patient information |
-| `contact.html` | Clinic contact and enquiry page |
-| `login.html` | Demo login page |
-| `signup.html` | Demo account creation page |
-| `register.html` | Redirects to the signup page |
-| `profile.html` | Current user's demo profile and logout page |
-| `admin-login.html` | Demo staff/admin login page |
-| `admin.html` | Admin appointment and user dashboard |
+| `HTML/index.html` | Redirects visitors to the homepage |
+| `HTML/home.html` | Main homepage |
+| `HTML/treatment.html` | Treatment catalogue |
+| `HTML/treatment-detail.html` | Dynamic treatment detail page |
+| `HTML/CO2.html` | CO2 Laser treatment page |
+| `HTML/carbonLaser.html` | Carbon Laser Peel page |
+| `HTML/pigmentation.html` | Pigmentation treatment page |
+| `HTML/appointment.html` | Appointment booking page |
+| `HTML/products.html` | Product catalogue and cart |
+| `HTML/payment.html` | Demo checkout page |
+| `HTML/contact.html` | Contact and enquiry page |
+| `HTML/login.html` | Demo login page |
+| `HTML/signup.html` | Demo signup page |
+| `HTML/register.html` | Redirect page to signup |
+| `HTML/profile.html` | Demo profile page |
 
 ## Project structure
 
 ```text
 .
-├── Images/                  # Treatment and product images
-├── index.html               # Entry redirect
-├── home.html                # Homepage
-├── treatment.html           # Treatment catalogue
-├── treatment-detail.html   # Dynamic treatment details
-├── appointment.html         # Slot reservation page
-├── products.html            # Product catalogue and cart
-├── payment.html             # Demo checkout page
-├── contact.html             # Contact page
-├── login.html               # Login page
-├── signup.html              # Signup page
-├── profile.html             # Profile page
-├── admin-login.html         # Admin login page
-├── admin.html               # Admin dashboard
-├── auth.js                  # Signup, login, session, and logout logic
-├── admin.js                 # Admin dashboard and appointment management
-├── theme.js                 # Theme toggle and theme persistence
-├── appointment.js           # Appointment calendar, slots, and validation
-├── products.js              # Product search and cart logic
-├── treatment.js              # Treatment page form behavior
-├── treatment-detail.js      # Dynamic treatment details
-├── home.css                 # Homepage styles
-├── appointment.css          # Appointment page styles
-├── auth.css                 # Login, signup, and profile styles
-├── products.css             # Product page styles
-├── treatment.css            # Treatment catalogue styles
-├── treatment-detail.css     # Treatment detail styles
-├── contact.css              # Contact page styles
-├── theme.css                # Shared theme and profile icon styles
-├── pigmentation.css         # Shared treatment detail styling
-├── CO2.css                 # CO2 page styles
-├── carbonLaser.css         # Carbon Laser page styles
-└── appoinment.js            # Legacy appointment script retained in the project
+├── HTML/                    # Website pages
+├── CSS/                     # Stylesheets
+├── JS/                      # Browser scripts and Node.js API server
+├── Images/                  # Treatment and product media assets
+├── package.json             # Node.js scripts and dependencies
+├── package-lock.json        # Locked npm dependency versions
+├── .env.example             # SMTP configuration template
+└── README.md
 ```
 
 ## Running the project
 
-No package installation or build step is required.
+### Option 1: Run with the Node.js server (recommended for appointment email flow)
 
-### Option 1: Open directly
+```bash
+npm install
+cp .env.example .env
+npm start
+```
 
-Open `index.html` in a browser. For the most reliable behavior, especially when testing browser storage and linked pages, use a local HTTP server instead.
+Then open: `http://localhost:8000/HTML/index.html`
 
-### Option 2: Start a local server
+Required `.env` variables:
 
-From the project directory, run one of the following commands:
+```text
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-smtp-username
+SMTP_PASSWORD=your-smtp-password
+MAIL_FROM=DermoCare <appointments@example.com>
+PORT=8000
+```
 
-```powershell
+### Option 2: Static frontend-only run
+
+```bash
 python -m http.server 8000
 ```
 
-Then open:
+Then open: `http://localhost:8000/HTML/index.html`
 
-```text
-http://localhost:8000/
-```
-
-If Python is not installed, use any static file server that serves the project root.
-
-## Demo usage flow
-
-1. Open the homepage.
-2. Select **Log in** or the profile icon.
-3. Select **Create an account** and submit a name, email, and password.
-4. Log in using the saved demo account.
-5. Open the profile icon to view the profile and test logout.
-6. Select a treatment and open **Book Appointment**.
-7. Choose a date and time, complete the patient form, and submit the demo request.
-8. Open **Products**, add items to the cart, and continue to the demo checkout page.
-9. Open **Admin login**, use the demo admin credentials, and manage appointment requests from the dashboard.
-
-To reset demo data, open the browser developer console and run:
-
-```javascript
-localStorage.removeItem("dermacare-users");
-localStorage.removeItem("dermacare-session");
-localStorage.removeItem("dermacare-cart");
-localStorage.removeItem("dermacare-appointments");
-localStorage.removeItem("dermacare-theme");
-```
+> Do not commit `.env` because it contains SMTP credentials.
 
 ## Browser storage keys
 
 | Key | Used by | Purpose |
 | --- | --- | --- |
-| `dermacare-users` | `auth.js` | Stores demo signup accounts |
-| `dermacare-session` | `auth.js` | Stores the current logged-in user's name and email |
-| `dermacare-appointments` | `appointment.js`, `admin.js` | Stores demo appointment requests and statuses |
-| `dermacare-cart` | `products.js` | Stores the demo cart |
-| `dermacare-theme` | `theme.js` | Stores the selected light/dark theme |
+| `dermacare-users` | `JS/auth.js` | Stores demo signup accounts |
+| `dermacare-session` | `JS/auth.js` | Stores current logged-in user details |
+| `dermacare-cart` | `JS/products.js` | Stores demo cart items |
+| `dermacare-theme` | `JS/theme.js` | Stores selected light/dark theme |
 
 ## Technology
 
 - HTML5
 - CSS3
 - Vanilla JavaScript
-- CSS custom properties
-- Responsive layouts and media queries
+- Node.js
+- Nodemailer
 - Browser `localStorage`
-- Google Fonts:
-  - DM Serif Display
-  - Manrope
-- Font Awesome 6 for interface icons
-- Local JPG and PNG assets
 
-## Development notes
-
-- Keep all relative links and asset paths aligned with the current project root.
-- Use a local HTTP server when testing navigation and browser storage.
-- The project contains multiple page-specific stylesheets as well as shared styles in `theme.css`.
-- Client-side validation improves the demo experience but is not a security boundary.
-- Before production deployment, replace demo authentication, appointment submission, and payment behavior with server-backed implementations.
-
-## Design and prototype
+## Design prototype
 
 [Figma design and prototype](https://www.figma.com/design/6i4eGtLwbts7AiMRKLVAQA/Dermocare-Web-App?node-id=0-1&t=UtStZuBPz6vXS7r6-1)
-
-## Production roadmap
-
-The following work is required before using this as a real clinic system:
-
-1. Add a backend API and database for users, appointments, products, and orders.
-2. Hash passwords with a modern password-hashing algorithm such as Argon2id or bcrypt.
-3. Replace `localStorage` authentication with secure, server-managed sessions.
-4. Add server-side authorization and input validation.
-5. Connect appointment availability to real clinic schedules.
-6. Prevent double booking with transactional server-side checks.
-7. Integrate a compliant payment provider instead of collecting payment details in the frontend.
-8. Add email/SMS confirmations and clinic-side appointment management.
-9. Add automated tests, accessibility checks, monitoring, and deployment configuration.
->>>>>>> Stashed changes

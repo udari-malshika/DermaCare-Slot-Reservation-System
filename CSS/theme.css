@@ -1,0 +1,304 @@
+.theme-toggle {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1000;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid rgba(200, 168, 248, 0.35);
+  border-radius: 999px;
+  background: rgba(13, 8, 32, 0.9);
+  color: #f0ebff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  font: 700 0.78rem/1 Manrope, system-ui, sans-serif;
+  backdrop-filter: blur(12px);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+}
+
+.profile-link {
+  display: inline-grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid var(--site-line);
+  border-radius: 50%;
+  color: var(--site-text);
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.profile-link:hover {
+  transform: translateY(-2px);
+  background: var(--site-card);
+}
+
+html[data-theme="light"] {
+  --dp-900: #f8f6fc;
+  --dp-800: #f0ebf8;
+  --dp-700: #e8def3;
+  --dp-600: #dacbea;
+  --dp-500: #7651aa;
+  --dp-400: #8d68bf;
+  --dp-300: #a783d3;
+  --dp-200: #7956a6;
+  --dp-100: #573580;
+  --dp-50: #2e1d43;
+  --rose-900: #fff0f6;
+  --rose-700: #a62d5c;
+  --rose-500: #be185d;
+  --rose-400: #c52a70;
+  --rose-300: #cf4787;
+  --rose-200: #a62d67;
+  --rose-100: #fff0f6;
+  --text-primary: #2e1d43;
+  --text-secondary: #604d76;
+  --text-muted: #786889;
+  --glass-bg: rgba(255, 255, 255, 0.68);
+  --glass-bg-strong: rgba(255, 255, 255, 0.9);
+  --glass-bg-s: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(101, 69, 139, 0.2);
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --card-border: rgba(101, 69, 139, 0.18);
+  --shadow-md: 0 6px 30px rgba(63, 39, 88, 0.14);
+  --shadow-lg: 0 16px 56px rgba(63, 39, 88, 0.16);
+}
+
+html[data-theme="light"] body {
+  background-color: var(--dp-900);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 10% 0%, rgba(167, 131, 211, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 65% 50% at 90% 90%, rgba(207, 71, 135, 0.12) 0%, transparent 55%);
+  color: var(--text-primary);
+}
+
+html[data-theme="light"] .theme-toggle {
+  border-color: rgba(101, 69, 139, 0.24);
+  background: rgba(255, 255, 255, 0.92);
+  color: #3e2855;
+}
+
+html[data-theme="light"] input,
+html[data-theme="light"] select,
+html[data-theme="light"] textarea {
+  background-color: #fff;
+  color: var(--text-primary);
+}
+
+html[data-theme="light"] .modal,
+html[data-theme="light"] .cart-modal,
+html[data-theme="light"] .quiz-modal {
+  color: var(--text-primary);
+}
+
+html[data-theme="dark"] .contact-page {
+  background: #090611;
+  color: #f0ebff;
+}
+
+html[data-theme="dark"] .contact-page header,
+html[data-theme="dark"] .contact-page .form-card,
+html[data-theme="dark"] .contact-page .hours-card,
+html[data-theme="dark"] .contact-page footer {
+  background: #150e35;
+  color: #f0ebff;
+  border-color: rgba(200, 168, 248, 0.2);
+}
+
+html[data-theme="dark"] .contact-page .contact-section {
+  background: transparent;
+}
+
+html[data-theme="dark"] .contact-page .info-text p,
+html[data-theme="dark"] .contact-page .hours-row,
+html[data-theme="dark"] .contact-page .note {
+  color: #c4b0f5;
+}
+
+html[data-theme="dark"] .contact-page .input-group input,
+:root {
+  --site-bg: #060410;
+  --site-surface: #120d1d;
+  --site-surface-2: #180f2a;
+  --site-panel: rgba(21, 14, 53, 0.82);
+  --site-card: rgba(255, 255, 255, 0.04);
+  --site-text: #f3ebff;
+  --site-text-soft: #d9ccfb;
+  --site-muted: #9988ba;
+  --site-line: rgba(161, 127, 255, 0.22);
+  --site-accent: #7a5ae0;
+  --site-accent-2: #b94d8c;
+  --site-accent-3: #f4b7d3;
+  --site-button: linear-gradient(135deg, #7651aa 0%, #db2777 100%);
+  --site-button-2: linear-gradient(135deg, #8e63d6 0%, #f0649d 100%);
+  --site-shadow: 0 18px 48px rgba(13, 8, 32, 0.28);
+}
+
+html[data-theme="light"] {
+  --site-bg: #f7f4fb;
+  --site-surface: #ffffff;
+  --site-surface-2: #f1ebfb;
+  --site-panel: rgba(255, 255, 255, 0.86);
+  --site-card: rgba(255, 255, 255, 0.82);
+  --site-text: #241a2d;
+  --site-text-soft: #433854;
+  --site-muted: #655d74;
+  --site-line: rgba(92, 72, 126, 0.12);
+  --site-accent: #6e4fc3;
+  --site-accent-2: #ca4f82;
+  --site-accent-3: #d291b3;
+  --site-button: linear-gradient(135deg, #7857c5 0%, #d95d97 100%);
+  --site-button-2: linear-gradient(135deg, #8c6ae0 0%, #ef7eaf 100%);
+  --site-shadow: 0 20px 40px rgba(66, 49, 88, 0.1);
+}
+
+body {
+  background: var(--site-bg);
+  color: var(--site-text);
+}
+
+body, .site-header, .site-footer, .panel, .info-card, .form-card, .detail-card,
+.card, .product-card, .treatment-card, .testimonial-card, .cta-box,
+.hero-card, .feature-item, .stats-bar, .details-card {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.site-header,
+.site-footer,
+.panel,
+.info-card,
+.form-card,
+.detail-card,
+.card,
+.product-card,
+.treatment-card,
+.testimonial-card,
+.cta-box,
+.hero-card,
+.feature-item,
+.stats-bar,
+.details-card,
+.modal-card {
+  background: var(--site-panel);
+  border-color: var(--site-line);
+  box-shadow: var(--site-shadow);
+}
+
+h1, h2, h3, h4, h5 {
+  color: var(--site-text);
+}
+
+p, li, span, small {
+  color: var(--site-text-soft);
+}
+
+.btn, .primary-btn, .book-btn, .send-btn, .pay-btn,
+.detail-book-btn, .help-btn, .login-btn, .book-detail-btn, .add-btn {
+  background: var(--site-button);
+  color: #fff;
+  border: none;
+  box-shadow: 0 12px 24px rgba(122, 90, 224, 0.2);
+}
+
+.btn:hover, .primary-btn:hover, .book-btn:hover, .send-btn:hover,
+.pay-btn:hover, .detail-book-btn:hover, .help-btn:hover {
+  background: var(--site-button-2);
+}
+
+input, select, textarea {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--site-text);
+  border-color: var(--site-line);
+}
+
+html[data-theme="light"] input,
+html[data-theme="light"] select,
+html[data-theme="light"] textarea {
+  background: #fff;
+  color: var(--site-text);
+}
+
+html[data-theme="light"] .site-header,
+html[data-theme="light"] .site-footer,
+html[data-theme="light"] .panel,
+html[data-theme="light"] .info-card,
+html[data-theme="light"] .form-card,
+html[data-theme="light"] .detail-card,
+html[data-theme="light"] .product-card,
+html[data-theme="light"] .treatment-card,
+html[data-theme="light"] .testimonial-card,
+html[data-theme="light"] .cta-box,
+html[data-theme="light"] .feature-item,
+html[data-theme="light"] .stats-bar,
+html[data-theme="light"] .details-card,
+html[data-theme="light"] .modal-card {
+  background: var(--site-panel);
+  border-color: var(--site-line);
+  box-shadow: var(--site-shadow);
+}
+
+html[data-theme="dark"] body {
+  background: var(--site-bg);
+  color: var(--site-text);
+}
+
+html[data-theme="dark"] .site-header,
+html[data-theme="dark"] .site-footer,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .info-card,
+html[data-theme="dark"] .form-card,
+html[data-theme="dark"] .detail-card,
+html[data-theme="dark"] .product-card,
+html[data-theme="dark"] .treatment-card,
+html[data-theme="dark"] .testimonial-card,
+html[data-theme="dark"] .cta-box,
+html[data-theme="dark"] .feature-item,
+html[data-theme="dark"] .stats-bar,
+html[data-theme="dark"] .details-card,
+html[data-theme="dark"] .modal-card {
+  background: var(--site-panel);
+  border-color: var(--site-line);
+  box-shadow: var(--site-shadow);
+}
+
+html[data-theme="dark"] .contact-page {
+  background: #090611;
+  color: #f0ebff;
+}
+
+html[data-theme="dark"] .contact-page header,
+html[data-theme="dark"] .contact-page .form-card,
+html[data-theme="dark"] .contact-page .hours-card,
+html[data-theme="dark"] .contact-page footer {
+  background: #150e35;
+  color: #f0ebff;
+  border-color: rgba(200, 168, 248, 0.2);
+}
+
+html[data-theme="dark"] .contact-page .contact-section {
+  background: transparent;
+}
+
+html[data-theme="dark"] .contact-page .info-text p,
+html[data-theme="dark"] .contact-page .hours-row,
+html[data-theme="dark"] .contact-page .note {
+  color: #c4b0f5;
+}
+
+html[data-theme="dark"] .contact-page .input-group input,
+html[data-theme="dark"] .contact-page .input-group select,
+html[data-theme="dark"] .contact-page .input-group textarea {
+  background: #0d0820;
+  color: #f0ebff;
+  border-color: rgba(200, 168, 248, 0.25);
+}
+
+@media (max-width: 600px) {
+  .theme-toggle {
+    right: 0.75rem;
+    bottom: 0.75rem;
+  }
+}
