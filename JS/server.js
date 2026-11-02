@@ -36,6 +36,7 @@ function loadEnvFile() {
 function sendJson(response, statusCode, body) {
   response.writeHead(statusCode, {
     "Content-Type": "application/json; charset=utf-8",
+    "Access-Control-Allow-Origin": "*",
     "Cache-Control": "no-store"
   });
   response.end(JSON.stringify(body));
@@ -169,8 +170,16 @@ async function handleAppointment(request, response) {
       return;
     }
 
-    await sendAppointmentEmail(appointment);
-    sendJson(response, 201, { message: "Appointment request received. A confirmation email was sent." });
+    let message = "Appointment request received. The clinic will contact you to confirm availability.";
+
+    try {
+      await sendAppointmentEmail(appointment);
+      message = "Appointment request received. A confirmation email was sent.";
+    } catch (error) {
+      console.error("Appointment saved without confirmation email:", error);
+    }
+
+    sendJson(response, 201, { message });
   } catch (error) {
     console.error("Unable to send appointment email:", error);
     sendJson(response, 500, { message: "We could not send the appointment email. Please try again later." });
@@ -205,6 +214,16 @@ function serveStatic(request, response) {
 }
 
 const server = http.createServer((request, response) => {
+  if (request.method === "OPTIONS" && request.url === "/api/appointments") {
+    response.writeHead(204, {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Methods": "POST, OPTIONS"
+    });
+    response.end();
+    return;
+  }
+
   if (request.method === "POST" && request.url === "/api/appointments") {
     handleAppointment(request, response);
     return;

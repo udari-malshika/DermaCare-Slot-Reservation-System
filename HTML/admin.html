@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard | DermaCare</title>
-  <script src="theme.js"></script>
+  <script src="../JS/theme.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css">
-  <link rel="stylesheet" href="theme.css">
-  <script src="admin.js" defer></script>
+  <link rel="stylesheet" href="../CSS/admin.css">
+  <link rel="stylesheet" href="../CSS/theme.css">
+  <script src="../JS/admin.js" defer></script>
 </head>
 <body class="admin-page">
   <header class="admin-header">
@@ -36,6 +36,23 @@
       <article class="stat-card"><span>Pending requests</span><strong id="pendingAppointments">0</strong></article>
       <article class="stat-card"><span>Confirmed appointments</span><strong id="confirmedAppointments">0</strong></article>
       <article class="stat-card"><span>Registered users</span><strong id="totalUsers">0</strong></article>
+      <article class="stat-card"><span>Product orders</span><strong id="totalOrders">0</strong></article>
+    </section>
+
+    <section class="dashboard-card">
+      <div class="card-heading">
+        <div><p class="eyebrow">SHOP ORDERS</p><h2>Product order details</h2></div>
+        <label class="filter-label">Filter
+          <select id="orderStatusFilter">
+            <option value="All">All orders</option>
+            <option value="Pending">Pending</option>
+            <option value="Processing">Processing</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </label>
+      </div>
+      <div id="ordersList" class="table-wrap"></div>
     </section>
 
     <section class="dashboard-card">

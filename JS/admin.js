@@ -2,6 +2,7 @@
   const sessionKey = "dermacare-session";
   const appointmentsKey = "dermacare-appointments";
   const usersKey = "dermacare-users";
+  const ordersKey = "dermacare-orders";
   let session = null;
   try {
     session = JSON.parse(localStorage.getItem(sessionKey) || "null");
@@ -10,7 +11,7 @@
   }
 
   if (!session || session.role !== "admin") {
-    window.location.replace("admin-login.html");
+    window.location.replace("../HTML/admin-login.html");
     return;
   }
 
@@ -24,13 +25,33 @@
     }
   };
 
-  let appointments = readArray(appointmentsKey).map((item, index) => ({
-    ...item,
-    id: item.id || "appointment-" + index,
-    status: item.status || "Pending"
-  }));
-  let users = readArray(usersKey);
+  let appointments = [];
+  let users = [];
+  let orders = [];
   const formatDate = (date) => date ? new Date(date + "T00:00:00").toLocaleDateString("en-GB") : "Not selected";
+
+  function loadDashboardData() {
+    appointments = readArray(appointmentsKey).map((item, index) => ({
+      ...item,
+      id: item.id || "appointment-" + index,
+      status: item.status || "Pending"
+    }));
+    users = readArray(usersKey);
+    orders = readArray(ordersKey).map((item, index) => ({
+      ...item,
+      id: item.id || "order-" + index,
+      status: item.status || "Pending",
+      items: Array.isArray(item.items) ? item.items : []
+    }));
+  }
+
+  function refreshDashboard() {
+    loadDashboardData();
+    renderStats();
+    renderAppointments();
+    renderUsers();
+    renderOrders();
+  }
 
   function saveAppointments() {
     try {
@@ -47,6 +68,7 @@
     document.getElementById("pendingAppointments").textContent = appointments.filter((item) => item.status === "Pending").length;
     document.getElementById("confirmedAppointments").textContent = appointments.filter((item) => item.status === "Confirmed").length;
     document.getElementById("totalUsers").textContent = users.length;
+    document.getElementById("totalOrders").textContent = orders.length;
   }
 
   function renderAppointments() {
@@ -92,6 +114,59 @@
     `).join("");
   }
 
+  function renderOrders() {
+    const filter = document.getElementById("orderStatusFilter").value;
+    const visible = orders.filter((item) => filter === "All" || item.status === filter);
+    const container = document.getElementById("ordersList");
+
+    if (!visible.length) {
+      container.innerHTML = '<p class="empty-state">No product orders match this filter.</p>';
+      return;
+    }
+
+    container.innerHTML = visible.map((order) => {
+      const itemSummary = order.items.map((item) =>
+        `${escapeHtml(item.name)} × ${Number(item.quantity)}`
+      ).join(" · ");
+
+      return `
+        <article class="order-row">
+          <div class="order-main">
+            <div class="order-heading">
+              <strong>${escapeHtml(order.id)}</strong>
+              <span class="status status-${order.status.toLowerCase()}">${escapeHtml(order.status)}</span>
+            </div>
+            <span>${escapeHtml(order.customerName)} · ${escapeHtml(order.email)} · ${escapeHtml(order.phone)}</span>
+            <span>${escapeHtml(order.address)}</span>
+            <small>${itemSummary || "No items recorded"} · ${money(order.total)} · ${escapeHtml(order.paymentMethod)}</small>
+          </div>
+          <div class="order-controls">
+            <select data-order-status-id="${escapeHtml(order.id)}" aria-label="Update order status">
+              ${["Pending", "Processing", "Completed", "Cancelled"].map((status) =>
+                `<option ${status === order.status ? "selected" : ""}>${status}</option>`
+              ).join("")}
+            </select>
+            <button class="delete-button" type="button" data-delete-order-id="${escapeHtml(order.id)}">Delete</button>
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  function money(amount) {
+    return `LKR ${Number(amount || 0).toLocaleString("en-LK")}`;
+  }
+
+  function saveOrders() {
+    try {
+      localStorage.setItem(ordersKey, JSON.stringify(orders));
+      return true;
+    } catch (error) {
+      console.error("Unable to save order changes.", error);
+      return false;
+    }
+  }
+
   function escapeHtml(value) {
     return String(value || "").replace(/[&<>"']/g, (character) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
@@ -125,12 +200,43 @@
     renderStats();
     renderAppointments();
   });
+  document.getElementById("orderStatusFilter").addEventListener("change", renderOrders);
+  document.getElementById("ordersList").addEventListener("change", (event) => {
+    const id = event.target.dataset.orderStatusId;
+    if (!id) return;
+    const order = orders.find((item) => item.id === id);
+    if (!order) return;
+    const previousStatus = order.status;
+    order.status = event.target.value;
+    if (!saveOrders()) {
+      order.status = previousStatus;
+      window.alert("Unable to save this order status in the browser.");
+    }
+    refreshDashboard();
+  });
+  document.getElementById("ordersList").addEventListener("click", (event) => {
+    const id = event.target.dataset.deleteOrderId;
+    if (!id || !window.confirm("Delete this product order?")) return;
+    const previousOrders = orders;
+    orders = orders.filter((item) => item.id !== id);
+    if (!saveOrders()) {
+      orders = previousOrders;
+      window.alert("Unable to delete this order in the browser.");
+    }
+    refreshDashboard();
+  });
   document.getElementById("logoutButton").addEventListener("click", () => {
     localStorage.removeItem(sessionKey);
-    window.location.replace("admin-login.html");
+    window.location.replace("../HTML/admin-login.html");
   });
 
-  renderStats();
-  renderAppointments();
-  renderUsers();
+  window.addEventListener("storage", (event) => {
+    if (event.key === appointmentsKey || event.key === usersKey || event.key === ordersKey) {
+      refreshDashboard();
+    }
+  });
+
+  window.setInterval(refreshDashboard, 2000);
+
+  refreshDashboard();
 })();

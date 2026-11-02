@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const appointmentsKey = "dermacare-appointments";
   const treatmentButtons = [...document.querySelectorAll(".treatment")];
 
   const searchInput = document.getElementById("treatmentSearch");
@@ -10,6 +11,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const formMessage = document.getElementById("formMessage");
 
   const consultationFee = 2000;
+
+  function saveAppointment(request) {
+    try {
+      const saved = JSON.parse(localStorage.getItem(appointmentsKey) || "[]");
+      const appointments = Array.isArray(saved) ? saved : [];
+      appointments.push({
+        ...request,
+        id: `appointment-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        status: "Pending",
+        createdAt: new Date().toISOString()
+      });
+      localStorage.setItem(appointmentsKey, JSON.stringify(appointments));
+      return true;
+    } catch (error) {
+      console.error("Unable to save appointment for the dashboard.", error);
+      return false;
+    }
+  }
+
+  function getAppointmentApiUrl() {
+    const localHost = window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1";
+
+    if (window.location.protocol === "file:" || (localHost && window.location.port !== "8000")) {
+      return "http://localhost:8000/api/appointments";
+    }
+
+    return "/api/appointments";
+  }
 
   const timeSlots = [
     {
@@ -302,15 +332,26 @@ document.addEventListener("DOMContentLoaded", () => {
       formMessage.textContent = "Sending your appointment confirmation...";
 
       try {
-        const response = await fetch("/api/appointments", {
+        const response = await fetch(getAppointmentApiUrl(), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(request)
         });
-        const result = await response.json();
+        const responseText = await response.text();
+        let result;
+
+        try {
+          result = responseText ? JSON.parse(responseText) : {};
+        } catch (error) {
+          throw new Error("The appointment server returned an invalid response. Please run the project with npm start.");
+        }
 
         if (!response.ok) {
-          throw new Error(result.message || "Unable to send the appointment email.");
+          throw new Error(result.message || `Appointment request failed (${response.status}).`);
+        }
+
+        if (!saveAppointment(request)) {
+          throw new Error("Appointment sent, but it could not be added to the admin dashboard.");
         }
 
         formMessage.style.color = "#26734d";

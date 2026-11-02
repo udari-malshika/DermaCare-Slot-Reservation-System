@@ -32,7 +32,9 @@ The repository contains:
 - Interactive date picker and slot selection
 - Appointment summary and patient details form
 - Submission to `POST /api/appointments`
-- Confirmation email sent by the Node.js API through configured SMTP credentials
+- Confirmation email sent by the Node.js API when SMTP credentials are configured
+- Appointment requests are still accepted when SMTP is not configured
+- New bookings appear in the admin dashboard automatically across open browser tabs
 
 ## Pages
 
@@ -47,12 +49,16 @@ The repository contains:
 | `HTML/pigmentation.html` | Pigmentation treatment page |
 | `HTML/appointment.html` | Appointment booking page |
 | `HTML/products.html` | Product catalogue and cart |
+| `HTML/cart.html` | Shopping cart |
+| `HTML/checkout.html` | Order checkout |
 | `HTML/payment.html` | Demo checkout page |
 | `HTML/contact.html` | Contact and enquiry page |
 | `HTML/login.html` | Demo login page |
 | `HTML/signup.html` | Demo signup page |
 | `HTML/register.html` | Redirect page to signup |
 | `HTML/profile.html` | Demo profile page |
+| `HTML/admin-login.html` | Admin login |
+| `HTML/admin.html` | Admin dashboard for appointments and product orders |
 
 ## Project structure
 
@@ -109,6 +115,8 @@ Then open: `http://localhost:8000/HTML/index.html`
 | `dermacare-users` | `JS/auth.js` | Stores demo signup accounts |
 | `dermacare-session` | `JS/auth.js` | Stores current logged-in user details |
 | `dermacare-cart` | `JS/products.js` | Stores demo cart items |
+| `dermacare-cart-v1` | `JS/cart.js`, `JS/checkout.js` | Stores the current product cart |
+| `dermacare-orders` | `JS/checkout.js`, `JS/admin.js` | Stores product orders for the admin dashboard |
 | `dermacare-theme` | `JS/theme.js` | Stores selected light/dark theme |
 
 ## Technology

@@ -1,6 +1,8 @@
 (function () {
   const usersKey = "dermacare-users";
   const sessionKey = "dermacare-session";
+  const adminEmail = "admin@dermacare.lk";
+  const adminPassword = "Admin@123";
 
   function getUsers() {
     try {
@@ -44,6 +46,25 @@
 
       const email = normalizeEmail(loginForm.elements.email.value);
       const password = loginForm.elements.password.value;
+
+      if (loginForm.dataset.role === "admin") {
+        if (email !== adminEmail || password !== adminPassword) {
+          showMessage("Admin email or password is incorrect.", "error");
+          return;
+        }
+
+        localStorage.setItem(sessionKey, JSON.stringify({
+          name: "DermoCare Administrator",
+          email: adminEmail,
+          role: "admin"
+        }));
+        showMessage("Login successful. Redirecting...", "success");
+        window.setTimeout(function () {
+          window.location.href = "admin.html";
+        }, 400);
+        return;
+      }
+
       const user = getUsers().find((account) => account.email === email);
 
       if (!user || user.password !== password) {

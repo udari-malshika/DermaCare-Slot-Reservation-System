@@ -87,6 +87,387 @@ const productCatalog = [
   }
 ];
 
+productCatalog.push(
+  {
+    id: 10,
+    name: "345 Skin Barrier Cream",
+    category: "Moisturizer",
+    skin: "Sensitive",
+    price: 5900,
+    image: "../Images/345%20cream.jpg",
+    description: "A comforting barrier cream for soft, hydrated-looking skin."
+  },
+  {
+    id: 11,
+    name: "Anua Heartleaf Cleansing Pad",
+    category: "Cleanser",
+    skin: "Sensitive",
+    price: 4200,
+    image: "../Images/Anua%20Clean%20pad.jpg",
+    description: "Refreshing cleansing pads for a gentle daily skin reset."
+  },
+  {
+    id: 12,
+    name: "Anua Niacinamide Serum",
+    category: "Serum",
+    skin: "Oily",
+    price: 5700,
+    image: "../Images/Anua%20Niasinamide.jpg",
+    description: "A balancing serum for a smoother, brighter-looking complexion."
+  },
+  {
+    id: 13,
+    name: "Anua PDRN Hyaluronic Serum",
+    category: "Serum",
+    skin: "Dry",
+    price: 7200,
+    image: "../Images/Anua%20PDRN%20Hyaluro.jpg",
+    description: "A deeply hydrating formula for a plump, dewy-looking finish."
+  },
+  {
+    id: 14,
+    name: "Beauty of Joseon Plum Cleanser",
+    category: "Cleanser",
+    skin: "Normal",
+    price: 4900,
+    image: "../Images/Beauty%20of%20Jonsen%20Pulm.jpg",
+    description: "A mild gel cleanser that leaves skin fresh and comfortable."
+  },
+  {
+    id: 15,
+    name: "Beauty of Joseon Plum Toner",
+    category: "Serum",
+    skin: "Dry",
+    price: 5100,
+    image: "../Images/Beauty%20of%20jonsen%20Pulm%20toner.jpg",
+    description: "A softening toner to help prepare skin for the rest of your routine."
+  },
+  {
+    id: 16,
+    name: "Biodance Soothing Mask",
+    category: "Mask",
+    skin: "Sensitive",
+    price: 3600,
+    image: "../Images/Biodance%20mask.jpg",
+    description: "A soothing mask for a refreshed, replenished-looking complexion."
+  },
+  {
+    id: 17,
+    name: "CO2 Laser Treatment",
+    category: "Treatment",
+    skin: "Normal",
+    price: 35000,
+    image: "../Images/CO2%20Laser%20treatment.jpg",
+    description: "A professional resurfacing treatment available at DermoCare."
+  },
+  {
+    id: 18,
+    name: "CO2 Laser Care",
+    category: "Treatment",
+    skin: "Normal",
+    price: 35000,
+    image: "../Images/CO2%20laser.jpg",
+    description: "Explore DermoCare's advanced CO2 laser care option."
+  },
+  {
+    id: 19,
+    name: "Carbon Laser Peel",
+    category: "Treatment",
+    skin: "Oily",
+    price: 28000,
+    image: "../Images/Carbon%20laser%20peel.jpg",
+    description: "A professional glow-focused treatment for smoother-looking skin."
+  },
+  {
+    id: 20,
+    name: "Centella White Serum",
+    category: "Serum",
+    skin: "Sensitive",
+    price: 5300,
+    image: "../Images/Centella%20White%20serum.jpg",
+    description: "A calming brightening serum for an even-looking complexion."
+  },
+  {
+    id: 21,
+    name: "Centella Brown Serum",
+    category: "Serum",
+    skin: "Normal",
+    price: 5000,
+    image: "../Images/Centella%20brown%20serum.jpg",
+    description: "A nourishing daily serum for balanced-looking skin."
+  },
+  {
+    id: 22,
+    name: "Centella Gentle Cleanser",
+    category: "Cleanser",
+    skin: "Sensitive",
+    price: 4500,
+    image: "../Images/Centella%20cleanser.jpg",
+    description: "A gentle cleanser made for a calm and comfortable cleanse."
+  },
+  {
+    id: 23,
+    name: "Centella Eye Cream",
+    category: "Moisturizer",
+    skin: "Dry",
+    price: 4400,
+    image: "../Images/Centella%20eye%20cream.jpg",
+    description: "Lightweight hydration for the delicate eye area."
+  },
+  {
+    id: 24,
+    name: "Centella Pink Mask",
+    category: "Mask",
+    skin: "Sensitive",
+    price: 3500,
+    image: "../Images/Centella%20pink%20mask.jpg",
+    description: "A calming mask for a soft, refreshed-looking glow."
+  },
+  {
+    id: 25,
+    name: "Dark Spot Correcting Serum",
+    category: "Serum",
+    skin: "Normal",
+    price: 6100,
+    image: "../Images/Dark%20spot%20correcting%20glow%20serum.jpg",
+    description: "A targeted serum for a visibly brighter-looking routine."
+  },
+  {
+    id: 26,
+    name: "Medicube Hyaluronic Cream",
+    category: "Moisturizer",
+    skin: "Dry",
+    price: 6700,
+    image: "../Images/Medicube%20Hyaluronic%20cap%20cream.jpg",
+    description: "A cushiony hyaluronic cream for lasting-looking hydration."
+  },
+  {
+    id: 27,
+    name: "Medicube Neck Wrinkle Cream",
+    category: "Moisturizer",
+    skin: "Dry",
+    price: 6500,
+    image: "../Images/Medicube%20Neck%20Wrinkle%20Cream.jpg",
+    description: "Nourishing care designed for the neck and décolletage."
+  },
+  {
+    id: 28,
+    name: "Medicube Niacinamide Cream",
+    category: "Moisturizer",
+    skin: "Oily",
+    price: 6300,
+    image: "../Images/Medicube%20Niacinamide%20cap%20cream.jpg",
+    description: "A lightweight cream for balanced, healthy-looking skin."
+  },
+  {
+    id: 29,
+    name: "Medicube Pink Capsule Cream",
+    category: "Moisturizer",
+    skin: "Normal",
+    price: 6800,
+    image: "../Images/Medicube%20Pink%20cap%20cream.jpg",
+    description: "A plush daily moisturizer for a radiant-looking finish."
+  },
+  {
+    id: 30,
+    name: "Medicube Pink Mask",
+    category: "Mask",
+    skin: "Dry",
+    price: 3900,
+    image: "../Images/Medicube%20Pink%20mask.jpg",
+    description: "A moisture-loving mask for a soft and luminous-looking complexion."
+  },
+  {
+    id: 31,
+    name: "Medicube Pink Serum",
+    category: "Serum",
+    skin: "Normal",
+    price: 6200,
+    image: "../Images/Medicube%20Pink%20serum.jpg",
+    description: "A glow-supporting serum for a smooth-looking daily ritual."
+  },
+  {
+    id: 32,
+    name: "Medicube Facial Mask",
+    category: "Mask",
+    skin: "Normal",
+    price: 3700,
+    image: "../Images/Medicube%20mask.jpg",
+    description: "A replenishing mask to elevate your weekly skincare ritual."
+  },
+  {
+    id: 33,
+    name: "The Ordinary Gentle Cleanser",
+    category: "Cleanser",
+    skin: "Normal",
+    price: 4000,
+    image: "../Images/Ord%20Clens.jpg",
+    description: "A simple, gentle cleanser for a clean and comfortable finish."
+  },
+  {
+    id: 34,
+    name: "The Ordinary Lactic Acid",
+    category: "Serum",
+    skin: "Sensitive",
+    price: 4700,
+    image: "../Images/Ord%20Lactic%20acid.jpg",
+    description: "A gentle exfoliating formula for smoother-looking skin texture."
+  },
+  {
+    id: 35,
+    name: "The Ordinary Moisturizer",
+    category: "Moisturizer",
+    skin: "Dry",
+    price: 4300,
+    image: "../Images/Ord%20Moisture.jpg",
+    description: "An everyday moisturizer for soft and comfortable-looking skin."
+  },
+  {
+    id: 36,
+    name: "The Ordinary Niacinamide",
+    category: "Serum",
+    skin: "Oily",
+    price: 4500,
+    image: "../Images/Ord%20Niacinamide.jpg",
+    description: "A balancing serum for a refined and even-looking appearance."
+  },
+  {
+    id: 37,
+    name: "The Ordinary Retinol",
+    category: "Serum",
+    skin: "Normal",
+    price: 4900,
+    image: "../Images/Ord%20Ratinol.jpg",
+    description: "A nighttime-focused formula for a smoother-looking skin routine."
+  },
+  {
+    id: 38,
+    name: "The Ordinary Glycolic Care",
+    category: "Serum",
+    skin: "Oily",
+    price: 4600,
+    image: "../Images/ord%20Glyc.jpg",
+    description: "A glow-renewing exfoliating care option for a fresh-looking finish."
+  },
+  {
+    id: 39,
+    name: "PRP Skin Therapy",
+    category: "Treatment",
+    skin: "Normal",
+    price: 30000,
+    image: "../Images/PRP%20therepy.jpg",
+    description: "A professional skin rejuvenation treatment available at DermoCare."
+  },
+  {
+    id: 40,
+    name: "Pigmentation Laser Care",
+    category: "Treatment",
+    skin: "Normal",
+    price: 26000,
+    image: "../Images/Pigmentation%20Remove.png",
+    description: "Professional pigmentation-focused care for a more even-looking tone."
+  },
+  {
+    id: 41,
+    name: "Pigmentation Renewal Treatment",
+    category: "Treatment",
+    skin: "Normal",
+    price: 26000,
+    image: "../Images/Pigmentation%20Removel.jpg",
+    description: "A clinic treatment designed to support a brighter-looking complexion."
+  },
+  {
+    id: 42,
+    name: "Pigmentation Care",
+    category: "Treatment",
+    skin: "Sensitive",
+    price: 26000,
+    image: "../Images/Pigmentation%20Removel.png",
+    description: "A professional pigmentation care option tailored to your skin goals."
+  },
+  {
+    id: 43,
+    name: "Purito Green Barrier Cream",
+    category: "Moisturizer",
+    skin: "Sensitive",
+    price: 5400,
+    image: "../Images/Purito%20green%20Cream.jpg",
+    description: "A soothing cream for calm, nourished-looking skin."
+  },
+  {
+    id: 44,
+    name: "RF Microneedling",
+    category: "Treatment",
+    skin: "Normal",
+    price: 32000,
+    image: "../Images/RF%20microneedling.jpg",
+    description: "A professional skin-firming treatment available at the clinic."
+  },
+  {
+    id: 45,
+    name: "Some By Mi Skincare",
+    category: "Serum",
+    skin: "Oily",
+    price: 5200,
+    image: "../Images/SOME%20BY%20MI.jpg",
+    description: "A refreshing formula for a clearer, more balanced-looking routine."
+  },
+  {
+    id: 46,
+    name: "Snail 9 Repair Serum",
+    category: "Serum",
+    skin: "Dry",
+    price: 5600,
+    image: "../Images/Snail%209%20serum.jpg",
+    description: "A comforting repair serum for hydrated-looking skin."
+  },
+  {
+    id: 47,
+    name: "Botox & Filler Consultation",
+    category: "Treatment",
+    skin: "Normal",
+    price: 25000,
+    image: "../Images/botox%20%26%20filler.jpg",
+    description: "Book a professional consultation for personalized aesthetic care."
+  },
+  {
+    id: 48,
+    name: "Centella Blue Serum",
+    category: "Serum",
+    skin: "Sensitive",
+    price: 5100,
+    image: "../Images/centella%20blue%20serum.jpg",
+    description: "A cooling, calming serum for a balanced-looking complexion."
+  },
+  {
+    id: 49,
+    name: "Centella Comfort Cream",
+    category: "Moisturizer",
+    skin: "Sensitive",
+    price: 5300,
+    image: "../Images/centella%20cream.jpg",
+    description: "A gentle cream for a soft, comforted-looking skin finish."
+  },
+  {
+    id: 50,
+    name: "Chemical Peeling",
+    category: "Treatment",
+    skin: "Oily",
+    price: 18000,
+    image: "../Images/chemical%20peeling.jpg",
+    description: "A professional exfoliating treatment for smoother-looking skin."
+  },
+  {
+    id: 51,
+    name: "Snail Mucin Cleanser",
+    category: "Cleanser",
+    skin: "Sensitive",
+    price: 4600,
+    image: "../Images/Snail%20cleanser.jpg",
+    description: "A gentle snail mucin cleanser for a soft, refreshed-looking finish."
+  }
+);
+
 const products = productCatalog;
 
 const $ = id => document.getElementById(id);
@@ -506,7 +887,7 @@ function showCart() {
             type="button"
             data-action="checkout"
           >
-            Continue to Order
+            Go to checkout
           </button>
         `
         : ""
@@ -555,6 +936,9 @@ function showCheckout() {
       sum + item.price * item.quantity,
     0
   );
+
+  window.location.href = "checkout.html";
+  return;
 
   openModal(`
     <h2 id="modalTitle">
@@ -750,7 +1134,9 @@ document.addEventListener("click", event => {
 });
 
 // Cart button
-cartButton.addEventListener("click", showCart);
+cartButton.addEventListener("click", () => {
+  window.location.href = "cart.html";
+});
 
 // Search, filters and sorting
 [category, skin, priceRange, search, sort].forEach(

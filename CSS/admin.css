@@ -52,7 +52,12 @@ h2 { font-size: 1.35rem; }
 select { padding: 9px 12px; border: 1px solid var(--admin-line); border-radius: 8px; background: rgba(255, 255, 255, .06); color: var(--admin-text); font: inherit; }
 .table-wrap { margin-top: 22px; }
 .appointment-row, .user-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 18px 0; border-top: 1px solid var(--admin-line); }
+.order-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 18px 0; border-top: 1px solid var(--admin-line); }
 .appointment-main, .user-row > div:nth-child(2) { display: grid; gap: 5px; }
+.order-main { display: grid; gap: 6px; min-width: 0; }
+.order-main > span, .order-main > small { color: var(--admin-muted); font-size: .82rem; overflow-wrap: anywhere; }
+.order-heading { display: flex; align-items: center; gap: 10px; }
+.order-controls { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 .appointment-main span, .appointment-main small, .user-row span, .user-row small { color: var(--admin-muted); font-size: .82rem; }
 .appointment-controls { display: flex; align-items: center; gap: 12px; }
 .status { padding: 6px 10px; border-radius: 999px; font-size: .75rem; font-weight: 800; }
@@ -98,4 +103,6 @@ html[data-theme="light"] .user-avatar { background: #eadffc; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .appointment-row { align-items: flex-start; flex-direction: column; }
   .appointment-controls { flex-wrap: wrap; }
+  .order-row { flex-direction: column; }
+  .order-controls { flex-wrap: wrap; }
 }
