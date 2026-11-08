@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | DermoCare</title>
+  <link rel="stylesheet" href="../CSS/cart.css">
+  <link rel="stylesheet" href="../CSS/checkout.css">
+  <script type="module" src="../JS/checkout.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="home.html"><span>✦</span> DermoCare</a>
+    <nav aria-label="Checkout navigation"><a href="cart.html">← Back to cart</a><a href="products.html">Products</a></nav>
+    <span class="secure-label">🔒 Secure checkout</span>
+  </header>
+  <main class="checkout-page">
+    <div class="page-intro">
+      <p class="eyebrow">FINAL STEP</p>
+      <h1>Complete your order</h1>
+      <p>Tell us where to deliver your skincare essentials.</p>
+    </div>
+    <div class="checkout-layout">
+      <form id="checkoutForm" class="checkout-form">
+        <section class="checkout-panel">
+          <h2>Delivery details</h2>
+          <div class="field-grid">
+            <label>Full name<input name="name" required autocomplete="name" placeholder="Your full name"></label>
+            <label>Email address<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+          </div>
+          <label>Phone number<input name="phone" type="tel" required autocomplete="tel" placeholder="+94 77 123 4567"></label>
+          <label>Delivery address<textarea name="address" required rows="4" placeholder="House number, street, city"></textarea></label>
+          <label>Payment method<select name="payment" required><option value="">Select a payment method</option><option>Cash on delivery</option><option>Card on delivery</option><option>Bank transfer</option></select></label>
+        </section>
+        <button class="primary-button submit-button" type="submit">Place order <span>→</span></button>
+        <p id="checkoutMessage" class="checkout-message" role="status" aria-live="polite"></p>
+      </form>
+      <aside class="checkout-panel order-panel">
+        <p class="eyebrow">YOUR ORDER</p>
+        <h2>Order summary</h2>
+        <div id="orderItems"></div>
+        <div class="summary-total"><span>Total</span><strong id="orderTotal">LKR 0</strong></div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

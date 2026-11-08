@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart | DermoCare</title>
+  <link rel="stylesheet" href="../CSS/cart.css">
+  <script src="../JS/cart.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="home.html"><span>✦</span> DermoCare</a>
+    <nav aria-label="Main navigation">
+      <a href="home.html">Home</a>
+      <a href="treatment.html">Treatments</a>
+      <a href="products.html">Products</a>
+      <a class="active" href="cart.html">Cart</a>
+    </nav>
+    <a class="header-button" href="products.html">Continue shopping</a>
+  </header>
+
+  <main class="cart-page">
+    <div class="page-intro">
+      <p class="eyebrow">YOUR COLLECTION</p>
+      <h1>Your shopping cart</h1>
+      <p>Review your skincare essentials before moving to checkout.</p>
+    </div>
+
+    <div class="cart-layout">
+      <section class="cart-panel">
+        <div class="panel-heading">
+          <h2>Selected products</h2>
+          <span id="cartItemCount">0 items</span>
+        </div>
+        <div id="cartItems" class="cart-items"></div>
+        <div id="emptyCart" class="empty-cart" hidden>
+          <div class="empty-icon">🛍️</div>
+          <h2>Your cart is waiting</h2>
+          <p>Discover calming, clinic-inspired products for your routine.</p>
+          <a class="primary-button" href="products.html">Explore products</a>
+        </div>
+      </section>
+
+      <aside class="summary-panel">
+        <p class="eyebrow">ORDER SUMMARY</p>
+        <h2>Ready when you are</h2>
+        <div class="summary-row"><span>Subtotal</span><strong id="subtotal">LKR 0</strong></div>
+        <div class="summary-row"><span>Delivery</span><strong>Free</strong></div>
+        <div class="summary-total"><span>Total</span><strong id="total">LKR 0</strong></div>
+        <button id="checkoutButton" class="primary-button" type="button">Continue to checkout <span>→</span></button>
+        <p class="summary-note">Your order is prepared securely. Payment is confirmed at checkout.</p>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 DermoCare Clinic</span>
+    <a href="contact.html">Need help? Contact us</a>
+  </footer>
+</body>
+</html>

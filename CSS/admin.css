@@ -1,0 +1,108 @@
+:root {
+  --admin-bg: #060410;
+  --admin-card: rgba(21, 14, 53, 0.82);
+  --admin-text: #f3ebff;
+  --admin-muted: #c4b0f5;
+  --admin-line: rgba(200, 168, 248, 0.22);
+  --admin-accent: #f472b6;
+  --admin-success: #a7f3d0;
+  --admin-warning: #fbd38d;
+}
+
+* { box-sizing: border-box; }
+body.admin-page {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(109, 69, 204, 0.26), transparent 38%),
+    radial-gradient(circle at 94% 88%, rgba(190, 24, 93, 0.18), transparent 36%),
+    var(--admin-bg);
+  color: var(--admin-text);
+  font-family: Manrope, system-ui, sans-serif;
+}
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px max(24px, calc((100% - 1180px) / 2));
+  border-bottom: 1px solid var(--admin-line);
+  background: rgba(12, 8, 29, 0.82);
+  backdrop-filter: blur(16px);
+}
+.brand { color: var(--admin-text); font-size: 1.3rem; font-weight: 800; text-decoration: none; }
+.brand span { color: var(--admin-accent); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+.admin-actions { display: flex; align-items: center; gap: 18px; }
+.admin-actions a { color: var(--admin-accent); font-weight: 700; text-decoration: none; }
+.admin-actions button, .delete-button { border: 0; background: transparent; color: var(--admin-muted); cursor: pointer; font: inherit; font-weight: 700; }
+.admin-container { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: 58px 0; }
+.admin-welcome, .card-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.eyebrow { margin: 0 0 8px; color: var(--admin-accent); font-size: .72rem; font-weight: 800; letter-spacing: .12em; }
+h1, h2 { margin: 0; }
+h1 { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; }
+h2 { font-size: 1.35rem; }
+.admin-welcome p:not(.eyebrow) { color: var(--admin-muted); }
+.primary-action { padding: 13px 20px; border-radius: 999px; background: var(--site-button); color: #fff; font-weight: 800; text-decoration: none; box-shadow: 0 12px 24px rgba(122, 90, 224, 0.2); }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 36px 0; }
+.stat-card, .dashboard-card { border: 1px solid var(--admin-line); border-radius: 18px; background: var(--admin-card); box-shadow: 0 18px 48px rgba(13, 8, 32, .28); }
+.stat-card { display: grid; gap: 12px; padding: 22px; }
+.stat-card span { color: var(--admin-muted); font-size: .85rem; font-weight: 700; }
+.stat-card strong { font-size: 2rem; }
+.dashboard-card { margin-top: 20px; padding: 28px; }
+.filter-label { display: flex; align-items: center; gap: 10px; color: var(--admin-muted); font-size: .85rem; font-weight: 700; }
+select { padding: 9px 12px; border: 1px solid var(--admin-line); border-radius: 8px; background: rgba(255, 255, 255, .06); color: var(--admin-text); font: inherit; }
+.table-wrap { margin-top: 22px; }
+.appointment-row, .user-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 18px 0; border-top: 1px solid var(--admin-line); }
+.order-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 18px 0; border-top: 1px solid var(--admin-line); }
+.appointment-main, .user-row > div:nth-child(2) { display: grid; gap: 5px; }
+.order-main { display: grid; gap: 6px; min-width: 0; }
+.order-main > span, .order-main > small { color: var(--admin-muted); font-size: .82rem; overflow-wrap: anywhere; }
+.order-heading { display: flex; align-items: center; gap: 10px; }
+.order-controls { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.appointment-main span, .appointment-main small, .user-row span, .user-row small { color: var(--admin-muted); font-size: .82rem; }
+.appointment-controls { display: flex; align-items: center; gap: 12px; }
+.status { padding: 6px 10px; border-radius: 999px; font-size: .75rem; font-weight: 800; }
+.status-pending { background: rgba(251, 211, 141, .16); color: var(--admin-warning); }
+.status-confirmed { background: rgba(167, 243, 208, .16); color: var(--admin-success); }
+.status-cancelled { background: rgba(255, 159, 159, .16); color: #ff9f9f; }
+.delete-button { color: #ff9f9f; }
+.user-row { justify-content: flex-start; }
+.user-row > small { margin-left: auto; }
+.user-avatar { display: grid; width: 40px; height: 40px; place-items: center; border-radius: 50%; background: rgba(244, 183, 211, .16); color: var(--admin-accent); font-weight: 800; }
+.empty-state { color: var(--admin-muted); }
+html[data-theme="light"] {
+  --admin-bg: #f7f4fb;
+  --admin-card: rgba(255, 255, 255, 0.88);
+  --admin-text: #241a2d;
+  --admin-muted: #6d627c;
+  --admin-line: rgba(92, 72, 126, 0.14);
+  --admin-accent: #6e4fc3;
+  --admin-success: #18794e;
+  --admin-warning: #9a5b08;
+}
+html[data-theme="light"] body.admin-page {
+  background:
+    radial-gradient(circle at 8% 0%, rgba(167, 131, 211, .22), transparent 38%),
+    radial-gradient(circle at 94% 88%, rgba(207, 71, 135, .12), transparent 36%),
+    var(--admin-bg);
+}
+html[data-theme="light"] .admin-header {
+  background: rgba(255, 255, 255, .82);
+}
+html[data-theme="light"] select {
+  background: #fff;
+}
+html[data-theme="light"] .status-pending { background: #fff3d4; }
+html[data-theme="light"] .status-confirmed { background: #daf5e6; }
+html[data-theme="light"] .status-cancelled { background: #ffe1e1; }
+html[data-theme="light"] .delete-button { color: #a52c2c; }
+html[data-theme="light"] .user-avatar { background: #eadffc; }
+@media (max-width: 760px) {
+  .admin-container { width: min(100% - 32px, 600px); padding: 36px 0; }
+  .admin-header { padding: 16px; }
+  .admin-welcome, .card-heading { align-items: flex-start; flex-direction: column; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .appointment-row { align-items: flex-start; flex-direction: column; }
+  .appointment-controls { flex-wrap: wrap; }
+  .order-row { flex-direction: column; }
+  .order-controls { flex-wrap: wrap; }
+}

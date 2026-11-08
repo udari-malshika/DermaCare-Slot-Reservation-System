@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | DermaCare</title>
+  <script src="../JS/theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/admin.css">
+  <link rel="stylesheet" href="../CSS/theme.css">
+  <script type="module" src="../JS/admin.js"></script>
+</head>
+<body class="admin-page">
+  <header class="admin-header">
+    <a class="brand" href="home.html">DermoCare <span>Admin</span></a>
+    <div class="admin-actions">
+      <a href="home.html">View website</a>
+      <button id="logoutButton" type="button">Log out</button>
+    </div>
+  </header>
+
+  <main class="admin-container">
+    <section class="admin-welcome">
+      <div>
+        <p class="eyebrow">CLINIC OPERATIONS</p>
+        <h1>Admin dashboard</h1>
+        <p>Review appointment requests and keep your patient list up to date.</p>
+      </div>
+      <a class="primary-action" href="appointment.html">Create appointment</a>
+    </section>
+    <p id="dashboardMessage" role="status" aria-live="polite"></p>
+
+    <section class="stats-grid" aria-label="Dashboard summary">
+      <article class="stat-card"><span>Total appointments</span><strong id="totalAppointments">0</strong></article>
+      <article class="stat-card"><span>Pending requests</span><strong id="pendingAppointments">0</strong></article>
+      <article class="stat-card"><span>Confirmed appointments</span><strong id="confirmedAppointments">0</strong></article>
+      <article class="stat-card"><span>Registered users</span><strong id="totalUsers">0</strong></article>
+      <article class="stat-card"><span>Product orders</span><strong id="totalOrders">0</strong></article>
+    </section>
+
+    <section class="dashboard-card">
+      <div class="card-heading">
+        <div><p class="eyebrow">SHOP ORDERS</p><h2>Product order details</h2></div>
+        <label class="filter-label">Filter
+          <select id="orderStatusFilter">
+            <option value="All">All orders</option>
+            <option value="Pending">Pending</option>
+            <option value="Processing">Processing</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </label>
+      </div>
+      <div id="ordersList" class="table-wrap"></div>
+    </section>
+
+    <section class="dashboard-card">
+      <div class="card-heading">
+        <div><p class="eyebrow">BOOKINGS</p><h2>Appointment requests</h2></div>
+        <label class="filter-label">Filter
+          <select id="statusFilter">
+            <option value="All">All statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </label>
+      </div>
+      <div id="appointmentsList" class="table-wrap"></div>
+    </section>
+
+    <section class="dashboard-card">
+      <div class="card-heading">
+        <div><p class="eyebrow">PATIENTS</p><h2>Registered users</h2></div>
+      </div>
+      <div id="usersList" class="table-wrap"></div>
+    </section>
+  </main>
+</body>
+</html>
