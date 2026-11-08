@@ -638,6 +638,7 @@ function renderProducts() {
 
 // Show notification
 let toastTimer;
+const addFeedbackTimers = new WeakMap();
 
 function showMessage(message) {
   const toast = $("toast");
@@ -652,8 +653,20 @@ function showMessage(message) {
   }, 2400);
 }
 
+function showAddFeedback(button) {
+  button.classList.add("is-added");
+  clearTimeout(addFeedbackTimers.get(button));
+
+  const timer = setTimeout(() => {
+    button.classList.remove("is-added");
+    addFeedbackTimers.delete(button);
+  }, 1600);
+
+  addFeedbackTimers.set(button, timer);
+}
+
 // Add product to cart
-function addToCart(id) {
+function addToCart(id, button) {
   const product = products.find(
     item => item.id === Number(id)
   );
@@ -674,6 +687,7 @@ function addToCart(id) {
   }
 
   saveCart();
+  showAddFeedback(button);
 
   showMessage(
     `${product.name} added to cart.`
@@ -1008,7 +1022,7 @@ document.addEventListener("click", event => {
     const id = actionButton.dataset.id;
 
     if (action === "details") showDetails(id);
-    if (action === "add") addToCart(id);
+    if (action === "add") addToCart(id, actionButton);
     if (action === "close") closeModal();
     if (action === "increase") updateQuantity(id, 1);
     if (action === "decrease") updateQuantity(id, -1);
