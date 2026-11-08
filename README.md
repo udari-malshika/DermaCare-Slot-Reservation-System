@@ -1,11 +1,13 @@
 # DermoCare Slot Reservation System
 
-DermoCare is a responsive website for a dermatology and aesthetic skincare clinic. Visitors can explore treatments, browse products, create an account, and submit appointment requests.
+DermoCare is a responsive website for a dermatology and aesthetic skincare clinic. Visitors can explore treatments, browse products, create an account with Firebase Authentication, and submit appointment requests.
 
 The repository contains:
 
 - A static frontend under `HTML/`, `CSS/`, and `JS/`
 - A small Node.js API (`JS/server.js`) used to accept appointment requests and send confirmation emails via SMTP
+
+The project also includes a demo shopping cart and checkout flow. Payments are not processed by a real payment service.
 
 ## Features
 
@@ -19,10 +21,15 @@ The repository contains:
 
 ### Authentication and profile
 
-- Signup and login with Firebase Authentication
+- Firebase Authentication signup and login with email and password
+- Account display name stored in the Firebase Authentication profile
+- Firebase-managed login session
+- Profile page showing the authenticated user's name and email
+- Logout action that ends the Firebase session
+- Profile icon in the navigation bars linking to the profile page
 - Password reset email through Firebase Authentication
 - User profiles stored in Firestore
-- Profile page and logout flow
+- Authentication errors are shown on the relevant page.
 
 ### Appointments and orders
 
@@ -30,6 +37,8 @@ The repository contains:
 - Appointment confirmation emails are sent by the Node.js API when SMTP is configured
 - Customers must be signed in to book appointments or place orders
 - Firestore rules restrict customer records to their owner and dashboard access to the verified administrator account
+
+Enable the **Email/Password** provider in Firebase Console under **Authentication → Sign-in method** before using signup or login.
 
 ### Appointment booking
 
@@ -123,7 +132,29 @@ python -m http.server 8000
 
 Then open: `http://localhost:8000/HTML/index.html`
 
+If Python is not installed, use any static file server that serves the project root.
+
+## Demo usage flow
+
+1. Open the homepage.
+2. Select **Log in** or the profile icon.
+3. Select **Create an account** and submit a name, email, and password.
+4. Log in using the Firebase account.
+5. Open the profile icon to view the profile and test logout.
+6. Select a treatment and open **Book Appointment**.
+7. Choose a date and time, complete the patient form, and submit the demo request.
+8. Open **Products**, add items to the cart, and continue to the demo checkout page.
+
+To reset demo data, open the browser developer console and run:
+
+```javascript
+localStorage.removeItem("dermacare-cart");
+localStorage.removeItem("dermacare-theme");
+```
+
 > Do not commit `.env` because it contains SMTP credentials.
+
+Accounts previously stored in browser `localStorage` are not migrated to Firebase; users need to create a new account.
 
 ## Browser storage keys
 
@@ -138,12 +169,27 @@ Then open: `http://localhost:8000/HTML/index.html`
 - HTML5
 - CSS3
 - Vanilla JavaScript
-- Node.js
-- Nodemailer
-- Firebase Authentication
-- Cloud Firestore
+- CSS custom properties and responsive layouts
 - Browser `localStorage` for cart and theme preferences
+- Firebase Authentication (email/password) and Cloud Firestore
+- Node.js and Nodemailer
+- Google Fonts:
+  - DM Serif Display
+  - Manrope
+- Font Awesome 6 for interface icons
+- Local JPG and PNG assets
 
 ## Design prototype
 
 [Figma design and prototype](https://www.figma.com/design/6i4eGtLwbts7AiMRKLVAQA/Dermocare-Web-App?node-id=0-1&t=UtStZuBPz6vXS7r6-1)
+## Production roadmap
+
+The following work is required before using this as a real clinic system:
+
+1. Add a backend API and database for users, appointments, products, and orders.
+2. Add server-side authorization and input validation.
+3. Connect appointment availability to real clinic schedules.
+4. Prevent double booking with transactional server-side checks.
+5. Integrate a compliant payment provider instead of collecting payment details in the frontend.
+6. Add email/SMS confirmations and clinic-side appointment management.
+7. Add automated tests, accessibility checks, monitoring, and deployment configuration.
