@@ -134,6 +134,10 @@ Then open: `http://localhost:8000/HTML/index.html`
 
 If Python is not installed, use any static file server that serves the project root.
 
+### GitHub Pages
+
+The repository root `index.html` redirects visitors to `HTML/home.html`. In the repository's **Settings → Pages**, publish from the branch containing this file and select the repository root (`/`) as the source. GitHub Pages serves the static frontend only; the Node.js appointment API and SMTP email flow require a separate server.
+
 ## Demo usage flow
 
 1. Open the homepage.
