@@ -1325,6 +1325,42 @@ header {
 .empty-state h3 { font: 400 1.4rem "DM Serif Display", serif; }
 .empty-state p { margin: .5rem 0 1rem; color: var(--text-muted); }
 
+.toast {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1000;
+  max-width: min(24rem, calc(100vw - 2rem));
+  padding: .85rem 1rem .85rem 2.9rem;
+  border: 1px solid #86efac;
+  border-radius: 12px;
+  background: #dcfce7;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .28);
+  color: #14532d;
+  font-size: .85rem;
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity var(--transition), transform var(--transition);
+}
+.toast::before {
+  position: absolute;
+  left: .85rem;
+  top: 50%;
+  display: grid;
+  width: 1.35rem;
+  height: 1.35rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #16a34a;
+  color: #fff;
+  content: "✓";
+  font-size: .85rem;
+  transform: translateY(-50%);
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
 /* ── Shop footer ── */
 .shop-footer {
   margin-top: 1rem;

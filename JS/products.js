@@ -676,7 +676,7 @@ function addToCart(id) {
   saveCart();
 
   showMessage(
-    `${product.name} added to cart 💜`
+    `${product.name} added to cart.`
   );
 }
 
