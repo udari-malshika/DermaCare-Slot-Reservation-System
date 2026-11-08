@@ -1,0 +1,184 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  display: block;
+  min-height: 0;
+  padding: 0;
+  background: rgba(6, 4, 16, .82);
+  border-bottom: 1px solid rgba(155, 110, 232, .22);
+  box-shadow: 0 4px 30px rgba(46, 27, 120, .25);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.site-header .nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 1280px;
+  height: 72px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.site-header .logo {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: .6rem;
+  color: #c8a8f8;
+  font-family: "DM Serif Display", serif;
+  font-size: 1.55rem;
+  letter-spacing: -.3px;
+  background: linear-gradient(135deg, #c8a8f8, #ec4899 60%, #fcd34d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.site-header .logo-icon {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6d45cc, #db2777);
+  box-shadow: 0 0 20px rgba(109, 69, 204, .5);
+  color: #fff;
+  font-size: 1.1rem;
+  -webkit-text-fill-color: #fff;
+}
+
+.site-header .nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem;
+  color: #c4b0f5;
+}
+
+.site-header .nav-links a {
+  padding: .45rem .8rem;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  color: #c4b0f5;
+  font-size: .84rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color .26s, background .26s, border-color .26s;
+}
+
+.site-header .nav-links a:hover,
+.site-header .nav-links a.active {
+  border-color: rgba(155, 110, 232, .22);
+  background: rgba(46, 27, 120, .18);
+  color: #f0ebff;
+}
+
+.site-header .nav-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: .6rem;
+}
+
+.site-header .login-btn,
+.site-header .book-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: .45rem .9rem;
+  border-radius: 9999px;
+  font-size: .82rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: transform .26s, box-shadow .26s, background .26s;
+}
+
+.site-header .login-btn {
+  border: 1px solid rgba(155, 110, 232, .22);
+  color: #c4b0f5;
+}
+
+.site-header .login-btn:hover {
+  background: rgba(46, 27, 120, .18);
+  color: #f0ebff;
+}
+
+.site-header .profile-link {
+  display: inline-grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(155, 110, 232, .22);
+  border-radius: 50%;
+  color: #f0ebff;
+}
+
+.site-header .book-btn {
+  background: linear-gradient(135deg, #4a2fa0, #be185d);
+  box-shadow: 0 4px 18px rgba(190, 24, 93, .3);
+  color: #fff;
+}
+
+.site-header .book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(190, 24, 93, .45);
+}
+
+.site-header .cart-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 38px;
+  padding: .42rem .8rem;
+  border: 1px solid rgba(155, 110, 232, .22);
+  border-radius: 9999px;
+  background: rgba(46, 27, 120, .18);
+  color: #c4b0f5;
+  cursor: pointer;
+  font: 600 .82rem Manrope, sans-serif;
+  white-space: nowrap;
+}
+
+@media (max-width: 980px) {
+  .site-header .nav-container { gap: .6rem; padding-inline: 1rem; }
+  .site-header .logo { font-size: 1.3rem; }
+  .site-header .nav-links a { padding-inline: .5rem; font-size: .78rem; }
+  .site-header .nav-actions { gap: .35rem; }
+  .site-header .login-btn,
+  .site-header .book-btn { padding-inline: .65rem; font-size: .75rem; }
+}
+
+@media (max-width: 760px) {
+  .site-header .nav-container { height: auto; min-height: 66px; flex-wrap: wrap; padding-block: .6rem; }
+  .site-header .nav-links { display: none; }
+  .site-header .nav-actions { margin-left: auto; }
+}
+
+@media (max-width: 520px) {
+  .site-header .nav-container { gap: .5rem; }
+  .site-header .logo { font-size: 1.2rem; }
+  .site-header .nav-actions { width: 100%; justify-content: space-between; }
+}
+
+html[data-theme="light"] .site-header {
+  background: rgba(255, 255, 255, .88);
+  border-color: rgba(31, 22, 39, .1);
+}
+
+html[data-theme="light"] .site-header .nav-links a,
+html[data-theme="light"] .site-header .login-btn { color: #59466a; }
+
+html[data-theme="light"] .site-header .nav-links a:hover,
+html[data-theme="light"] .site-header .nav-links a.active {
+  background: rgba(109, 69, 204, .08);
+  color: #2d1438;
+}

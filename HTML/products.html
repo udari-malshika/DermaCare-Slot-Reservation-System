@@ -7,8 +7,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <link rel="stylesheet" href="../CSS/Products.css">
+  <link rel="stylesheet" href="../CSS/site-navigation.css">
   <script src="../JS/products.js" defer></script>
 </head>
 
@@ -22,23 +24,28 @@
     YOUR SKIN DESERVES THE BEST · DISCOVER YOUR ROUTINE
   </div>
 
-  <header>
-    <a href="home.html" class="logo">
-      <span class="logo-mark">✦</span> DermaCare
-    </a>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="home.html" class="logo">
+        <span class="logo-icon"><i class="fa-solid fa-shield-heart"></i></span>
+        <span>DermoCare</span>
+      </a>
 
-    <nav>
-      <a href="home.html">Home</a>
-      <a href="treatment.html">Treatments</a>
-      <a class="active" href="products.html">Products</a>
-      <a href="contact.html">Contact Us</a>
-    </nav>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="home.html">Home</a>
+        <a href="home.html#treatments">Treatments</a>
+        <a class="active" href="products.html" aria-current="page">Products</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
 
-    <div class="header-actions">
-      <button class="cart-btn" id="cartButton" type="button">
-        🛒 Cart <span class="cart-count" id="cartCount">0</span>
-      </button>
-      <a href="login.html" class="login-btn">Log In</a>
+      <div class="nav-actions">
+        <button class="cart-btn" id="cartButton" type="button">
+          🛒 Cart <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <a href="login.html" class="login-btn">Log in</a>
+        <a href="profile.html" class="profile-link" aria-label="Open profile" title="Profile">👤</a>
+        <a href="appointment.html" class="book-btn">Book Appointment</a>
+      </div>
     </div>
   </header>
 
